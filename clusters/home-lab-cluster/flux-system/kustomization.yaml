@@ -7,4 +7,3 @@ resources:
 - cilium.yaml
 - kubevirt-operator.yaml
 - kubevirt-cr.yaml
-- kubevirt-manager.yaml
