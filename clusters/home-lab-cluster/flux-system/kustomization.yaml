@@ -6,3 +6,4 @@ resources:
 - capacitator.yaml
 - cilium.yaml
 - kubevirt-operator.yaml
+- kubevirt-cr.yaml
