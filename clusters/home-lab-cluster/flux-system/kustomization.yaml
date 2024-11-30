@@ -5,5 +5,3 @@ resources:
 - gotk-sync.yaml
 - capacitator.yaml
 - cilium.yaml
-- kubevirt-operator.yaml
-- kubevirt-cr.yaml
