@@ -17,7 +17,7 @@ spec:
   chart:
     spec:
       chart: multus
-      version: 3.9.3
+      version: "*"
       sourceRef:
         kind: HelmRepository
         name: startechnica
