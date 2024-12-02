@@ -33,3 +33,5 @@ spec:
         enabled: true
       ui:
         enabled: true
+    #for multus
+    cni.exclusive: false
