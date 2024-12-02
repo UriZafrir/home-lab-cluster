@@ -1,41 +1,61 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: startechnica
-  namespace: flux-system
-spec:
-  interval: 1h
-  url: https://startechnica.github.io/apps
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
+#https://docs.k3s.io/networking/multus-ipams
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
 metadata:
   name: multus
   namespace: kube-system
 spec:
-  interval: 1h
-  chart:
-    spec:
-      chart: multus
-      version: "*"
-      sourceRef:
-        kind: HelmRepository
-        name: startechnica
-        namespace: flux-system
-  values:
-    multusConfiguration: |-
-      {
-        "name": "multus-cni-network",
-        "type": "multus",
-        "capabilities": {
-          "portMappings": true
-        },
-        "delegates": [
-          {
-            "cniVersion": "1.17.0-pre.3",
-            "name": "cilium-network",
-            "type": "cilium-cni"
-          }
-        ],
-        "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig"
-      }
+  repo: https://rke2-charts.rancher.io
+  chart: rke2-multus
+  targetNamespace: kube-system
+  valuesContent: |-
+    config:
+      fullnameOverride: multus
+      cni_conf:
+        confDir: /var/lib/rancher/k3s/agent/etc/cni/net.d
+        binDir: /var/lib/rancher/k3s/data/cni/
+        kubeconfig: /var/lib/rancher/k3s/agent/etc/cni/net.d/multus.d/multus.kubeconfig
+
+
+
+# apiVersion: source.toolkit.fluxcd.io/v1beta2
+# kind: HelmRepository
+# metadata:
+#   name: startechnica
+#   namespace: flux-system
+# spec:
+#   interval: 1h
+#   url: https://startechnica.github.io/apps
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: multus
+#   namespace: kube-system
+# spec:
+#   interval: 1h
+#   chart:
+#     spec:
+#       chart: multus
+#       version: "*"
+#       sourceRef:
+#         kind: HelmRepository
+#         name: startechnica
+#         namespace: flux-system
+#   values:
+#     multusConfiguration: |-
+#       {
+#         "name": "multus-cni-network",
+#         "type": "multus",
+#         "capabilities": {
+#           "portMappings": true
+#         },
+#         "delegates": [
+#           {
+#             "cniVersion": "1.17.0-pre.3",
+#             "name": "cilium-network",
+#             "type": "cilium-cni"
+#           }
+#         ],
+#         "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig"
+#       }
