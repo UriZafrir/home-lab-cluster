@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - metallb.yaml
 - IPAddressPool.yaml
+- L2Advertisement.yaml
