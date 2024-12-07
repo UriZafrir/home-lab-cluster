@@ -1,3 +1,6 @@
+#vcluster connect vcluster -n vcluster
+#vcluster connect vcluster -n vcluster --print
+#https://www.vcluster.com/docs/vcluster/manage/accessing-vcluster
 apiVersion: v1
 kind: Namespace
 metadata:
