@@ -31,7 +31,8 @@ spec:
         name: vcluster
         namespace: flux-system
   values:
-    # syncer:
-    #   extraArgs:
-    #   - --tls-san=192.168.100.2
+    controlPlane:
+      proxy:
+        extraSANs:
+        - 192.168.100.2
 
