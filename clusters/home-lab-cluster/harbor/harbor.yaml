@@ -31,6 +31,9 @@ spec:
     # Configure Harbor settings here
     expose:
       type: loadBalancer
+      tls:
+        auto:
+          commonName: harbor.local
     persistence:
       persistentVolumeClaim:
         storageClass: local-path
