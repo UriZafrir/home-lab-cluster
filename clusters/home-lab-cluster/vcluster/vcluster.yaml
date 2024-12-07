@@ -31,4 +31,7 @@ spec:
         name: vcluster
         namespace: flux-system
   values:
-    # Add any vCluster configuration values here
+    syncer:
+      extraArgs:
+      - --tls-san=192.168.100.2
+
