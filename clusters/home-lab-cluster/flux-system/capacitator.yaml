@@ -26,5 +26,5 @@ spec:
   sourceRef:
     kind: OCIRepository
     name: capacitor
-  values:
-    loadbalancerEnabled: true
+  # values:
+  #   loadbalancerEnabled: true
