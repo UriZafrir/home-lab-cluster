@@ -54,14 +54,14 @@ spec:
   sourceRef:
     kind: OCIRepository
     name: capacitor
-  patches:
-    - patch: |
-        apiVersion: v1
-        kind: Service
-        metadata:
-          name: capacitor
-        spec:
-          type: LoadBalancer
-      target:
-        kind: Service
-        name: capacitor
+  # patches:
+  #   - patch: |
+  #       apiVersion: v1
+  #       kind: Service
+  #       metadata:
+  #         name: capacitor
+  #       spec:
+  #         type: LoadBalancer
+  #     target:
+  #       kind: Service
+  #       name: capacitor
