@@ -28,9 +28,9 @@ spec:
         name: jaeger
         namespace: flux-system
   values:
-    # provisionDataStore:
-    #   cassandra: false
-    #   elasticsearch: true
-    # storage:
-    #   type: elasticsearch
+    provisionDataStore:
+      cassandra: false
+      elasticsearch: true
+    storage:
+      type: elasticsearch
 
