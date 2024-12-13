@@ -1,4 +1,3 @@
-# https://fluxcd.io/flux/guides/helmreleases/#using-a-chart-reference
 ---
 apiVersion: v1
 kind: Namespace
@@ -6,13 +5,12 @@ metadata:
   name: spark
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: bitnami-spark
   namespace: flux-system
 spec:
   interval: 10m
-  type: oci
   url: oci://registry-1.docker.io/bitnamicharts/spark
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -22,17 +20,15 @@ metadata:
   namespace: spark
 spec:
   interval: 5m
-  chart:
-    spec:
-      chart: spark
-      sourceRef:
-        kind: HelmRepository
-        name: bitnami-spark
-      # version: 'v0.0.0-latest'
-  values:
+  releaseName: spark
+  chartRef:
+    kind: OCIRepository
+    name: bitnami-spark
+    namespace: flux-system
+  # values:
 
 
-
+# https://fluxcd.io/flux/guides/helmreleases/#using-a-chart-reference
 # ---
 # apiVersion: v1
 # kind: Namespace
@@ -40,14 +36,14 @@ spec:
 #   name: spark
 # ---
 # apiVersion: source.toolkit.fluxcd.io/v1beta2
-# kind: OCIRepository
+# kind: HelmRepository
 # metadata:
 #   name: bitnami-spark
 #   namespace: flux-system
 # spec:
 #   interval: 10m
+#   type: oci
 #   url: oci://registry-1.docker.io/bitnamicharts/spark
-#   ref: 
 # ---
 # apiVersion: helm.toolkit.fluxcd.io/v2beta1
 # kind: HelmRelease
@@ -56,12 +52,18 @@ spec:
 #   namespace: spark
 # spec:
 #   interval: 5m
-#   releaseName: spark
-#   chartRef:
-#     kind: OCIRepository
-#     name: bitnami-spark
-#     namespace: flux-system
+#   chart:
+#     spec:
+#       chart: spark
+#       sourceRef:
+#         kind: HelmRepository
+#         name: bitnami-spark
+#       # version: 'v0.0.0-latest'
 #   values:
+
+
+
+
 
 
 # apiVersion: v1
