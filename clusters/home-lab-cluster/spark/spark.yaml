@@ -15,19 +15,19 @@ spec:
   ref:
     tag: 9.3.0
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: spark
-  namespace: spark
-spec:
-  interval: 5m
-  releaseName: spark
-  chartRef:
-    kind: OCIRepository
-    name: bitnami-spark
-  #   namespace: flux-system
-  # values:
+# apiVersion: helm.toolkit.fluxcd.io/v2
+# kind: HelmRelease
+# metadata:
+#   name: spark
+#   namespace: spark
+# spec:
+#   interval: 5m
+#   releaseName: spark
+#   chartRef:
+#     kind: OCIRepository
+#     name: bitnami-spark
+#   #   namespace: flux-system
+#   # values:
 
 
 # https://fluxcd.io/flux/guides/helmreleases/#using-a-chart-reference
