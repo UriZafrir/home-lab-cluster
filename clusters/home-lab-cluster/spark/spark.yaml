@@ -26,7 +26,7 @@ spec:
   chartRef:
     kind: OCIRepository
     name: bitnami-spark
-  #   namespace: flux-system
+    namespace: flux-system
   # values:
 
 
