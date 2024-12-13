@@ -15,16 +15,13 @@ metadata:
 spec:
   interval: 5m
   releaseName: spark
-  chartRef:
-    kind: OCIRepository
-    name: bitnami-spark
   chart:
-    spec:
-      chart: spark # The name of the chart within the OCI repository
-      sourceRef:
-        kind: OCIRepository
-        name: bitnami-spark # Reference to the OCIRepository defined earlier
-        namespace: flux-system
+  #   spec:
+  #     chart: spark # The name of the chart within the OCI repository
+    chartRef:
+      kind: OCIRepository
+      name: bitnami-spark
+      # namespace: spark
   values:
 
 ---
