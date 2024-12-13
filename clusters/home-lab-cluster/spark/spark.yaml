@@ -1,3 +1,4 @@
+# https://fluxcd.io/flux/guides/helmreleases/#using-a-chart-reference
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
@@ -16,8 +17,8 @@ spec:
   interval: 5m
   releaseName: spark
   chart:
-  #   spec:
-  #     chart: spark # The name of the chart within the OCI repository
+    spec:
+      chart: spark # The name of the chart within the OCI repository
     chartRef:
       kind: OCIRepository
       name: bitnami-spark
