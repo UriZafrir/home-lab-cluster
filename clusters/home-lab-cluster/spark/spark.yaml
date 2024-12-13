@@ -18,7 +18,15 @@ spec:
   chartRef:
     kind: OCIRepository
     name: bitnami-spark
+  chart:
+    spec:
+      chart: spark # The name of the chart within the OCI repository
+      # sourceRef:
+      #   kind: OCIRepository
+      #   name: bitnami-spark # Reference to the OCIRepository defined earlier
+      #   namespace: flux-system
   values:
+
 ---
 apiVersion: v1
 kind: Namespace
