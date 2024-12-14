@@ -13,7 +13,7 @@ spec:
   interval: 10m
   url: oci://ghcr.io/cloudtooling/helm-charts/olm
   ref:
-    tag: 0.30.0
+    tag: "0.30.0"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
