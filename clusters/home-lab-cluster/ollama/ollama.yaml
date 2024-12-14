@@ -33,9 +33,10 @@ spec:
         pull:
           - llama3.2
     ingress:
+      className: nginx
       enabled: true
       annotations: 
-        kubernetes.io/ingress.class: nginx
+        # kubernetes.io/ingress.class: nginx
         kubernetes.io/tls-acme: "true"
       hosts:
       - host: ollama.local
