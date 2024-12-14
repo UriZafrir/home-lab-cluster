@@ -28,10 +28,10 @@ spec:
         name: cert-manager
         namespace: flux-system
   values:
-    ingressShim:
-      defaultIssuerName: letsencrypt-prod 
-      defaultIssuerKind: ClusterIssuer
-      defaultIssuerGroup: cert-manager.io
+    # ingressShim:
+    #   defaultIssuerName: letsencrypt-prod 
+    #   defaultIssuerKind: ClusterIssuer
+    #   defaultIssuerGroup: cert-manager.io
     crds:
       enabled: true
 
