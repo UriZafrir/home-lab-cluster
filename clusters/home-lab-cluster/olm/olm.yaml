@@ -5,15 +5,15 @@ metadata:
   name: operator-lifecycle-manager
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+kind: GitRepository
 metadata:
   name: olm-repo
   namespace: flux-system
 spec:
   interval: 1h
   url: https://github.com/operator-framework/operator-lifecycle-manager
-  ref:
-    branch: master
+  reference:
+    branch: main
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
