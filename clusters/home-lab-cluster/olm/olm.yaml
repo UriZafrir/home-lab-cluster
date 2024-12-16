@@ -28,5 +28,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: olm-repo
+        namespace: flux-system
   values:
     # Add any custom values here
