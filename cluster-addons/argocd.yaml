@@ -12,7 +12,9 @@ spec:
     helm:
       releaseName: argocd
       valuesObject:
-      
+        server:
+          service:
+            type: NodePort
   destination:
     server: "https://kubernetes.default.svc"
     namespace: argocd
