@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     targetRevision: HEAD
-    path: ./applicationset
+    path: ./cluster-addons
   # Destination cluster and namespace to deploy the application
   destination:
     server: https://kubernetes.default.svc
