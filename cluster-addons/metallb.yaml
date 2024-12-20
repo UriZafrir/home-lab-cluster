@@ -13,7 +13,7 @@ spec:
       releaseName: metallb
       valuesObject:
     kustomize:
-      patchesStrategicMerge:
+      resources:
       - |-
         apiVersion: metallb.io/v1beta1
         kind: IPAddressPool
@@ -33,8 +33,8 @@ spec:
     server: "https://kubernetes.default.svc"
     namespace: metallb-system
   syncPolicy:
-    # automated:
-    #   prune: true
-    #   selfHeal: true
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
