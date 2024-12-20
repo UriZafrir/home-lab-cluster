@@ -15,6 +15,9 @@ spec:
         server:
           service:
             type: NodePort
+        configs:
+          cm:
+            kustomize.buildOptions: "--enable-helm"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: argocd
