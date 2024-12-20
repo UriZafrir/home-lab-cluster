@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pihole
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: mojo2600
+    repoURL: https://mojo2600.github.io/pihole-kubernetes/
+    targetRevision: 2.27.0
+    helm:
+      releaseName: pihole
+      valuesObject:
+        persistentVolumeClaim:
+          enabled: true
+          storageClass: local-path
+        serviceWeb:
+          annotations:
+            metallb.universe.tf/allow-shared-ip: pihole-svc
+          type: LoadBalancer
+        serviceDns:
+          annotations:
+            metallb.universe.tf/allow-shared-ip: pihole-svc
+          type: LoadBalancer
+        serviceDhcp:
+          annotations:
+            metallb.universe.tf/allow-shared-ip: pihole-svc
+          type: LoadBalancer
+        # dnsmasq:
+        #   customDnsEntries:
+        #     - address=/pihole.local/192.168.100.1
+        #     - address=/ollama.local/192.168.100.3
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: pihole
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
