@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ollama
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: ollama
+    repoURL: https://otwld.github.io/ollama-helm/
+    targetRevision: 1.1.2
+    helm:
+      releaseName: ollama
+      valuesObject:
+        ollama:
+          models:
+            pull:
+              - llama3.2
+            run:
+              - llama3.2
+        service:
+          type: LoadBalancer
+
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: ollama
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
