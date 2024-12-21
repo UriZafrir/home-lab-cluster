@@ -23,8 +23,8 @@ spec:
               size: 2Gi
               # isPvc: false
               # customVolume:
-              # hostPath:
-              #   path: /mnt/data
+                # hostPath:
+                #   path: /mnt/data
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/longhorn
