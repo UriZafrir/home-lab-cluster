@@ -24,6 +24,9 @@ spec:
           defaultClass: false
         preUpgradeChecker:
           jobEnabled: false
+        service:
+          ui:
+            type: LoadBalancer
   destination:
     server: "https://kubernetes.default.svc"
     namespace: longhorn-system

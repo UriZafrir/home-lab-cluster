@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jellyfin
+  namespace: argocd
+spec:
+  project: default
+  sources:
+
+    - repoURL: https://utkuozdemir.org/helm-charts
+      chart: jellyfin
+      targetRevision: 2.0.0
+      helm:
+        releaseName: jellyfin
+        valuesObject:
+          service:
+            type: LoadBalancer
+          persistence:
+            data:
+              existingClaim: 
+              storageClass: longhorn-static
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: HEAD
+      path: extras/longhorn
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: jellyfin
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
