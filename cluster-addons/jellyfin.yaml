@@ -17,7 +17,7 @@ spec:
             type: LoadBalancer
           persistence:
             data:
-              existingClaim: 
+              existingClaim: longhorn-static-pvc-1
               storageClass: longhorn-static
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
