@@ -5,13 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    chart: eck-operator
-    repoURL: https://helm.elastic.co
-    targetRevision: 2.16.0
-    helm:
-      releaseName: elastic-operator
-      valuesObject:
+  sources:
+    - repoURL: https://helm.elastic.co
+      chart: eck-operator
+      targetRevision: 2.16.0
+      helm:
+        releaseName: elastic-operator
+        valuesObject:
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: HEAD
+      path: extras/elastic
   destination:
     server: "https://kubernetes.default.svc"
     namespace: elastic-system
