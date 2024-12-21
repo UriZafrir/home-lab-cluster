@@ -1,3 +1,9 @@
+#first install iscsi
+#apt-get install open-iscsi
+#systemctl enable iscsid
+#systemctl start iscsid
+#systemctl status iscsid
+#https://longhorn.io/docs/1.7.2/deploy/install/
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
