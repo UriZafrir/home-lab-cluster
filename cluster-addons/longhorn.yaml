@@ -36,3 +36,9 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+  ignoreDifferences:
+  - group: ""
+    kind: Service
+    jsonPointers:
+    - /spec/ports/0/nodePort
