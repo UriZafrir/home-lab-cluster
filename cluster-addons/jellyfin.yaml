@@ -20,7 +20,7 @@ spec:
               enabled: true
               # existingClaim: longhorn-static-pvc-1
               storageClass: local-path
-              size: 2Gi
+              size: 20Gi
               # isPvc: false
               # customVolume:
                 # hostPath:
