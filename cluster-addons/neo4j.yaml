@@ -12,6 +12,8 @@ spec:
     helm:
       releaseName: neo4j
       valuesObject:
+        neo4j:
+          name: neo4j-1
   destination:
     server: "https://kubernetes.default.svc"
     namespace: neo4j
