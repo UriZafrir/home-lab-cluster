@@ -14,6 +14,9 @@ spec:
       valuesObject:
         neo4j:
           name: neo4j-1
+        volumes:
+          data:
+            mode: defaultStorageClass
   destination:
     server: "https://kubernetes.default.svc"
     namespace: neo4j
