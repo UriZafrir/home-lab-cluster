@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: neo4j
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: neo4j
+    repoURL: https://neo4j.github.io/helm-charts/
+    targetRevision: 5.26.0
+    helm:
+      releaseName: neo4j
+      valuesObject:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: neo4j
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
