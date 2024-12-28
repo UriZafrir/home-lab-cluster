@@ -13,6 +13,8 @@ spec:
       helm:
         releaseName: jellyfin
         valuesObject:
+          image:
+            tag: latest
           service:
             type: LoadBalancer
           persistence:
