@@ -7,4 +7,4 @@ spec:
   channel: stable
   name: knative-operator
   source: operatorhubio-catalog
-  sourceNamespace: knative
+  sourceNamespace: operators
