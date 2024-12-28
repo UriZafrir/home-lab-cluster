@@ -24,8 +24,8 @@ spec:
         ollama:
           service:
             type: LoadBalancer
-          knative:
-            enabled: true
+          # knative:
+          #   enabled: true
           ollama:
             models:
               pull:
