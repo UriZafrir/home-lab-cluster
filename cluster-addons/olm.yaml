@@ -8,7 +8,7 @@ spec:
   source:
     chart: operator-lifecycle-manager
     repoURL: https://github.com/operator-framework/operator-lifecycle-manager.git
-    targetRevision: HEAD
+    targetRevision: master
     path: deploy/chart
     helm:
       releaseName: operator-lifecycle-manager
