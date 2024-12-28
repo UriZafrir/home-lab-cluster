@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    chart: operator-lifecycle-manager
+    # chart: operator-lifecycle-manager
     repoURL: https://github.com/operator-framework/operator-lifecycle-manager
     targetRevision: master
     path: deploy/chart
