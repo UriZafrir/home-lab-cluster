@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: operator-lifecycle-manager
+  name: olm
   namespace: argocd
 spec:
   project: default
   source:
-    # chart: operator-lifecycle-manager
+    # chart: olm
     repoURL: https://github.com/operator-framework/operator-lifecycle-manager
     targetRevision: master
     path: deploy/chart
     helm:
-      releaseName: operator-lifecycle-manager
+      releaseName: olm
       valuesObject:
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: operator-lifecycle-manager
+    namespace: olm
   syncPolicy:
     automated:
       prune: true
