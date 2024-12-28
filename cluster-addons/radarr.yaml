@@ -14,6 +14,7 @@ spec:
       valuesObject:
         image:
           repository: lscr.io/linuxserver/radarr
+          tag: latest
         service:
           type: LoadBalancer  
         
