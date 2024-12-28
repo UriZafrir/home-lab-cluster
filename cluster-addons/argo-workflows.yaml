@@ -13,6 +13,8 @@ spec:
       releaseName: argo-workflows
       valuesObject:
         server:
+          authModes:
+            - server
           serviceType: LoadBalancer
   destination:
     server: "https://kubernetes.default.svc"
