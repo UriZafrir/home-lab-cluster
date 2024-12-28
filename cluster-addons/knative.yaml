@@ -8,10 +8,10 @@ spec:
   source:
     repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     targetRevision: HEAD
-    path: extras/operators
+    path: extras/knative
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: operators
+    namespace: knative
   syncPolicy:
     automated:
       prune: true
