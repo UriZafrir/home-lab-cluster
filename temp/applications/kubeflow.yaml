@@ -6,12 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    path: example
-    repoURL: https://github.com/kubeflow/manifests
+    repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     targetRevision: HEAD
+    path: extras/kubeflow
   destination:
+    server: "https://kubernetes.default.svc"
     namespace: kubeflow
-    server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
       prune: true
