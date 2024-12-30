@@ -6,18 +6,22 @@ metadata:
 spec:
   project: default
   source:
-    chart: argo-cd
-    repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 7.7.10
-    helm:
-      releaseName: argocd
-      valuesObject:
-        server:
-          service:
-            type: NodePort
-        configs:
-          cm:
-            kustomize.buildOptions: "--enable-helm"
+    - repoURL: https://argoproj.github.io/argo-helm
+      chart: argo-cd
+      targetRevision: 7.7.10
+      helm:
+        releaseName: argocd
+        valuesObject:
+          server:
+            service:
+              type: NodePort
+          configs:
+            cm:
+              kustomize.buildOptions: "--enable-helm"
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: HEAD
+      path: extras/deployKF
+
   destination:
     server: "https://kubernetes.default.svc"
     namespace: argocd
