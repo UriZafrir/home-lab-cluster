@@ -11,6 +11,16 @@ spec:
     path: example
     repoURL: https://github.com/kubeflow/manifests
     targetRevision: HEAD
+    kustomize:
+      patches:
+        - target:
+            kind: Service
+            name: istio-ingressgateway
+            namespace: istio-system
+          patch: |-
+            - op: replace
+              path: /spec/type
+              value: LoadBalancer
   destination:
     namespace: kubeflow
     server: 'https://kubernetes.default.svc'
@@ -21,13 +31,3 @@ spec:
     syncOptions:
     - CreateNamespace=true
     - ServerSideApply=true
-
-  patches:
-    - target:
-        kind: Service
-        name: istio-ingressgateway
-        namespace: istio-system
-      patch: |-
-        - op: replace
-          path: /spec/type
-          value: LoadBalancer
