@@ -1,3 +1,5 @@
+#first need to add kernel modules and increase inotify limits
+#https://www.deploykf.org/guides/getting-started/#istio-kernel-modules
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
