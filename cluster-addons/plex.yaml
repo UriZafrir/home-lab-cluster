@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: plex
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: plex
+    repoURL: https://utkuozdemir.org/helm-charts
+    targetRevision: 2.1.1
+    helm:
+      releaseName: plex
+      valuesObject:
+        # image:
+        #   repository: lscr.io/linuxserver/plex
+        #   tag: latest
+        service:
+          type: LoadBalancer 
+        persistence:
+          config: 
+            enabled: false
+            customVolume:
+              hostPath:
+                path: /mnt/data/pvc-bab4feb2-9abb-40e2-a4e9-3cb1a6472d72_jellyfin_jellyfin-data/
+        
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: plex
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+

@@ -1,0 +1,50 @@
+#first need to add kernel modules and increase inotify limits
+#https://www.deploykf.org/guides/getting-started/#istio-kernel-modules
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubeflow
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: example
+    repoURL: https://github.com/kubeflow/manifests
+    targetRevision: HEAD
+    kustomize:
+      patches:
+        - target:
+            kind: Service
+            name: istio-ingressgateway
+            namespace: istio-system
+          patch: |-
+            - op: replace
+              path: /spec/type
+              value: LoadBalancer
+        - target:
+            kind: Gateway
+            metadata:
+              name: istio-ingressgateway
+              labels:
+                release: istio
+            spec:
+              selector:
+                app: istio-ingressgateway
+                istio: ingressgateway
+              servers:
+              - port:
+                  number: 80
+                  name: http
+                  protocol: HTTP
+                hosts:
+                - '*'
+  destination:
+    namespace: kubeflow
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
