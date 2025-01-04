@@ -19,7 +19,8 @@ spec:
           type: LoadBalancer 
         persistence:
           data: 
-            enabled: false
+            enabled: true
+            isPvc: false
             customVolume:
               hostPath:
                 path: /mnt/data/pvc-bab4feb2-9abb-40e2-a4e9-3cb1a6472d72_jellyfin_jellyfin-data/
