@@ -18,7 +18,7 @@ spec:
         service:
           type: LoadBalancer 
         persistence:
-          config: 
+          data: 
             enabled: false
             customVolume:
               hostPath:
