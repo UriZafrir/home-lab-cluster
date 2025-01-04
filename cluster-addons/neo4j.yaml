@@ -18,8 +18,8 @@ spec:
           data:
             mode: defaultStorageClass
         env:
-        - name: NEO4J_PLUGINS
-          value: '["apoc", "apoc-extended"]'
+          - name: NEO4J_PLUGINS
+            value: '["apoc", "apoc-extended"]'
   destination:
     server: "https://kubernetes.default.svc"
     namespace: neo4j
