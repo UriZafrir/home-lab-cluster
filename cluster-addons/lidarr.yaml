@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lidarr
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: lidarr
+    repoURL: https://bubylou.github.io/Arr-Stack
+    targetRevision: 0.3.2
+    helm:
+      releaseName: lidarr
+      valuesObject:
+        image:
+          repository: lscr.io/linuxserver/lidarr
+          tag: latest
+        service:
+          type: LoadBalancer  
+        
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: lidarr
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+

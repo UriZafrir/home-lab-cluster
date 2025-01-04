@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sonarr
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: sonarr
+    repoURL: https://charts.alekc.dev
+    targetRevision: 1.7.0
+    helm:
+      releaseName: sonarr
+      valuesObject:
+        image:
+          repository: lscr.io/linuxserver/radarr
+          tag: latest
+        service:
+          type: LoadBalancer  
+        
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: sonarr
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
