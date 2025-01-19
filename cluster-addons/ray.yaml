@@ -1,0 +1,25 @@
+#https://github.com/ray-project/kuberay/blob/master/helm-chart/kuberay-operator/README.md
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kuberay-operator
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: kuberay-operator
+    repoURL: https://charts.jetstack.io
+    targetRevision: 1.16.2
+    helm:
+      releaseName: kuberay-operator
+      valuesObject:
+        installCRDs: true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kuberay-operator
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
