@@ -8,8 +8,8 @@ spec:
   project: default
   source:
     chart: kuberay-operator
-    repoURL: https://charts.jetstack.io
-    targetRevision: 1.16.2
+    repoURL: https://ray-project.github.io/kuberay-helm/
+    targetRevision: 1.1.0
     helm:
       releaseName: kuberay-operator
       valuesObject:
