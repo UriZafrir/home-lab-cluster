@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: neo4j
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
