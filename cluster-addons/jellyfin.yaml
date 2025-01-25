@@ -27,6 +27,10 @@ spec:
               # customVolume:
               #   hostPath:
               #     path: /mnt/data/pvc-bab4feb2-9abb-40e2-a4e9-3cb1a6472d72_jellyfin_jellyfin-data/
+          podSecurityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/longhorn
