@@ -20,13 +20,13 @@ spec:
           persistence:
             data:
               enabled: true
-              # existingClaim: longhorn-static-pvc-1
               storageClass: local-path
               size: 20Gi
+              # enabled: true
               # isPvc: false
               # customVolume:
-                # hostPath:
-                #   path: /mnt/data
+              #   hostPath:
+              #     path: /mnt/data/pvc-bab4feb2-9abb-40e2-a4e9-3cb1a6472d72_jellyfin_jellyfin-data/
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/longhorn
