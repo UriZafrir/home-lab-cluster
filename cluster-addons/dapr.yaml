@@ -10,7 +10,7 @@ spec:
   source:
     chart: dapr
     repoURL: https://dapr.github.io/helm-charts/
-    targetRevision: 1.15.0-rc.2
+    targetRevision: 1.15.0-rc.10
     helm:
       releaseName: dapr
       valuesObject:
