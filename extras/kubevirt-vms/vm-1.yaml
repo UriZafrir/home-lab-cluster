@@ -49,15 +49,16 @@ spec:
             #cloud-config
             users:
               - name: fedora
-                 ssh-authorized-keys:
-                     - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjfyR0TesyI0zSn92lLgsjTzTTkL8Ox9rBDKX/JThah
+                ssh-authorized-keys:
+                    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjfyR0TesyI0zSn92lLgsjTzTTkL8Ox9rBDKX/JThah
             ssh_pwauth: True
             disable_root: false
             password: fedora
             chpasswd:
               expire: False
               list: |-
-                 fedora:fedora
+                fedora:fedora
+                root:fedora
         name: cloudinit
 ---
 # apiVersion: v1
