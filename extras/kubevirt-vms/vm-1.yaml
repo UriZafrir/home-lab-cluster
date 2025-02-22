@@ -63,33 +63,33 @@ spec:
                   - ssh-rsa ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjfyR0TesyI0zSn92lLgsjTzTTkL8Ox9rBDKX/JThah
               ssh_pwauth: True
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: vmsshservice
-spec:
-  externalTrafficPolicy: Cluster
-  ports:
-  - name: nodeport
-    nodePort: 30000
-    port: 27017
-    protocol: TCP
-    targetPort: 22
-  selector:
-    kubevirt.io/vm: vm-fedora
-  type: NodePort
 # apiVersion: v1
 # kind: Service
 # metadata:
 #   name: vmsshservice
 # spec:
+#   externalTrafficPolicy: Cluster
 #   ports:
-#   - port: 27017
+#   - name: nodeport
+#     nodePort: 30000
+#     port: 27017
 #     protocol: TCP
 #     targetPort: 22
 #   selector:
-#     kubevirt.io/domain: vm-fedora
-#   type: LoadBalancer
+#     kubevirt.io/vm: vm-fedora
+#   type: NodePort
+apiVersion: v1
+kind: Service
+metadata:
+  name: vmsshservice
+spec:
+  ports:
+  - port: 27017
+    protocol: TCP
+    targetPort: 22
+  selector:
+    kubevirt.io/domain: vm-fedora
+  type: LoadBalancer
 
 # apiVersion: kubevirt.io/v1
 # kind: VirtualMachine
