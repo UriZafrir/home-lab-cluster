@@ -5,7 +5,7 @@ metadata:
     kubevirt.io/vm: vm-cirros
   name: vm-cirros
 spec:
-  runStrategy: Halted
+  # runStrategy: Halted
   template:
     metadata:
       labels:
