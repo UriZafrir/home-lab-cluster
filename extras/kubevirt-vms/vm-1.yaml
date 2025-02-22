@@ -50,7 +50,7 @@ spec:
             users:
               - name: fedora
                  ssh-authorized-keys:
-                     - $YOUR_KEY_HERE
+                     - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjfyR0TesyI0zSn92lLgsjTzTTkL8Ox9rBDKX/JThah
             ssh_pwauth: True
             disable_root: false
             password: fedora
@@ -58,7 +58,7 @@ spec:
               expire: False
               list: |-
                  fedora:fedora
-        name: cloudinitdisk
+        name: cloudinit
 ---
 # apiVersion: v1
 # kind: Service
