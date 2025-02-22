@@ -41,27 +41,24 @@ spec:
           type: ""
       terminationGracePeriodSeconds: 180
       volumes:
-        - name: containerdisk
-          containerDisk:
-            image: quay.io/containerdisks/fedora:41
-        - name: cloudinit
-          cloudInitNoCloud:
-            userData: |
-              # The default username is: fedora
-              #cloud-config
-              chpasswd:
-                expire: False
-                list: |
-                   fedora:fedora
-              users:
-                - name: fedora
-                  shell: /bin/bash
-                  lock_passwd: false
-                  groups: sudo,wheel
-                  sudo: ['ALL=(ALL) NOPASSWD:ALL']
-                  ssh-authorized-keys:
-                  - ssh-rsa ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjfyR0TesyI0zSn92lLgsjTzTTkL8Ox9rBDKX/JThah
-              ssh_pwauth: True
+      - containerDisk:
+          image: quay.io/containerdisks/fedora:41
+        name: containerdisk
+      - cloudInitNoCloud:
+          userData: |-
+            #cloud-config
+            users:
+              - name: fedora
+                 ssh-authorized-keys:
+                     - $YOUR_KEY_HERE
+            ssh_pwauth: True
+            disable_root: false
+            password: fedora
+            chpasswd:
+              expire: False
+              list: |-
+                 fedora:fedora
+        name: cloudinitdisk
 ---
 # apiVersion: v1
 # kind: Service
