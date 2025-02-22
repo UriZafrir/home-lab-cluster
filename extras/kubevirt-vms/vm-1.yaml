@@ -48,7 +48,7 @@ metadata:
   name: vmsshservice
 spec:
   ports:
-  - port: 31132
+  - port: 22
     protocol: TCP
     targetPort: 22
   selector:
