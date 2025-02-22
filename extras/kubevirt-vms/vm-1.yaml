@@ -68,13 +68,28 @@ kind: Service
 metadata:
   name: vmsshservice
 spec:
+  externalTrafficPolicy: Cluster
   ports:
-  - port: 22
+  - name: nodeport
+    nodePort: 30000
+    port: 27017
     protocol: TCP
     targetPort: 22
   selector:
-    kubevirt.io/domain: vm-fedora
-  type: LoadBalancer
+    kubevirt.io/vm: vm-fedora
+  type: NodePort
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: vmsshservice
+# spec:
+#   ports:
+#   - port: 27017
+#     protocol: TCP
+#     targetPort: 22
+#   selector:
+#     kubevirt.io/domain: vm-fedora
+#   type: LoadBalancer
 
 # apiVersion: kubevirt.io/v1
 # kind: VirtualMachine
