@@ -12,6 +12,8 @@ spec:
         kubevirt.io/vm: vm-cirros
     spec:
       domain:
+        cpu:
+          cores: 4
         resources:
           requests:
             memory: 4G
@@ -46,7 +48,7 @@ metadata:
   name: vmsshservice
 spec:
   ports:
-  - port: 22
+  - port: 31132
     protocol: TCP
     targetPort: 22
   selector:
