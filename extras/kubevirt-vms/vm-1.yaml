@@ -35,10 +35,9 @@ spec:
           requests:
             memory: 1Gi
       networks:
-      - name: default
-        pod: {} # Stock pod network
-        machine:
-          type: ""
+        - machine:
+            type: ''
+          name: default
       terminationGracePeriodSeconds: 180
       volumes:
       - containerDisk:
