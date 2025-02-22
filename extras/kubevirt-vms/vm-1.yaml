@@ -1,22 +1,14 @@
+#https://quay.io/repository/containerdisks/fedora
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
-  labels:
-    kubevirt.io/vm: vm-cirros
-  name: vm-cirros
+  name: fedora
 spec:
-  runStrategy: Once
+  runStrategy: Always
   template:
     metadata:
-      labels:
-        kubevirt.io/vm: vm-cirros
     spec:
       domain:
-        cpu:
-          cores: 4
-        resources:
-          requests:
-            memory: 4G
         devices:
           disks:
           - disk:
@@ -24,23 +16,39 @@ spec:
             name: containerdisk
           - disk:
               bus: virtio
-            name: cloudinitdisk
+            name: cloudinit
           interfaces:
             - name: default
               masquerade: {}
+          rng: {}
+        features:
+          acpi: {}
+          smm:
+            enabled: true
+        firmware:
+          bootloader:
+            efi:
+              secureBoot: true
+        resources:
+          requests:
+            memory: 1Gi
       networks:
       - name: default
         pod: {} # Stock pod network
         machine:
           type: ""
-      terminationGracePeriodSeconds: 0
+      terminationGracePeriodSeconds: 180
       volumes:
-      - name: containerdisk
-        containerDisk:
-          image: kubevirt/cirros-container-disk-demo:latest
+      - containerDisk:
+          image: quay.io/containerdisks/fedora:41
+        name: containerdisk
       - cloudInitNoCloud:
-          userDataBase64: IyEvYmluL3NoCgplY2hvICdwcmludGVkIGZyb20gY2xvdWQtaW5pdCB1c2VyZGF0YScK
-        name: cloudinitdisk
+          userData: |-
+            #cloud-config
+            # The default username is: fedora
+            ssh_authorized_keys:
+              - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjfyR0TesyI0zSn92lLgsjTzTTkL8Ox9rBDKX/JThah
+        name: cloudinit
 ---
 apiVersion: v1
 kind: Service
@@ -54,3 +62,48 @@ spec:
   selector:
     kubevirt.io/domain: vm-cirros
   type: LoadBalancer
+
+# apiVersion: kubevirt.io/v1
+# kind: VirtualMachine
+# metadata:
+#   labels:
+#     kubevirt.io/vm: vm-cirros
+#   name: vm-cirros
+# spec:
+#   runStrategy: Once
+#   template:
+#     metadata:
+#       labels:
+#         kubevirt.io/vm: vm-cirros
+#     spec:
+#       domain:
+#         cpu:
+#           cores: 4
+#         resources:
+#           requests:
+#             memory: 4G
+#         devices:
+#           disks:
+#           - disk:
+#               bus: virtio
+#             name: containerdisk
+#           - disk:
+#               bus: virtio
+#             name: cloudinitdisk
+#           interfaces:
+#             - name: default
+#               masquerade: {}
+#       networks:
+#       - name: default
+#         pod: {} # Stock pod network
+#         machine:
+#           type: ""
+#       terminationGracePeriodSeconds: 0
+#       volumes:
+#       - name: containerdisk
+#         containerDisk:
+#           image: kubevirt/cirros-container-disk-demo:latest
+#       - cloudInitNoCloud:
+#           userDataBase64: IyEvYmluL3NoCgplY2hvICdwcmludGVkIGZyb20gY2xvdWQtaW5pdCB1c2VyZGF0YScK
+#         name: cloudinitdisk
+

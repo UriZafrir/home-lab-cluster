@@ -1,0 +1,56 @@
+# apiVersion: kubevirt.io/v1
+# kind: VirtualMachine
+# metadata:
+#   labels:
+#     kubevirt.io/vm: vm-cirros
+#   name: vm-cirros
+# spec:
+#   runStrategy: Once
+#   template:
+#     metadata:
+#       labels:
+#         kubevirt.io/vm: vm-cirros
+#     spec:
+#       domain:
+#         cpu:
+#           cores: 4
+#         resources:
+#           requests:
+#             memory: 4G
+#         devices:
+#           disks:
+#           - disk:
+#               bus: virtio
+#             name: containerdisk
+#           - disk:
+#               bus: virtio
+#             name: cloudinitdisk
+#           interfaces:
+#             - name: default
+#               masquerade: {}
+#       networks:
+#       - name: default
+#         pod: {} # Stock pod network
+#         machine:
+#           type: ""
+#       terminationGracePeriodSeconds: 0
+#       volumes:
+#       - name: containerdisk
+#         containerDisk:
+#           image: kubevirt/cirros-container-disk-demo:latest
+#       - cloudInitNoCloud:
+#           userDataBase64: IyEvYmluL3NoCgplY2hvICdwcmludGVkIGZyb20gY2xvdWQtaW5pdCB1c2VyZGF0YScK
+#         name: cloudinitdisk
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: vmsshservice
+# spec:
+#   ports:
+#   - port: 22
+#     protocol: TCP
+#     targetPort: 22
+#   selector:
+#     kubevirt.io/domain: vm-cirros
+#   type: LoadBalancer
