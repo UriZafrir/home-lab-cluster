@@ -32,7 +32,7 @@ spec:
             - name: BRIDGE_K8S_AUTH_BEARER_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: console-token-ppfc2 # console serviceaccount token
+                  name: console-token-secret # console serviceaccount token
                   key: token
 
 ---
@@ -70,3 +70,12 @@ subjects:
 - kind: ServiceAccount
   name: console
   namespace: kube-system
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: console-token-secret
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: console
+type: kubernetes.io/service-account-token
