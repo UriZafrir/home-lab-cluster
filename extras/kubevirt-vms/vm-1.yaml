@@ -61,6 +61,7 @@ spec:
                   sudo: ['ALL=(ALL) NOPASSWD:ALL']
                   ssh-authorized-keys:
                   - ssh-rsa ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjfyR0TesyI0zSn92lLgsjTzTTkL8Ox9rBDKX/JThah
+              ssh_pwauth: True
 ---
 apiVersion: v1
 kind: Service
