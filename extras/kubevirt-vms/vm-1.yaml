@@ -53,7 +53,7 @@ spec:
                     - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjfyR0TesyI0zSn92lLgsjTzTTkL8Ox9rBDKX/JThah
             ssh_pwauth: True
             disable_root: false
-            sudo: ALL=(ALL) NOPASSWD:ALL
+            # sudo: ALL=(ALL) NOPASSWD:ALL #didnt work
             password: fedora
             chpasswd:
               expire: False
