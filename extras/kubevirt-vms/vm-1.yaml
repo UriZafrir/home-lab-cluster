@@ -3,6 +3,8 @@ apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
   name: fedora
+  labels:
+    kubevirt.io/vm: vm-fedora
 spec:
   runStrategy: Always
   template:
@@ -60,7 +62,7 @@ spec:
     protocol: TCP
     targetPort: 22
   selector:
-    kubevirt.io/domain: vm-cirros
+    kubevirt.io/domain: vm-fedora
   type: LoadBalancer
 
 # apiVersion: kubevirt.io/v1
