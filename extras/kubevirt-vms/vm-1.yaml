@@ -20,6 +20,12 @@ spec:
           - disk:
               bus: virtio
             name: cloudinitdisk
+          interfaces:
+            - name: default
+              masquerade: {}
+      networks:
+      - name: default
+        pod: {} # Stock pod network
         machine:
           type: ""
         resources:
