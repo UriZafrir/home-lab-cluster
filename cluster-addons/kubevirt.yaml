@@ -11,9 +11,9 @@ spec:
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/kubevirt
-    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-    #   targetRevision: HEAD
-    #   path: extras/kubevirt-vms
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: HEAD
+      path: extras/kubevirt-vms
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kubevirt
