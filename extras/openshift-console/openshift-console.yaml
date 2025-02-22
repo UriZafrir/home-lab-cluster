@@ -41,7 +41,7 @@ apiVersion: v1
 metadata:
   name: console-np-service
   namespace: openshift-console
-  spec:
+spec:
   selector:
     app: console
   type: LoadBalancer
