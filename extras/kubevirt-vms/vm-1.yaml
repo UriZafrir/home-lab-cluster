@@ -12,6 +12,9 @@ spec:
         kubevirt.io/vm: vm-cirros
     spec:
       domain:
+        resources:
+          requests:
+            memory: 4G
         devices:
           disks:
           - disk:
@@ -28,9 +31,6 @@ spec:
         pod: {} # Stock pod network
         machine:
           type: ""
-        resources:
-          requests:
-            memory: 64M
       terminationGracePeriodSeconds: 0
       volumes:
       - name: containerdisk
