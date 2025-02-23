@@ -3,12 +3,14 @@ kind: Application
 metadata:
   name: istio
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     chart: istiod
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.24.2
+    targetRevision: 1.25.0-rc.0
     helm:
       releaseName: istiod
       valuesObject:

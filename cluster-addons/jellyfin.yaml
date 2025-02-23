@@ -6,7 +6,6 @@ metadata:
 spec:
   project: default
   sources:
-
     - repoURL: https://utkuozdemir.org/helm-charts
       chart: jellyfin
       targetRevision: 2.0.0
