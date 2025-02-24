@@ -18,21 +18,27 @@ spec:
             type: LoadBalancer
           persistence:
             data:
-              enabled: true
-              storageClass: local-path
-              size: 20Gi
               # enabled: true
-              # isPvc: false
-              # customVolume:
-              #   hostPath:
-              #     path: /mnt/data/pvc-bab4feb2-9abb-40e2-a4e9-3cb1a6472d72_jellyfin_jellyfin-data/
+              # storageClass: local-path
+              # size: 20Gi
+              enabled: true
+              isPvc: false
+              customVolume:
+                hostPath:
+                  path: /mnt/data/jellyfin-data/
+            config:
+              enabled: true
+              isPvc: false
+              customVolume:
+                hostPath:
+                  path: /mnt/data/jellyfin-config
           # podSecurityContext:
           #   runAsUser: 1000
           #   runAsGroup: 1000
           #   fsGroup: 1000
-    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: HEAD
-      path: extras/longhorn
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: HEAD
+    #   path: extras/longhorn
   destination:
     server: "https://kubernetes.default.svc"
     namespace: jellyfin
