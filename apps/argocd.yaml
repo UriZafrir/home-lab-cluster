@@ -8,16 +8,16 @@ spec:
   source:
     chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 7.7.10
+    targetRevision: 7.8.5
     helm:
       releaseName: argocd
       valuesObject:
         server:
           service:
             type: NodePort
-        configs:
-          cm:
-            kustomize.buildOptions: "--enable-helm"
+        # configs:
+        #   cm:
+        #     kustomize.buildOptions: "--enable-helm"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: argocd
