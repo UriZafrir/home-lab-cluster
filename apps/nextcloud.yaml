@@ -1,3 +1,6 @@
+#su -s /bin/bash www-data
+#php occ config:system:set trusted_domains 2 --value=192.168.100.2
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -18,8 +21,8 @@ spec:
           type: LoadBalancer
         persistence:
           enabled: true
-        # collabora:
-        #   enabled: true
+        collabora:
+          enabled: true
         nextcloud:
           trustedDomains:
             - "http://192.168.100.2"
