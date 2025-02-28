@@ -20,6 +20,8 @@ spec:
           enabled: true
         # collabora:
         #   enabled: true
+        trustedDomains:
+          - "http://192.168.100.2"
   destination:
     server: "https://kubernetes.default.svc"
     namespace:  nextcloud
