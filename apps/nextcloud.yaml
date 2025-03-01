@@ -26,6 +26,16 @@ spec:
         nextcloud:
           trustedDomains:
             - "http://192.168.100.2"
+          configs:
+            logging.config.php: |-
+              <?php
+              $CONFIG = array (
+                'log_type' => 'file',
+                'logfile' => 'nextcloud.log',
+                'loglevel' => 0,
+                'logdateformat' => 'F d, Y H:i:s'
+                );
+
   destination:
     server: "https://kubernetes.default.svc"
     namespace:  nextcloud
