@@ -13,7 +13,7 @@ spec:
   source:
       repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
-      path: extras/nexcloud
+      path: extras/nextcloud
   destination:
     server: "https://kubernetes.default.svc"
     namespace:  nextcloud
