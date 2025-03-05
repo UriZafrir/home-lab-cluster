@@ -11,7 +11,7 @@ metadata:
 spec:
   project: default
   source:
-    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/nexcloud
   destination:
