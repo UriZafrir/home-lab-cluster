@@ -7,14 +7,17 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    chart: cert-manager
-    repoURL: https://charts.jetstack.io
-    targetRevision: 1.16.2
-    helm:
-      releaseName: cert-manager
+  sources:
+    - repoURL: https://charts.jetstack.io
+      chart: cert-manager
+      targetRevision: 1.17.1
+      helm:
+        releaseName: cert-manager
       valuesObject:
         installCRDs: true
+    - repoURL: https://github.com/UriZafrir/oracle-cloud-jellyfin.git
+      targetRevision: HEAD
+      path: extras/cert-manager
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cert-manager

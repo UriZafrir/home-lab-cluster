@@ -36,6 +36,31 @@ spec:
           #   runAsUser: 1000
           #   runAsGroup: 1000
           #   fsGroup: 1000
+          # ingress:
+          #   # -- Expose the app using an ingress
+          #   enabled: true
+          #   # -- Ingress class name
+          #   className: "nginx"
+          #   # -- Annotations for the ingress
+          #   annotations:
+          #     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          #   # -- Ingress hosts configuration
+          #   # @default -- see [values.yaml](values.yaml)
+          #   hosts:
+          #     - host: jellyfin.uri.cluster.gd
+          #       paths:
+          #         - path: /
+          #           pathType: Prefix
+          #           backend:
+          #             service:
+          #               name: jellyfin
+          #               port:
+          #                 number: 8096
+          #   # -- The TLS configuration for the Ingress
+          #   tls:
+          #   - hosts:
+          #     - jellyfin.uri.cluster.gd
+          #     secretName: jellyfin-tls
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/longhorn
