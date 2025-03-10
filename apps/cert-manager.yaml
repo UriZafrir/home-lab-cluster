@@ -14,7 +14,7 @@ spec:
       helm:
         releaseName: cert-manager
       valuesObject:
-        installCRDs: true
+        # installCRDs: true
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/cert-manager
