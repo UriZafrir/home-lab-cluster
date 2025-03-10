@@ -14,9 +14,12 @@ spec:
     helm:
       releaseName: ingress-nginx
       valuesObject:
+      # these three are needed for host-networking - opening port 80 and 443 on host, sharing dns with host, and running as a daemon set so because only a single process can bind to a port
+      # https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
         controller:
           hostNetwork: true
           kind: DaemonSet
+          dnsPolicy: ClusterFirstWithHostNet
   destination:
     server: "https://kubernetes.default.svc"
     namespace: ingress-nginx
