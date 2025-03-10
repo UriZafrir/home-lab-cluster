@@ -15,6 +15,7 @@ spec:
         releaseName: cert-manager
       valuesObject:
         # installCRDs: true
+        podDnsPolicy: "ClusterFirst"
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/cert-manager
