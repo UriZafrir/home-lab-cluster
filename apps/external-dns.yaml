@@ -8,8 +8,8 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://charts.bitnami.com
-      chart: bitnami/external-dns
+    - repoURL: https://charts.bitnami.com/bitnami
+      chart: external-dns
       targetRevision: 8.7.7
       helm:
         releaseName: external-dns
