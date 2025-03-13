@@ -1,5 +1,5 @@
 #curl https://192.168.100.4:32400/web/ -vvv
-#curl https://in.uri.work.gd/plex/web -vvv --insecure
+#curl https://in.uri.work.gd/plex -vvv --insecure
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
