@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: 69.8.2
+      helm:
+        releaseName: kube-prometheus-stack
+      valuesObject:
+        # installCRDs: true
+        # podDnsPolicy: "ClusterFirst"
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: HEAD
+    #   path: extras/kube-prometheus-stack
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
