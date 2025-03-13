@@ -14,8 +14,15 @@ spec:
       helm:
         releaseName: kube-prometheus-stack
       valuesObject:
-        # installCRDs: true
-        # podDnsPolicy: "ClusterFirst"
+        prometheus:
+          service:
+            type: LoadBalancer
+        grafana:
+          service:
+            type: LoadBalancer
+        alertmanager:
+          service:
+            type: LoadBalancer
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/kube-prometheus-stack
