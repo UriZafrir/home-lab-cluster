@@ -25,7 +25,7 @@ spec:
             isPvc: false
             customVolume:
               hostPath:
-                path: /mnt/data/pvc-bab4feb2-9abb-40e2-a4e9-3cb1a6472d72_jellyfin_jellyfin-data/
+                path: /mnt/data/jellyfin-data/
         
   destination:
     server: "https://kubernetes.default.svc"
