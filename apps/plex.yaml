@@ -34,7 +34,7 @@ spec:
           # -- Annotations for the ingress
           annotations:
             cert-manager.io/cluster-issuer: "ca-issuer"
-            nginx.ingress.kubernetes.io/rewrite-target: /web/$2  # Rewrites /plex/foo → /web/foo
+            nginx.ingress.kubernetes.io/rewrite-target: /plex/web/$2  # Rewrites /plex/foo → /web/foo
             nginx.ingress.kubernetes.io/use-regex: "true"  
           # -- Ingress hosts configuration
           # @default -- see [values.yaml](values.yaml)
