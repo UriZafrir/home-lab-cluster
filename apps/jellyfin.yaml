@@ -43,7 +43,7 @@ spec:
             # -- Ingress hosts configuration
             # @default -- see [values.yaml](values.yaml)
             hosts:
-              - host: jellyfin.uri.cluster.gd
+              - host: in.uri.work.gd
                 paths:
                   - path: /
                     pathType: Prefix
@@ -55,7 +55,7 @@ spec:
             # -- The TLS configuration for the Ingress
             tls:
             - hosts:
-              - jellyfin.uri.cluster.gd
+              - in.uri.work.gd
               secretName: jellyfin-tls
           # podSecurityContext:
           #   runAsUser: 1000
