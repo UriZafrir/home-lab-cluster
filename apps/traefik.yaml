@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik 
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://traefik.github.io/charts
+      chart: traefik 
+      targetRevision: 34.4.1
+      helm:
+        releaseName: traefik 
+      valuesObject:
+        # installCRDs: true
+        # podDnsPolicy: "ClusterFirst"
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: HEAD
+    #   path: extras/traefik 
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: traefik 
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
