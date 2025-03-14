@@ -14,8 +14,10 @@ spec:
       helm:
         releaseName: traefik 
       valuesObject:
-        # installCRDs: true
-        # podDnsPolicy: "ClusterFirst"
+        ingressRoute:
+          dashboard: 
+            enabled: true
+
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/traefik 
