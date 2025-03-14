@@ -13,11 +13,10 @@ spec:
       targetRevision: 34.4.1
       helm:
         releaseName: traefik 
-      valuesObject:
-        ingressRoute:
-          dashboard: 
-            enabled: true
-
+        valuesObject:
+          ingressRoute:
+            dashboard: 
+              enabled: true
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/traefik 
