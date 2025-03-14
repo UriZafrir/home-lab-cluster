@@ -17,8 +17,6 @@ spec:
           ingressRoute:
             dashboard: 
               enabled: true
-              matchRule: Host(`in.uri.work.gd`) && PathPrefix(`/dashboard`) || PathPrefix(`/api`)
-
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/traefik 
