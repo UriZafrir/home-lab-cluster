@@ -17,6 +17,7 @@ spec:
           ingressRoute:
             dashboard: 
               enabled: true
+              entryPoints: ["web"]
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/traefik 
