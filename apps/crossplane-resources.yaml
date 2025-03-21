@@ -5,24 +5,16 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  # annotations:
-  #   argocd.argoproj.io/sync-options: Replace=true
+  annotations:
+    argocd.argoproj.io/sync-options: Replace=true
 spec:
   project: default
   sources:
-    - repoURL: https://charts.crossplane.io/master/
-      chart: crossplane
-      targetRevision: 1.20.0-rc.0.31.gce27e653e
-      helm:
-        releaseName: crossplane
-        valuesObject:
-          # installCRDs: true
-          # podDnsPolicy: "ClusterFirst"
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
-      path: extras/crossplane
-      # directory:
-      #   recurse: true
+      path: extras/crossplane/gcp-resources
+      directory:
+        recurse: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: crossplane-system
