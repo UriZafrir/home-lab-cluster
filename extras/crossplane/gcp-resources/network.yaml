@@ -27,3 +27,5 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: network_1
     region: us-east4
+  providerConfigRef:
+    name: providerconfig-gcp
