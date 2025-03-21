@@ -19,6 +19,8 @@ spec:
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/crossplane
+      directory:
+        recurse: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: crossplane-system
