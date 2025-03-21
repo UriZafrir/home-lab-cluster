@@ -1,7 +1,8 @@
 apiVersion: storage.gcp.upbound.io/v1beta1
 kind: Bucket
 metadata:
-  generateName: crossplane-bucket-1
+  # generateName: crossplane-bucket-
+  name: crossplane-bucket-1
   labels:
     docs.crossplane.io/example: provider-gcp
 spec:
