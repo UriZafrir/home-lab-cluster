@@ -20,7 +20,7 @@ spec:
           # podDnsPolicy: "ClusterFirst"
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
-      path: extras/crossplane
+      path: extras/crossplane/gcp-providers
       # directory:
       #   recurse: true
   destination:

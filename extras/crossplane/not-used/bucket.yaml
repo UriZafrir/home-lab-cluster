@@ -9,4 +9,4 @@ spec:
   forProvider:
     location: US
   providerConfigRef:
-    name: default
+    name: providerconfig-gcp

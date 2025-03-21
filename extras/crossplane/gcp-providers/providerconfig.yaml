@@ -1,7 +1,7 @@
 apiVersion: gcp.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
-  name: default
+  name: providerconfig-gcp
 spec:
   projectID: gke-project-450213
   credentials:
