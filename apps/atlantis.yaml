@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: atlantis
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://runatlantis.github.io/helm-charts
+      chart: atlantis
+      targetRevision: 5.16.0
+      helm:
+        releaseName: atlantis
+        valuesObject:
+          service:
+            type: LoadBalancer
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: atlantis
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
