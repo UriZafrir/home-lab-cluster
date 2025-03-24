@@ -8,8 +8,8 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: docker.io/envoyproxy/gateway-helm
-      chart: envoy-gateway
+    - repoURL: docker.io/envoyproxy
+      chart: gateway-helm
       targetRevision: v1.3.1
       helm:
         releaseName: envoy-gateway
