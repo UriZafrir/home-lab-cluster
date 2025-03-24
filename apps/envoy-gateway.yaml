@@ -18,7 +18,6 @@ spec:
             rbac:
               annotations:
                 argocd.argoproj.io/sync-wave: "-1"
-
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/envoy-gateway
