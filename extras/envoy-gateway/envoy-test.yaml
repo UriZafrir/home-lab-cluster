@@ -57,12 +57,15 @@ metadata:
   name: httproute-jellyfin
 spec:
   parentRefs:
-    - name: eg
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: eg
   hostnames:
     - "uri2.zone.id"
   rules:
     - backendRefs:
         - group: ""
+          kind: Service
           name: jellyfin
           port: 8096
           weight: 1
