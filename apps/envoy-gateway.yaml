@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: envoy-gateway
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: docker.io/envoyproxy/gateway-helm
+      chart: envoy-gateway
+      targetRevision: v1.3.1
+      helm:
+        releaseName: envoy-gateway
+        valuesObject:
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: HEAD
+    #   path: extras/envoy-gateway/gcp-providers
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: envoy-gateway-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
