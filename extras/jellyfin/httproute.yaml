@@ -6,7 +6,7 @@ spec:
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: eg
+      name: envoy-gateway
       namespace: envoy-gateway-system
   hostnames:
     - "uri2.zone.id"
