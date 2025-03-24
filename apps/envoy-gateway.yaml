@@ -14,9 +14,9 @@ spec:
       helm:
         releaseName: envoy-gateway
         valuesObject:
-    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-    #   targetRevision: HEAD
-    #   path: extras/envoy-gateway/gcp-providers
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: HEAD
+      path: extras/envoy-gateway
   destination:
     server: "https://kubernetes.default.svc"
     namespace: envoy-gateway-system
