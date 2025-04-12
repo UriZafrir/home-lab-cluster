@@ -8,10 +8,10 @@ metadata:
 spec:
   sources:
     - repoURL: https://istio-release.storage.googleapis.com/charts
-      chart: istiod
+      chart: base
       targetRevision: 1.25.1
       helm:
-        releaseName: istiod
+        releaseName: istio-base
   destination:
     server: "https://kubernetes.default.svc"
     namespace: istio-system
@@ -19,8 +19,8 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    # syncOptions:
-    # - CreateNamespace=true
+    syncOptions:
+    - CreateNamespace=true
   ignoreDifferences:
     - group: admissionregistration.k8s.io
       kind: ValidatingWebhookConfiguration
