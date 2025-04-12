@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/UriZafrir/k3d-testing.git
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/gateway-api-crds
   destination:
