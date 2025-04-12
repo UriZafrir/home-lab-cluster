@@ -21,7 +21,7 @@ metadata:
   name: http-app-1
 spec:
   parentRefs:
-  - name: cilium-gateway
+  - name: bookinfo-gateway
     namespace: bookinfo
   rules:
   - matches:
