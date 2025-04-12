@@ -24,4 +24,5 @@ spec:
         value: /api/v1/products
     backendRefs:
     - name: productpage
+      namespace: bookinfo
       port: 9080
