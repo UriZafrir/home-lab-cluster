@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kiali
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: kiali
+    repoURL: https://kiali.org/helm-charts
+    targetRevision: 2.8.0
+    helm:
+      valuesObject:
+        deployment:
+          service_type: LoadBalancer
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: istio-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    # syncOptions:
+    # - CreateNamespace=true
+  # ignoreDifferences:
+  #   - group: admissionregistration.k8s.io
+  #     kind: ValidatingWebhookConfiguration
+  #     name: istio-validator-istio-system
+  #     jsonPointers:
+  #       - /webhooks/0/failurePolicy
+  #   - group: admissionregistration.k8s.io
+  #     kind: ValidatingWebhookConfiguration
+  #     name: istiod-default-validator
+  #     jsonPointers:
+  #       - /webhooks/0/failurePolicy
