@@ -10,7 +10,7 @@ spec:
   sources:
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
-      path: exras/istio-addons
+      path: extras/istio-addons
   destination:
     server: "https://kubernetes.default.svc"
     namespace: istio-system
