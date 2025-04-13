@@ -213,7 +213,7 @@ metadata:
     app.kubernetes.io/version: "3.4.2"
   annotations:
 spec:
-  type: ClusterIP
+  type: LoadBalancer # i changed this
   ports:
     - name: http-metrics
       port: 3100

@@ -62,7 +62,7 @@ metadata:
   labels:
     app: jaeger
 spec:
-  type: ClusterIP
+  type: LoadBalancer # I changed this
   ports:
     - name: http-query
       port: 80
