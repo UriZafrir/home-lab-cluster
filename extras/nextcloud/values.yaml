@@ -1,16 +1,16 @@
-DATABASE_PASSWORD: ***REMOVED***
-FULLTEXTSEARCH_PASSWORD: ***REMOVED***
-IMAGINARY_SECRET: ***REMOVED***
+DATABASE_PASSWORD: REPLACE_ME
+FULLTEXTSEARCH_PASSWORD: REPLACE_ME
+IMAGINARY_SECRET: REPLACE_ME
 NC_DOMAIN: nextcloud.uri.com          # TODO! Needs to be changed to the domain that you want to use for Nextcloud.
-NEXTCLOUD_PASSWORD: ***REMOVED***          # TODO! This is the password of the initially created Nextcloud admin with username admin.
-ONLYOFFICE_SECRET: ***REMOVED***
-RECORDING_SECRET: ***REMOVED***
-REDIS_PASSWORD: ***REMOVED***
-SIGNALING_SECRET: ***REMOVED***
-TALK_INTERNAL_SECRET: ***REMOVED***
+NEXTCLOUD_PASSWORD: REPLACE_ME          # TODO! This is the password of the initially created Nextcloud admin with username admin.
+ONLYOFFICE_SECRET: REPLACE_ME
+RECORDING_SECRET: REPLACE_ME
+REDIS_PASSWORD: REPLACE_ME
+SIGNALING_SECRET: REPLACE_ME
+TALK_INTERNAL_SECRET: REPLACE_ME
 TIMEZONE: Europe/Berlin          # TODO! This is the timezone that your containers will use.
-TURN_SECRET: ***REMOVED***
-WHITEBOARD_SECRET: ***REMOVED***
+TURN_SECRET: REPLACE_ME
+WHITEBOARD_SECRET: REPLACE_ME
 
 CLAMAV_ENABLED: "no"          # Setting this to "yes" (with quotes) enables the option in Nextcloud automatically.
 COLLABORA_ENABLED: "no"          # Setting this to "yes" (with quotes) enables the option in Nextcloud automatically.
