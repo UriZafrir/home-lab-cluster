@@ -16,6 +16,8 @@ spec:
       valuesObject:
         service:
           type: LoadBalancer
+        migrationJob:
+          enabled: false
   destination:
     server: "https://kubernetes.default.svc"
     namespace: litellm
