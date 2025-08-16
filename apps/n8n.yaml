@@ -16,7 +16,7 @@ spec:
       valuesObject:
         main:
           extraEnv:
-            N8N_SECURE_COOKIE: false
+            N8N_SECURE_COOKIE: "false"
           service:
             type: LoadBalancer
   destination:
