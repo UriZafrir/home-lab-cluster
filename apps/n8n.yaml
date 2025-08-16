@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: n8n
+    repoURL: oci://8gears.container-registry.com/library/n8n
+    targetRevision: 1.0.10
+    helm:
+      releaseName: n8n
+      valuesObject:
+        main:
+          service:
+            type: LoadBalancer
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: n8n
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
