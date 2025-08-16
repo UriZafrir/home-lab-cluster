@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: litellm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://unique-ag.github.io/helm-charts/
+      chart: litellm
+      targetRevision: 1.72.2
+      helm:
+        releaseName: litellm
+        valuesObject:
+          service:
+            type: LoadBalancer
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: litellm
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
