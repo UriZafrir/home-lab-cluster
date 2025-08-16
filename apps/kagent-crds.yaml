@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kagent
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    repoURL: ghcr.io/kagent-dev
+    path: kagent/helm/kagent-crds
+    helm:
+      releaseName: kagent
+      valuesObject:
+        service:
+          type: LoadBalancer
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kagent
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
