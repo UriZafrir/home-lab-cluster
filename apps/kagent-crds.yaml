@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   sources:
-    repoURL: ghcr.io/kagent-dev
+  - repoURL: ghcr.io/kagent-dev
     path: kagent/helm/kagent-crds
     helm:
       releaseName: kagent
