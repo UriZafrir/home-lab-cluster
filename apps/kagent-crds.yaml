@@ -8,14 +8,12 @@ metadata:
 spec:
   project: default
   sources:
-  - repoURL: ghcr.io/kagent-dev
+  - repoURL: oci://ghcr.io/kagent-dev
     targetRevision: 0.5.5
-    path: kagent/helm/kagent-crds
+    chart: kagent/helm/kagent-crds
     helm:
-      releaseName: kagent
+      releaseName: kagent-crds
       valuesObject:
-        service:
-          type: LoadBalancer
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kagent
