@@ -11,7 +11,7 @@ spec:
       repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       revision: HEAD
       files:
-      - path: ./apps-2/*.yaml
+      - path: ./apps/*.yaml
   template:
     metadata:
       name: '{{.path.filename}}'
