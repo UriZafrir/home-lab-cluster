@@ -9,7 +9,7 @@ spec:
   project: default
   sources:
   - repoURL: oci://ghcr.io/kagent-dev/kmcp/helm/kagent-crds
-    targetRevision: 0.5.5
+    targetRevision: 0.1.5
     chart: kmcp-crds
     helm:
       releaseName: kmcp-crds
