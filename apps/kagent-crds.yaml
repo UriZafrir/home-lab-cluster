@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   sources:
-  - repoURL: oci://ghcr.io/kagent-dev
+  - repoURL: oci://ghcr.io/kagent-dev/
     targetRevision: 0.5.5
     chart: kagent/helm/kagent-crds
     helm:
