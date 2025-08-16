@@ -14,7 +14,7 @@ spec:
       - path: ./apps/*.yaml
   template:
     metadata:
-      name: '{{.path.filename}}'
+      name: '{{.path.filename | trimSuffix ".yaml"}}'
     spec:
       project: default
       source:
