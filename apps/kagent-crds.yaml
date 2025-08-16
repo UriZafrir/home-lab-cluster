@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kagent
+  name: kagent-crds
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,6 +9,7 @@ spec:
   project: default
   sources:
   - repoURL: ghcr.io/kagent-dev
+    targetRevision: 0.5.5
     path: kagent/helm/kagent-crds
     helm:
       releaseName: kagent
