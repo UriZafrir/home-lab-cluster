@@ -7,15 +7,15 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  sources:
-    - repoURL: https://unique-ag.github.io/helm-charts/
-      chart: litellm
-      targetRevision: 1.72.2
-      helm:
-        releaseName: litellm
-        valuesObject:
-          service:
-            type: LoadBalancer
+  source:
+    repoURL: https://github.com/BerriAI/litellm
+    targetRevision: main
+    path: deploy/charts/litellm-helm
+    helm:
+      releaseName: litellm
+      valuesObject:
+        service:
+          type: LoadBalancer
   destination:
     server: "https://kubernetes.default.svc"
     namespace: litellm
