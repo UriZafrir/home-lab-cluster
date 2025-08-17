@@ -14,11 +14,9 @@ spec:
     helm:
       releaseName: n8n
       valuesObject:
+        image:
+          tag: local
         main:
-          # command:
-          #   - /bin/sh
-          #   - -c
-          #   - "cd /usr/local/lib/node_modules/n8n && npm install @rxap/n8n-nodes-litellm && tini -- /docker-entrypoint.sh"
           extraEnv:
             N8N_SECURE_COOKIE:
               value: "false"
