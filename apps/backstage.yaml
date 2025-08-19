@@ -14,6 +14,8 @@ spec:
     helm:
       releaseName: backstage
       valuesObject:
+        service:
+          type: LoadBalancer
   destination:
     server: "https://kubernetes.default.svc"
     namespace: backstage
