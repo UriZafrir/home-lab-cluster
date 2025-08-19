@@ -15,8 +15,8 @@ spec:
       releaseName: n8n
       valuesObject:
         image:
-          repository: urizaf/n8n
-          tag: latest
+          # repository: urizaf/n8n
+          # tag: latest
         main:
           extraEnv:
             N8N_SECURE_COOKIE:
