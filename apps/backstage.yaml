@@ -6,15 +6,16 @@ metadata:
 spec:
   project: default
   source:
+    #from https://github.com/backstage/backstage
     repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     targetRevision: HEAD
     path: extras/backstage
-    # helm:
+    helm:
     #   valueFiles:
     #     - values.yaml
-      # values: |
-      #   service:
-      #     type: LoadBalancer
+      values: |
+        service:
+          type: LoadBalancer
   destination:
     server: "https://kubernetes.default.svc"
     namespace: backstage
