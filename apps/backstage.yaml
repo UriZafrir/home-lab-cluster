@@ -8,12 +8,13 @@ metadata:
 spec:
   project: default
   sources:
-  - repoURL: oci://ghcr.io/backstage/charts/backstage
-    targetRevision: 2.6.0
-    chart: backstage
+  - repoURL: https://github.com/backstage/backstage.git
+    targetRevision: HEAD
+    path: contrib/kubernetes/basic_kubernetes_example_with_helm
     helm:
-      releaseName: backstage
-      valuesObject:
+      valueFiles:
+        - values.yaml
+      values: |
         service:
           type: LoadBalancer
   destination:
