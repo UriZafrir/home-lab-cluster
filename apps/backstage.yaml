@@ -16,6 +16,9 @@ spec:
       values: |
         service:
           type: LoadBalancer
+        image:
+          repository: ghcr.io/spotify/backstage
+          tag: 1.42.0
   destination:
     server: "https://kubernetes.default.svc"
     namespace: backstage
