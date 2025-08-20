@@ -7,8 +7,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/backstage/backstage.git
-    targetRevision: master
-    path: contrib/kubernetes/basic_kubernetes_example_with_helm
+    targetRevision: HEAD
+    path: extras/backstage
     # helm:
     #   valueFiles:
     #     - values.yaml
