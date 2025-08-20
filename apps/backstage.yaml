@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-  - repoURL: https://github.com/backstage/backstage.git
+    repoURL: https://github.com/backstage/backstage.git
     targetRevision: HEAD
     path: contrib/kubernetes/basic_kubernetes_example_with_helm
     helm:
