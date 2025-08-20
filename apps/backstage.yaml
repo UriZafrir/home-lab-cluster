@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/backstage/backstage.git
+    repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     targetRevision: HEAD
     path: extras/backstage
     # helm:
