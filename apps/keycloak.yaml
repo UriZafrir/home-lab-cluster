@@ -14,10 +14,12 @@ spec:
       helm:
         releaseName: keycloak
         valuesObject:
-          service:
-            type: LoadBalancer
-          livenessProbe:
-            enabled: false
+          # service:
+          #   type: LoadBalancer
+          # livenessProbe:
+          #   enabled: false
+          # ReadinessProbe:
+          #   enabled: false
   destination:
     server: "https://kubernetes.default.svc"
     namespace: keycloak
