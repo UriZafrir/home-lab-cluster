@@ -16,6 +16,8 @@ spec:
         valuesObject:
           service:
             type: LoadBalancer
+          livenessProbe:
+            enabled: false
   destination:
     server: "https://kubernetes.default.svc"
     namespace: keycloak
