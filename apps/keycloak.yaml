@@ -19,6 +19,7 @@ spec:
           #   level: ALL
           service:
             type: LoadBalancer
+          resourcesPreset: medium
           # livenessProbe:
           #   initialDelaySeconds: 500000
           # readinessProbe:
