@@ -17,6 +17,8 @@ spec:
           #   enabled: true
           logging:
             level: ALL
+          service:
+            type: LoadBalancer
     # - repoURL: oci://registry-1.docker.io/bitnamicharts/keycloak
     #   chart: keycloak
     #   targetRevision: 25.1.2
