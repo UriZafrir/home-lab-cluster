@@ -16,7 +16,7 @@ spec:
           # diagnosticMode:
           #   enabled: true
           logging:
-            level: DEBUG
+            level: ALL
     # - repoURL: oci://registry-1.docker.io/bitnamicharts/keycloak
     #   chart: keycloak
     #   targetRevision: 25.1.2
