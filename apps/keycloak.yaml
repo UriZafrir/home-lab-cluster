@@ -11,6 +11,10 @@ spec:
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/keycloak
+      helm:
+        valuesObject:
+          diagnosticMode:
+            enabled: true
     # - repoURL: oci://registry-1.docker.io/bitnamicharts/keycloak
     #   chart: keycloak
     #   targetRevision: 25.1.2
