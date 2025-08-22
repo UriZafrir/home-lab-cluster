@@ -19,12 +19,10 @@ spec:
             level: ALL
           service:
             type: LoadBalancer
-          primary:
-            livenessProbe:
-              initialDelaySeconds: 500000
-          primary:
-            readinessProbe:
-              initialDelaySeconds: 500000
+          livenessProbe:
+            initialDelaySeconds: 500000
+          readinessProbe:
+            initialDelaySeconds: 500000
     # - repoURL: oci://registry-1.docker.io/bitnamicharts/keycloak
     #   chart: keycloak
     #   targetRevision: 25.1.2
