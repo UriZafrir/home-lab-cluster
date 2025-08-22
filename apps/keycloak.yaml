@@ -13,8 +13,10 @@ spec:
       path: extras/keycloak
       helm:
         valuesObject:
-          diagnosticMode:
-            enabled: true
+          # diagnosticMode:
+          #   enabled: true
+          logging:
+            level: DEBUG
     # - repoURL: oci://registry-1.docker.io/bitnamicharts/keycloak
     #   chart: keycloak
     #   targetRevision: 25.1.2
