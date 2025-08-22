@@ -13,8 +13,8 @@ spec:
       path: extras/keycloak
       helm:
         valuesObject:
-          diagnosticMode:
-            enabled: true
+          # diagnosticMode:
+          #   enabled: true
           # logging:
           #   level: ALL
           service:
