@@ -13,16 +13,16 @@ spec:
       path: extras/keycloak
       helm:
         valuesObject:
-          # diagnosticMode:
-          #   enabled: true
-          logging:
-            level: ALL
+          diagnosticMode:
+            enabled: true
+          # logging:
+          #   level: ALL
           service:
             type: LoadBalancer
-          livenessProbe:
-            initialDelaySeconds: 500000
-          readinessProbe:
-            initialDelaySeconds: 500000
+          # livenessProbe:
+          #   initialDelaySeconds: 500000
+          # readinessProbe:
+          #   initialDelaySeconds: 500000
     # - repoURL: oci://registry-1.docker.io/bitnamicharts/keycloak
     #   chart: keycloak
     #   targetRevision: 25.1.2
