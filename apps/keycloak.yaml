@@ -19,7 +19,13 @@ spec:
           #   level: ALL
           service:
             type: LoadBalancer
-          resourcesPreset: medium
+          resources:
+            requests:
+              cpu: 4
+              memory: 2048Mi
+            limits:
+              cpu: 4
+              memory: 2048Mi
           # livenessProbe:
           #   initialDelaySeconds: 500000
           # readinessProbe:
