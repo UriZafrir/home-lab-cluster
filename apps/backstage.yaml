@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backstage
+  namespace: argocd
+spec:
+  project: default
+  source:
+    #from https://github.com/backstage/backstage
+    repoURL: oci://ghcr.io/backstage/charts/backstage
+    targetRevision: 2.6.1
+    helm:
+      valuesObject:
+        service:
+          type: LoadBalancer
+        image:
+          registry: urizaf
+          repository: backstage
+        serviceAccount:
+          create: true
+    # #from https://github.com/backstage/backstage
+    # repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    # targetRevision: HEAD
+    # path: extras/backstage
+    # helm:
+    # #   valueFiles:
+    # #     - values.yaml
+    #   values: |
+    #     service:
+    #       type: LoadBalancer
+    #     image:
+    #       repository: urizaf/backstage
+    #       tag: latest
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: backstage
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
