@@ -8,6 +8,7 @@ spec:
   source:
     #from https://github.com/backstage/backstage
     repoURL: oci://ghcr.io/backstage/charts/backstage
+    chart: backstage
     targetRevision: 2.6.1
     helm:
       valuesObject:
