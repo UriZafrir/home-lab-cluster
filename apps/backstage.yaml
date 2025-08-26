@@ -30,8 +30,8 @@ spec:
           type: LoadBalancer
         backstage:
           image:
-            registry: local
-            repository: backstage
+            registry: docker.io
+            repository: local/backstage-app
             pullPolicy: Never
         serviceAccount:
           create: true
