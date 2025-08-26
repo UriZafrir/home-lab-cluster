@@ -18,6 +18,7 @@ spec:
           image:
             registry: local
             repository: backstage
+            pullPolicy: Never
         serviceAccount:
           create: true
     # #from https://github.com/backstage/backstage
