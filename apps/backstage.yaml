@@ -33,6 +33,8 @@ spec:
             registry: docker.io
             repository: local/backstage-app
             pullPolicy: Never
+          extraEnvVarsSecrets:
+            - backstage-secret
         serviceAccount:
           create: true
   destination:
