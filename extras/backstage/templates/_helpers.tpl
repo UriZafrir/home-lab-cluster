@@ -1,80 +1,74 @@
-{{/* vim: set filetype=mustache: */}}
 {{/*
-Expand the name of the chart.
+Return the proper image name
 */}}
-{{- define "backstage.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- define "backstage.image" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.backstage.image "global" .Values.global) }}
+{{- end -}}
+
+{{/*
+Return the proper Docker Image Registry Secret Names
+*/}}
+{{- define "backstage.renderImagePullSecrets" -}}
+{{- include "common.images.renderPullSecrets" (dict "images" (list .Values.backstage.image) "context" $) -}}
+{{- end -}}
+
+{{/*
+ Create the name of the service account to use
+ */}}
+{{- define "backstage.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "common.names.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
 {{- end -}}
 
 {{/*
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-If release name contains chart name it will be used as a full name.
 */}}
-{{- define "backstage.fullname" -}}
-{{- if .Values.fullnameOverride -}}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- define "backstage.postgresql.fullname" -}}
+{{- include "common.names.dependency.fullname" (dict "chartName" "postgresql" "chartValues" .Values.postgresql "context" $) -}}
+{{- end -}}
+
+{{/*
+Return the Postgres Database hostname
+*/}}
+{{- define "backstage.postgresql.host" -}}
+{{- if eq .Values.postgresql.architecture "replication" }}
+{{- include "backstage.postgresql.fullname" . -}}-primary
 {{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- if contains $name .Release.Name -}}
-{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- include "backstage.postgresql.fullname" . -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the Postgres Database Secret Name
+*/}}
+{{- define "backstage.postgresql.databaseSecretName" -}}
+{{- if ((((.Values).global).postgresql).auth).existingSecret }}
+    {{- tpl .Values.global.postgresql.auth.existingSecret $ -}}
+{{- else if .Values.postgresql.auth.existingSecret }}
+    {{- tpl .Values.postgresql.auth.existingSecret $ -}}
 {{- else -}}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
+    {{- default (include "backstage.postgresql.fullname" .) (tpl .Values.postgresql.auth.existingSecret $) -}}
 {{- end -}}
 {{- end -}}
 
 {{/*
-Create chart name and version as used by the chart label.
+Return the Postgres databaseSecret key to retrieve credentials for database
 */}}
-{{- define "backstage.chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{/*
-Common App labels
-*/}}
-{{- define "backstage.app.labels" -}}
-app.kubernetes.io/name: {{ include "backstage.name" . }}-app
-helm.sh/chart: {{ include "backstage.chart" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end -}}
-
-{{/*
-Common Backend labels
-*/}}
-{{- define "backstage.backend.labels" -}}
-app.kubernetes.io/name: {{ include "backstage.name" . }}-backend
-helm.sh/chart: {{ include "backstage.chart" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end -}}
-
-{{/*
-Create the name of the service account to use for the app
-*/}}
-{{- define "backstage.app.serviceAccountName" -}}
-{{- if .Values.app.serviceAccount.create -}}
-    {{ default "default" .Values.app.serviceAccount.name }}
+{{- define "backstage.postgresql.databaseSecretKey" -}}
+{{- $defaultDatabaseSecretKey := "password" -}}
+{{- if (or ((((.Values).global).postgresql).auth).existingSecret .Values.postgresql.auth.existingSecret) }}
+    {{- if (((((.Values).global).postgresql).auth).secretKeys).userPasswordKey -}}
+        {{- .Values.global.postgresql.auth.secretKeys.userPasswordKey  -}}
+    {{- else if ((((.Values).postgresql).auth).secretKeys).userPasswordKey -}}
+        {{- .Values.postgresql.auth.secretKeys.userPasswordKey  -}}
+    {{- else -}}
+        {{- print $defaultDatabaseSecretKey -}}
+    {{- end -}}
 {{- else -}}
-    {{ default "default" .Values.app.serviceAccount.name }}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Create the name of the service account to use for the backend
-*/}}
-{{- define "backstage.backend.serviceAccountName" -}}
-{{- if .Values.backend.serviceAccount.create -}}
-    {{ default default .Values.backend.serviceAccount.name }}
-{{- else -}}
-    {{ default "default" .Values.backend.serviceAccount.name }}
+    {{- print $defaultDatabaseSecretKey -}}
 {{- end -}}
 {{- end -}}

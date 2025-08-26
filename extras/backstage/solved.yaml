@@ -1,0 +1,92 @@
+---
+# Source: backstage/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-backstage
+  namespace: "default" 
+  labels:
+    app.kubernetes.io/name: backstage
+    helm.sh/chart: backstage-2.6.0
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: backstage
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - name: http-backend
+      port: 7007
+      targetPort: backend
+      protocol: TCP
+      nodePort: null  
+  selector:
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/component: backstage
+---
+# Source: backstage/templates/backstage-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-backstage
+  namespace: "default"
+  labels: 
+    app.kubernetes.io/name: backstage
+    helm.sh/chart: backstage-2.6.0
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: backstage
+  annotations:
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backstage
+      app.kubernetes.io/instance: release-name
+      app.kubernetes.io/component: backstage
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: backstage
+        helm.sh/chart: backstage-2.6.0
+        app.kubernetes.io/instance: release-name
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/component: backstage
+      annotations:
+        checksum/app-config: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+    spec:
+      serviceAccountName: default
+      volumes:
+      
+      containers:
+        - name: backstage-backend
+          image: local/backstage:latest
+          imagePullPolicy: "Always"
+          command:
+            - node
+            - packages/backend
+          args:
+          readinessProbe:
+            httpGet:
+              path: /.backstage/health/v1/readiness
+              port: 7007
+              scheme: HTTP
+          livenessProbe:
+            httpGet:
+              path: /.backstage/health/v1/liveness
+              port: 7007
+              scheme: HTTP
+          startupProbe:
+            httpGet:
+              path: /.backstage/health/v1/liveness
+              port: 7007
+              scheme: HTTP
+          env:
+            - name: APP_CONFIG_backend_listen_port
+              value: "7007"
+          ports:
+            - name: backend
+              containerPort: 7007
+              protocol: TCP
