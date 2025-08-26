@@ -14,9 +14,10 @@ spec:
       valuesObject:
         service:
           type: LoadBalancer
-        image:
-          registry: local
-          repository: backstage
+        backstage:
+          image:
+            registry: local
+            repository: backstage
         serviceAccount:
           create: true
     # #from https://github.com/backstage/backstage
