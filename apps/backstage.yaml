@@ -36,7 +36,7 @@ spec:
           extraEnvVarsSecrets:
             - backstage-secret
           extraEnvVars:
-            LOG_LEVEL: debug
+            - LOG_LEVEL: debug
         serviceAccount:
           create: true
         rbac:
