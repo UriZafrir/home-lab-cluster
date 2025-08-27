@@ -470,6 +470,12 @@ serviceAccount:
   # -- Auto-mount the service account token in the pod
   automountServiceAccountToken: true
 
+# -- RBAC Configuration
+# @default -- See below
+rbac:
+  # -- Enable the creation of a ClusterRoleBinding for Backstage pods
+  create: false
+
 # -- Metrics configuration
 metrics:
 

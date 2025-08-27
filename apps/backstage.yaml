@@ -37,6 +37,8 @@ spec:
             - backstage-secret
         serviceAccount:
           create: true
+        rbac:
+          create: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: backstage
