@@ -35,12 +35,12 @@ spec:
             pullPolicy: Never
           extraEnvVarsSecrets:
             - backstage-secret
+          extraEnvVars:
+            LOG_LEVEL: debug
         serviceAccount:
           create: true
         rbac:
           create: true
-        extraEnvVars:
-          LOG_LEVEL: debug
   destination:
     server: "https://kubernetes.default.svc"
     namespace: backstage
