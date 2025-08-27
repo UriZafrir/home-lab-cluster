@@ -39,6 +39,8 @@ spec:
           create: true
         rbac:
           create: true
+        extraEnvVars:
+          LOG_LEVEL: debug
   destination:
     server: "https://kubernetes.default.svc"
     namespace: backstage
