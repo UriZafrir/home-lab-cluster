@@ -38,8 +38,8 @@ spec:
           extraEnvVars:
             - name: LOG_LEVEL
               value: debug
-            - name: KUBERNETES_CLIENT_DEBUG
-              value: "true"
+            # - name: KUBERNETES_CLIENT_DEBUG # didn't work
+            #   value: "true"
         serviceAccount:
           create: true
         rbac:
