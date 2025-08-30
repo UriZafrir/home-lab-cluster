@@ -29,6 +29,7 @@ spec:
         service:
           type: LoadBalancer
         backstage:
+          command: []
           image:
             registry: docker.io
             repository: local/backstage-app
