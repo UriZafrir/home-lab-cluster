@@ -12,6 +12,15 @@ spec:
     path: extras/backstage-from-backstage
     helm:
       values: |
+        app:
+          service:
+            type: LoadBalancer
+        backend:
+          enabled: true
+          service:
+            type: LoadBalancer
+          # serviceAccount:
+          #   create: true
         # service:
         #   type: LoadBalancer
         # backstage:
