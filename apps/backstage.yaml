@@ -15,10 +15,14 @@ spec:
         app:
           service:
             type: LoadBalancer
+          image:
+            repository: local/backstage-app-frontend
         backend:
           enabled: true
           service:
             type: LoadBalancer
+          image:
+            repository: local/backstage-app-backend
           # serviceAccount:
           #   create: true
         # service:
