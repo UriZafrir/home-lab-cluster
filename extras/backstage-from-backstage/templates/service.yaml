@@ -13,7 +13,7 @@ spec:
       protocol: TCP
       name: app
   selector:
-    app.kubernetes.io/name: {{ include "backstage.name" . }}
+    app.kubernetes.io/name: {{ include "backstage.name" . }}-app
     app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 {{- if .Values.backend.enabled }}
@@ -32,6 +32,6 @@ spec:
       protocol: TCP
       name: backend 
   selector:
-    app.kubernetes.io/name: {{ include "backstage.name" . }}
+    app.kubernetes.io/name: {{ include "backstage.name" . }}-backend
     app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
