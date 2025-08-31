@@ -44,22 +44,20 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.app.resources | nindent 12 }}
-          env:
-            {{- if .Values.app.extraEnvVarsSecrets }}
+          {{- if .Values.app.extraEnvVarsSecrets }}
+          envFrom:
             {{- range .Values.app.extraEnvVarsSecrets }}
-            - name: {{ .name }}
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .secretName }}
-                  key: {{ .key }}
+            - secretRef:
+                name: {{ . }}
             {{- end }}
-            {{- end }}
-            {{- if .Values.app.extraEnvVars }}
+          {{- end }}
+          {{- if .Values.app.extraEnvVars }}
+          env:
             {{- range .Values.app.extraEnvVars }}
             - name: {{ .name }}
               value: {{ .value | quote }}
             {{- end }}
-            {{- end }}
+          {{- end }}
       {{- with .Values.app.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -120,22 +118,20 @@ spec:
               port: backend
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
-          env:
-            {{- if .Values.backend.extraEnvVarsSecrets }}
+          {{- if .Values.backend.extraEnvVarsSecrets }}
+          envFrom:
             {{- range .Values.backend.extraEnvVarsSecrets }}
-            - name: {{ .name }}
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .secretName }}
-                  key: {{ .key }}
+            - secretRef:
+                name: {{ . }}
             {{- end }}
-            {{- end }}
-            {{- if .Values.backend.extraEnvVars }}
+          {{- end }}
+          {{- if .Values.backend.extraEnvVars }}
+          env:
             {{- range .Values.backend.extraEnvVars }}
             - name: {{ .name }}
               value: {{ .value | quote }}
             {{- end }}
-            {{- end }}
+          {{- end }}
       {{- with .Values.backend.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
