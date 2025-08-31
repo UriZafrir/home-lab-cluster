@@ -44,6 +44,22 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.app.resources | nindent 12 }}
+          env:
+            {{- if .Values.app.extraEnvVarsSecrets }}
+            {{- range .Values.app.extraEnvVarsSecrets }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .secretName }}
+                  key: {{ .key }}
+            {{- end }}
+            {{- end }}
+            {{- if .Values.app.extraEnvVars }}
+            {{- range .Values.app.extraEnvVars }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
       {{- with .Values.app.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -104,6 +120,22 @@ spec:
               port: backend
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
+          env:
+            {{- if .Values.backend.extraEnvVarsSecrets }}
+            {{- range .Values.backend.extraEnvVarsSecrets }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .secretName }}
+                  key: {{ .key }}
+            {{- end }}
+            {{- end }}
+            {{- if .Values.backend.extraEnvVars }}
+            {{- range .Values.backend.extraEnvVars }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
       {{- with .Values.backend.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

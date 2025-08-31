@@ -45,6 +45,8 @@ app:
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
+  extraEnvVarsSecrets: []
+  extraEnvVars: []
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -96,6 +98,8 @@ backend:
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
+  extraEnvVarsSecrets: []
+  extraEnvVars: []
   nodeSelector: {}
   tolerations: []
   affinity: {}
