@@ -6,6 +6,33 @@ metadata:
 spec:
   project: default
   source:
+    #https://github.com/backstage/backstage/tree/master/contrib/kubernetes/basic_kubernetes_example_with_helm/backstage
+    repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    targetRevision: HEAD
+    path: extras/backstage-from-backstage
+    helm:
+      values: |
+        # service:
+        #   type: LoadBalancer
+        # backstage:
+        #   command: []
+        #   image:
+        #     registry: docker.io
+        #     repository: local/backstage-app
+        #     pullPolicy: Never
+        #   extraEnvVarsSecrets:
+        #     - backstage-secret
+        #   extraEnvVars:
+        #     - name: LOG_LEVEL
+        #       value: debug
+        #     # - name: KUBERNETES_CLIENT_DEBUG # didn't work
+        #     #   value: "true"
+        # serviceAccount:
+        #   create: true
+        # rbac:
+        #   create: true
+        # # diagnosticMode:
+        # #   enabled: true
     # repoURL: oci://ghcr.io/backstage/charts/backstage
     # chart: backstage
     # targetRevision: 2.6.1
@@ -21,32 +48,32 @@ spec:
         # serviceAccount:
         #   create: true
     #from https://github.com/backstage/backstage
-    repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-    targetRevision: HEAD
-    path: extras/backstage
-    helm:
-      values: |
-        service:
-          type: LoadBalancer
-        backstage:
-          command: []
-          image:
-            registry: docker.io
-            repository: local/backstage-app
-            pullPolicy: Never
-          extraEnvVarsSecrets:
-            - backstage-secret
-          extraEnvVars:
-            - name: LOG_LEVEL
-              value: debug
-            # - name: KUBERNETES_CLIENT_DEBUG # didn't work
-            #   value: "true"
-        serviceAccount:
-          create: true
-        rbac:
-          create: true
-        # diagnosticMode:
-        #   enabled: true
+    # repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    # targetRevision: HEAD
+    # path: extras/backstage-from-bitnami
+    # helm:
+    #   values: |
+    #     service:
+    #       type: LoadBalancer
+    #     backstage:
+    #       command: []
+    #       image:
+    #         registry: docker.io
+    #         repository: local/backstage-app
+    #         pullPolicy: Never
+    #       extraEnvVarsSecrets:
+    #         - backstage-secret
+    #       extraEnvVars:
+    #         - name: LOG_LEVEL
+    #           value: debug
+    #         # - name: KUBERNETES_CLIENT_DEBUG # didn't work
+    #         #   value: "true"
+    #     serviceAccount:
+    #       create: true
+    #     rbac:
+    #       create: true
+    #     # diagnosticMode:
+    #     #   enabled: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: backstage
