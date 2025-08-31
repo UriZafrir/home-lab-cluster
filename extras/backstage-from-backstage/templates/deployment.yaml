@@ -37,11 +37,11 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: app
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: app
           resources:
             {{- toYaml .Values.app.resources | nindent 12 }}
           {{- if .Values.app.extraEnvVarsSecrets }}
@@ -106,15 +106,15 @@ spec:
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           ports:
             - name: backend
-              containerPort: 80
+              containerPort: 7007
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /healthcheck
               port: backend
           readinessProbe:
             httpGet:
-              path: /
+              path: /healthcheck
               port: backend
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
