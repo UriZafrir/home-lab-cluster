@@ -1,3 +1,13 @@
+serviceAccount:
+  create: false
+  name: ""
+  labels: {}
+  annotations: {}
+  automountServiceAccountToken: true
+
+rbac:
+  create: false
+
 app:
   enabled: true
   nameOverride: ''

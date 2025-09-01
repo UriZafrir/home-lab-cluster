@@ -61,7 +61,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Create the name of the service account to use for the app
 */}}
 {{- define "backstage.app.serviceAccountName" -}}
-{{- if .Values.app.serviceAccount.create -}}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "backstage.fullname" .) .Values.serviceAccount.name }}
+{{- else if .Values.app.serviceAccount.create -}}
     {{ default "default" .Values.app.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.app.serviceAccount.name }}
@@ -72,9 +74,22 @@ Create the name of the service account to use for the app
 Create the name of the service account to use for the backend
 */}}
 {{- define "backstage.backend.serviceAccountName" -}}
-{{- if .Values.backend.serviceAccount.create -}}
-    {{ default default .Values.backend.serviceAccount.name }}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "backstage.fullname" .) .Values.serviceAccount.name }}
+{{- else if .Values.backend.serviceAccount.create -}}
+    {{ default "default" .Values.backend.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.backend.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "backstage.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "backstage.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}

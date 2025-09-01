@@ -18,11 +18,11 @@ spec:
           image:
             repository: local/backstage-app-frontend
             pullPolicy: Never
-          extraEnvVarsSecrets:
-            - backstage-secret
-          extraEnvVars:
-            - name: LOG_LEVEL
-              value: debug
+          # extraEnvVarsSecrets:
+          #   - backstage-secret
+          # extraEnvVars:
+          #   - name: LOG_LEVEL
+          #     value: debug
         backend:
           enabled: true
           service:
@@ -35,8 +35,10 @@ spec:
           extraEnvVars:
             - name: LOG_LEVEL
               value: debug
-          # serviceAccount:
-          #   create: true
+        serviceAccount:
+          create: true
+        rbac:
+          create: true
         # service:
         #   type: LoadBalancer
         # backstage:
