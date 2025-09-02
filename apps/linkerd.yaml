@@ -17,7 +17,7 @@ spec:
       targetRevision: 2025.8.5
       helm:
         releaseName: linkerd-control-plane
-          valuesObject:
+        valuesObject:
 
   destination:
     server: "https://kubernetes.default.svc"
