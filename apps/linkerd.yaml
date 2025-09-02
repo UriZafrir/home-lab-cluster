@@ -21,7 +21,7 @@ spec:
           identity:
             issuer:
               scheme: kubernetes.io/tls
-            externalCA: true
+            # externalCA: true
             identityTrustAnchorsPEM: |
               -----BEGIN CERTIFICATE-----
               MIIBjjCCATSgAwIBAgIRALVayUJAhCbWXsQ5GKVTUTwwCgYIKoZIzj0EAwIwJTEj
