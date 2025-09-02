@@ -24,6 +24,7 @@
 | app.nodeSelector            | Node selectors for scheduling app/frontend pods           | `{}`                |
 | app.tolerations             | Tolerations for scheduling app/frontend pods              | `{}`                |
 | app.affinity                | Affinity settings for scheduling app/frontend pods        | `{}`                |
+| app.annotations             | Annotations for the app/frontend pods                     | `{}`                |
 
 ## Backend Values
 
@@ -49,3 +50,4 @@
 | backend.nodeSelector            | Node selectors for scheduling backend pods                    | `{}`                |
 | backend.tolerations             | Tolerations for scheduling backend pods                       | `{}`                |
 | backend.affinity                | Affinity settings for scheduling backend pods                 | `{}`                |
+| backend.annotations             | Annotations for the backend pods                              | `{}`                |

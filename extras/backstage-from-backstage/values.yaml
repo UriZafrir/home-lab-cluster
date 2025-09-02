@@ -61,6 +61,7 @@ app:
   tolerations: []
   affinity: {}
   labels: {}
+  annotations: {}
 
 backend:
   enabled: false
@@ -115,3 +116,4 @@ backend:
   tolerations: []
   affinity: {}
   labels: {}
+  annotations: {}

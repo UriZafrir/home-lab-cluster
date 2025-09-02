@@ -143,3 +143,21 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- toYaml . | nindent 0 }}
 {{- end }}
 {{- end -}}
+
+{{/*
+Common App template annotations
+*/}}
+{{- define "backstage.app.templateAnnotations" -}}
+{{- with .Values.app.annotations }}
+{{- toYaml . | nindent 0 }}
+{{- end }}
+{{- end -}}
+
+{{/*
+Common Backend template annotations
+*/}}
+{{- define "backstage.backend.templateAnnotations" -}}
+{{- with .Values.backend.annotations }}
+{{- toYaml . | nindent 0 }}
+{{- end }}
+{{- end -}}

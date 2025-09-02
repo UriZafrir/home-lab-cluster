@@ -13,7 +13,7 @@ spec:
     helm:
       values: |
         app:
-          labels:
+          annotations:
             linkerd.io/inject: enabled
           service:
             type: LoadBalancer
@@ -27,7 +27,7 @@ spec:
           #     value: debug
         backend:
           enabled: true
-          labels:
+          annotations:
             linkerd.io/inject: enabled
           service:
             type: LoadBalancer
