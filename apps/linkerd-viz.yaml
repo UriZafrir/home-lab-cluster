@@ -20,6 +20,7 @@ spec:
         dashboard:
           service:
             type: LoadBalancer
+          enforcedHostRegexp: '.*'
   destination:
     server: "https://kubernetes.default.svc"
     namespace: linkerd
