@@ -14,8 +14,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "backstage.name" . }}-app
-        app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "backstage.app.templateLabels" . | indent 8 }}
     spec:
     {{- with .Values.app.imagePullSecrets }}
       imagePullSecrets:
@@ -88,8 +87,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "backstage.name" . }}-backend
-        app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "backstage.backend.templateLabels" . | indent 8 }}
     spec:
     {{- with .Values.backend.imagePullSecrets }}
       imagePullSecrets:

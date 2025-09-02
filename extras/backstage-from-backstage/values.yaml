@@ -60,6 +60,7 @@ app:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+  labels: {}
 
 backend:
   enabled: false
@@ -113,3 +114,4 @@ backend:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+  labels: {}

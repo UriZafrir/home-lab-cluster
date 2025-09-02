@@ -42,6 +42,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- with .Values.app.labels }}
+{{- toYaml . | nindent 0 }}
+{{- end }}
 {{- end -}}
 
 {{/*
@@ -55,6 +58,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- with .Values.backend.labels }}
+{{- toYaml . | nindent 0 }}
+{{- end }}
 {{- end -}}
 
 {{/*
@@ -92,4 +98,48 @@ Create the name of the service account to use
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Common App selector labels
+*/}}
+{{- define "backstage.app.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "backstage.name" . }}-app
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- with .Values.app.labels }}
+{{- toYaml . | nindent 0 }}
+{{- end }}
+{{- end -}}
+
+{{/*
+Common App template labels
+*/}}
+{{- define "backstage.app.templateLabels" -}}
+app.kubernetes.io/name: {{ include "backstage.name" . }}-app
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- with .Values.app.labels }}
+{{- toYaml . | nindent 0 }}
+{{- end }}
+{{- end -}}
+
+{{/*
+Common Backend selector labels
+*/}}
+{{- define "backstage.backend.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "backstage.name" . }}-backend
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- with .Values.backend.labels }}
+{{- toYaml . | nindent 0 }}
+{{- end }}
+{{- end -}}
+
+{{/*
+Common Backend template labels
+*/}}
+{{- define "backstage.backend.templateLabels" -}}
+app.kubernetes.io/name: {{ include "backstage.name" . }}-backend
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- with .Values.backend.labels }}
+{{- toYaml . | nindent 0 }}
+{{- end }}
 {{- end -}}
