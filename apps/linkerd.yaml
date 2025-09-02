@@ -1,0 +1,30 @@
+#https://linkerd.io/2-edge/tasks/generate-certificates/
+#first run:
+# step certificate create root.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
+# step certificate create identity.linkerd.cluster.local issuer.crt issuer.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: linkerd-control-plane
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://helm.linkerd.io/edge
+      chart: linkerd-control-plane
+      targetRevision: 2025.8.5
+      helm:
+        releaseName: linkerd-control-plane
+          valuesObject:
+
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: linkerd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
