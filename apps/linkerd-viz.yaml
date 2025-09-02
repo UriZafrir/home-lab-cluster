@@ -11,14 +11,15 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  sources:
-    - repoURL: https://helm.linkerd.io/edge
-      chart: linkerd-viz
-      targetRevision: 2025.8.5
-      helm:
-        releaseName: linkerd-viz
-      # service:
-      #   type: LoadBalancer
+  source:
+    repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    targetRevision: HEAD
+    path: extras/linkerd-viz
+    helm:
+      values: |
+        dashboard:
+          service:
+            type: LoadBalancer
   destination:
     server: "https://kubernetes.default.svc"
     namespace: linkerd
