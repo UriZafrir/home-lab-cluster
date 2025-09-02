@@ -18,7 +18,20 @@ spec:
       helm:
         releaseName: linkerd-control-plane
         valuesObject:
-
+          identity:
+            externalCA: true
+            identityTrustAnchorsPEM: |
+              -----BEGIN CERTIFICATE-----
+              MIIBjjCCATSgAwIBAgIRALVayUJAhCbWXsQ5GKVTUTwwCgYIKoZIzj0EAwIwJTEj
+              MCEGA1UEAxMacm9vdC5saW5rZXJkLmNsdXN0ZXIubG9jYWwwHhcNMjUwOTAyMTQx
+              OTU2WhcNMzUwODMxMTQxOTU2WjAlMSMwIQYDVQQDExpyb290LmxpbmtlcmQuY2x1
+              c3Rlci5sb2NhbDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDCVLfs0BYfjK+2y
+              a5IEdMmOLEyd9+WeZgR3LGJvogvHAEYnFz/ZPun5UXkFDoiJDUyIPA3q6BfZT47G
+              EPHxrwmjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEBMB0G
+              A1UdDgQWBBT0HJS4s9gfT3LmflevmKj7tGaZXjAKBggqhkjOPQQDAgNIADBFAiEA
+              p129VxsaOMB0prgyiMJwYKbTDPyA8gHLoSnxdl0/HTgCIATw1L0HQanKGsokbhaK
+              bdCbp3d2IBTadtonvCcnnyGF
+              -----END CERTIFICATE-----
   destination:
     server: "https://kubernetes.default.svc"
     namespace: linkerd
