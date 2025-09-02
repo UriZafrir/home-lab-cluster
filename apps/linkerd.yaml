@@ -19,6 +19,8 @@ spec:
         releaseName: linkerd-control-plane
         valuesObject:
           identity:
+            issuer:
+              scheme: kubernetes.io/tls
             externalCA: true
             identityTrustAnchorsPEM: |
               -----BEGIN CERTIFICATE-----
