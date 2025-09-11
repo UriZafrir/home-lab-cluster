@@ -19,9 +19,9 @@ spec:
           #   enabled: true
           # externalIPs:
           #   enabled: true
-          # operator:
-          #   # replicas: 1  # Uncomment this if you only have one node
-          #   rollOutPods: true
+          operator:
+            replicas: 1  # Uncomment this if you only have one node
+          # rollOutPods: true
           # rollOutCiliumPods: true
           # k8sClientRateLimit:
           #   qps: 50
