@@ -14,6 +14,9 @@ spec:
       helm:
         releaseName: cilium
         valuesObject:
+          ipam:
+            operator:
+              clusterPoolIPv4PodCIDRList: "10.42.0.0/16"
           kubeProxyReplacement: true
           # l2announcements:
           #   enabled: true
