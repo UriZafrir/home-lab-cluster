@@ -14,7 +14,7 @@ spec:
       helm:
         releaseName: cilium
         valuesObject:
-          # kubeProxyReplacement: true
+          kubeProxyReplacement: true
           # l2announcements:
           #   enabled: true
           # externalIPs:
