@@ -11,6 +11,7 @@ spec:
   project: default
   sources:
     - repoURL: https://kiali.org/helm-charts
+      chart: kiali-server
       targetRevision: 2.15.0
       helm:
         releaseName: kiali
