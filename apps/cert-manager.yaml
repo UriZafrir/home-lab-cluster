@@ -14,9 +14,6 @@ spec:
       helm:
         releaseName: cert-manager
         valuesObject:
-          admissionWebhooks:
-            certManager:
-              enabled: true
           # installCRDs: true
           # podDnsPolicy: "ClusterFirst"
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
