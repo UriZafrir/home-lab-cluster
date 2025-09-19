@@ -1,3 +1,4 @@
+{{- if .Values.grafana.enabled }}
 ---
 # Source: grafana/templates/serviceaccount.yaml
 apiVersion: v1
@@ -90,7 +91,7 @@ metadata:
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "11.3.1"
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - name: service
       port: 3000
@@ -1110,3 +1111,4 @@ metadata:
   creationTimestamp: null
   name: istio-services-grafana-dashboards
   namespace: istio-system
+{{- end }}

@@ -1,0 +1,14 @@
+grafana:
+  enabled: false
+
+jaeger:
+  enabled: false
+
+kiali:
+  enabled: false
+
+loki:
+  enabled: false
+
+prometheus:
+  enabled: false

@@ -13,6 +13,10 @@ spec:
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/istio-addons
+      helm:
+        values:
+          kiali:
+            enabled: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: istio-system

@@ -1,3 +1,4 @@
+{{- if .Values.prometheus.enabled }}
 ---
 # Source: prometheus/templates/serviceaccount.yaml
 apiVersion: v1
@@ -558,3 +559,4 @@ spec:
         - name: storage-volume
           emptyDir:
             {}
+{{- end }}

@@ -1,3 +1,4 @@
+{{- if .Values.jaeger.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -62,7 +63,7 @@ metadata:
   labels:
     app: jaeger
 spec:
-  type: LoadBalancer # I changed this
+  type: ClusterIP
   ports:
     - name: http-query
       port: 80
@@ -119,3 +120,4 @@ spec:
     name: http-otel
   selector:
     app: jaeger
+{{- end }}

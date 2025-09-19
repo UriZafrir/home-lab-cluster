@@ -1,3 +1,4 @@
+{{- if .Values.kiali.enabled }}
 ---
 # Source: kiali-server/templates/serviceaccount.yaml
 apiVersion: v1
@@ -291,7 +292,7 @@ metadata:
     app.kubernetes.io/part-of: "kiali"
   annotations:
 spec:
-  type: LoadBalancer #  I added this lines
+  type: ClusterIP 
   ports:
   - name: http
     appProtocol: http
@@ -446,3 +447,4 @@ spec:
           secretName: "kiali-multi-cluster-secret"
           optional: true
 ...
+{{- end }}
