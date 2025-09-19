@@ -19,7 +19,7 @@ spec:
               enabled: true
           manager:
             collectorImage:
-              repository: otel/opentelemetry-collector-contrib:latest
+              repository: otel/opentelemetry-collector-contrib
             
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
