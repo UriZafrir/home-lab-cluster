@@ -14,6 +14,9 @@ spec:
       helm:
         releaseName: prometheus
         valuesObject:
+          server:
+            service:
+              type: LoadBalancer
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/prometheus
