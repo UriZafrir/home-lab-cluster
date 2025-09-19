@@ -17,9 +17,9 @@ spec:
             admissionWebhooks:
               certManager:
                 enabled: true
-    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-    #   targetRevision: HEAD
-    #   path: extras/opentelemetry-operator
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: HEAD
+      path: extras/opentelemetry-operator
   destination:
     server: "https://kubernetes.default.svc"
     namespace: opentelemetry-operator-system
