@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-addons
+  name: kiali
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,13 +10,13 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: HEAD
-      path: extras/istio-addons
+    - repoURL: https://kiali.org/helm-charts
+      targetRevision: 2.15.0
       helm:
-        values: |
-          kiali:
-            enabled: true
+        releaseName: kiali
+        valuesObject:
+          auth:
+            strategy: "anonymous"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: istio-system

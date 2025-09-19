@@ -1,1 +1,0 @@
-#kubectl label namespace jellyfin istio.io/dataplane-mode=ambient
