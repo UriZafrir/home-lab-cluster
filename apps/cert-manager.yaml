@@ -16,9 +16,9 @@ spec:
         valuesObject:
           # installCRDs: true
           # podDnsPolicy: "ClusterFirst"
-    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-    #   targetRevision: HEAD
-    #   path: extras/cert-manager
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: HEAD
+      path: extras/cert-manager
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cert-manager
