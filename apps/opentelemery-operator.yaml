@@ -14,9 +14,13 @@ spec:
       helm:
         releaseName: opentelemetry-operator
         valuesObject:
-            admissionWebhooks:
-              certManager:
-                enabled: true
+          admissionWebhooks:
+            certManager:
+              enabled: true
+          manager:
+            collectorImage:
+              repository: otel/opentelemetry-collector-contrib:latest
+            
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
       path: extras/opentelemetry-operator
