@@ -14,7 +14,7 @@ spec:
       targetRevision: HEAD
       path: extras/istio-addons
       helm:
-        values:
+        values: |
           kiali:
             enabled: true
   destination:
