@@ -3,6 +3,10 @@ kind: OpenTelemetryCollector
 metadata:
   name: collector
 spec:
+  # for getting prometheus metrics from the daemonset collector
+  observability:
+    metrics:
+      enableMetrics: true
   mode: daemonset
   hostNetwork: true
   config:
@@ -25,7 +29,7 @@ spec:
 
     exporters:
       prometheus:
-        endpoint: "0.0.0.0:8889"  # Prometheus scrape endpoint
+        endpoint: "0.0.0.0:8888"  # Prometheus scrape endpoint
         namespace: "otel"
       debug: {}
 
