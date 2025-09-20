@@ -20,6 +20,11 @@ spec:
           manager:
             collectorImage:
               repository: otel/opentelemetry-collector-contrib
+            #for prometheus to scrape it
+            prometheusRule:
+              enabled: true
+            serviceMonitor:
+              enabled: true
             
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: HEAD
