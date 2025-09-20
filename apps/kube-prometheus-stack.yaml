@@ -16,13 +16,17 @@ spec:
         valuesObject:
           # crds:
           #   enabled: false
+          kubernetesServiceMonitors:
+            enabled: false
           prometheus:
             service:
               type: LoadBalancer
           grafana:
+            enabled: false
             service:
               type: LoadBalancer
           alertmanager:
+            enabled: false
             service:
               type: LoadBalancer
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
