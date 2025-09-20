@@ -17,20 +17,12 @@ spec:
           mode: daemonset
           image:
             repository: otel/opentelemetry-collector-contrib
-          # presets:
-          #   logsCollection:
-          #     enabled: true
-          #     includeCollectorLogs: true
-          #   hostMetrics:
-          #     enabled: true
-          # manager:
-          #   collectorImage:
-          #     repository: otel/opentelemetry-collector-contrib
-            #for prometheus to scrape it
-            # prometheusRule:
-            #   enabled: true
-            # serviceMonitor:
-            #   enabled: true
+          presets:
+            logsCollection:
+              enabled: true
+              includeCollectorLogs: true
+            hostMetrics:
+              enabled: true
             
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
