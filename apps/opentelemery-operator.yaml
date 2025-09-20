@@ -14,6 +14,7 @@ spec:
       helm:
         releaseName: opentelemetry-collector
         valuesObject:
+          mode: daemonset
           image:
             repository: otel/opentelemetry-collector-contrib
           # presets:
