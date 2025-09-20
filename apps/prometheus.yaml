@@ -14,7 +14,7 @@ spec:
       helm:
         releaseName: kube-prometheus-stack
         valuesObject:
-          prometheus
+          prometheus:
             service:
               type: LoadBalancer
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
