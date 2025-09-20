@@ -14,7 +14,14 @@ spec:
       helm:
         releaseName: opentelemetry-collector
         valuesObject:
+          service:
+            enabled: true
           mode: daemonset
+          serviceMonitor:
+            enabled: true
+          ports:
+            metrics:
+              enabled: true
           image:
             repository: otel/opentelemetry-collector-contrib
           presets:
