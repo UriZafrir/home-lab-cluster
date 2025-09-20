@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: opentelemetry-collector
+  name: opentelemetry-operator
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,32 +9,29 @@ spec:
   project: default
   sources:
     - repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
-      chart: opentelemetry-collector
-      targetRevision: 0.134.0
+      chart: opentelemetry-operator
+      targetRevision: 0.95.1
       helm:
-        releaseName: opentelemetry-collector
+        releaseName: opentelemetry-operator
         valuesObject:
-          # presets:
-          #   logsCollection:
-          #     enabled: true
-          #     includeCollectorLogs: true
-          #   hostMetrics:
-          #     enabled: true
-          # manager:
-          #   collectorImage:
-          #     repository: otel/opentelemetry-collector-contrib
+          admissionWebhooks:
+            certManager:
+              enabled: true
+          manager:
+            collectorImage:
+              repository: otel/opentelemetry-collector-contrib
             #for prometheus to scrape it
             # prometheusRule:
             #   enabled: true
             # serviceMonitor:
             #   enabled: true
             
-    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-    #   targetRevision: HEAD
-    #   path: extras/opentelemetry-collector
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: HEAD
+      path: extras/opentelemetry-operator
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: opentelemetry-collector-system
+    namespace: opentelemetry-operator-system
   syncPolicy:
     automated:
       prune: true
