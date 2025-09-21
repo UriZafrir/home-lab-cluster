@@ -20,7 +20,7 @@ spec:
             type: LoadBalancer
           serviceMonitor:
             enabled: true
-          datasources.yaml:
+          datasources:
             apiVersion: 1
             datasources:
             - name: Prometheus
