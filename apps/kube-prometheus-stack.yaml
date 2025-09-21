@@ -18,6 +18,8 @@ spec:
           #   enabled: false
           kubernetesServiceMonitors:
             enabled: false
+          defaultRules:
+            create: false
           prometheus:
             service:
               type: LoadBalancer
