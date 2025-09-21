@@ -20,9 +20,9 @@ spec:
             type: LoadBalancer
           serviceMonitor:
             enabled: true
-    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: HEAD
-      path: extras/grafana
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: HEAD
+    #   path: extras/grafana
   destination:
     server: "https://kubernetes.default.svc"
     namespace: grafana
