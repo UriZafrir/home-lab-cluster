@@ -31,6 +31,8 @@ spec:
           grafana.ini:
             users:
               default_theme: light
+          admin:
+            existingSecret: grafana-secret
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/grafana
