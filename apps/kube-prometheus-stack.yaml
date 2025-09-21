@@ -23,6 +23,11 @@ spec:
           prometheus:
             service:
               type: LoadBalancer
+          #make prometheus discover serviceMonitors from all namespaces:
+            prometheusSpec:
+              serviceMonitorNamespaceSelector:
+                matchLabels: {}  # Selects all namespaces
+              serviceMonitorSelectorNilUsesHelmValues: false  # No label filtering
           grafana:
             enabled: false
             service:
