@@ -28,6 +28,9 @@ spec:
               url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
               access: proxy
               isDefault: true
+          grafana.ini:
+            users:
+              default_theme: light
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/grafana
