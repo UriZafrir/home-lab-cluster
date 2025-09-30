@@ -8,4 +8,4 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   addresses:
-  - 192.168.100.1-192.168.100.254
+  - 192.168.123.100-192.168.123.254
