@@ -16,8 +16,8 @@ spec:
       helm:
         releaseName: metrics-server
         valuesObject:
-        args:
-          - --kubelet-insecure-tls
+          args:
+            - --kubelet-insecure-tls
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/metrics-server
