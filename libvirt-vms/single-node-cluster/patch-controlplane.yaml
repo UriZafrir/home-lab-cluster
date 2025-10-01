@@ -1,0 +1,30 @@
+machine:
+  network:
+    interfaces:
+    - interface: eth0
+      vip:
+        ip: 192.168.123.130
+cluster:
+  allowSchedulingOnControlPlanes: true
+  controllerManager:
+    extraArgs:
+      bind-address: 0.0.0.0
+  scheduler:
+    extraArgs:
+      bind-address: 0.0.0.0
+  apiServer:
+    certSANs:
+    - 127.0.0.1
+    admissionControl:
+      - name:
+        configuration:
+          exemptions:
+            namespaces:
+              - kube-system
+  proxy:
+    disabled: true
+  # discovery:
+  #   enabled: false
+  etcd:
+    advertisedSubnets:
+    - 192.168.123.0/24

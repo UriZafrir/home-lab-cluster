@@ -1,0 +1,11 @@
+<network>
+  <name>talos-1</name>
+  <forward mode='route'>
+  </forward>
+  <bridge name='virbr1' stp='on' delay='0'/>
+  <ip address='192.168.123.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.123.2' end='192.168.123.99'/>
+    </dhcp>
+  </ip>
+</network>
