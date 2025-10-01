@@ -10,3 +10,4 @@ libvirt-vms/single-node-cluster/secrets.yaml
 libvirt-vms/single-node-cluster/talosconfig
 libvirt-vms/single-node-cluster/worker.yaml
 libvirt-vms/cozystack/cluster1/controlplane.yaml
+libvirt-vms/cozystack/cluster1/nodes/node1.yaml
