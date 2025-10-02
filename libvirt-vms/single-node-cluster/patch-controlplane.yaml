@@ -21,6 +21,7 @@ cluster:
           exemptions:
             namespaces:
               - kube-system
+              - metallb-system
   proxy:
     disabled: true
   # discovery:

@@ -1,7 +1,8 @@
-NODE_IP=192.168.123.90
 
 talosctl gen secrets
 <!-- talosctl gen config single-node-cluster https://${NODE_IP}:6443 --install-disk /dev/vda --config-patch @cluster-patch.yaml --with-secrets secrets.yaml -->
+
+NODE_IP=192.168.123.90
 
 talosctl gen config \
     cozystack https://${NODE_IP}:6443 \

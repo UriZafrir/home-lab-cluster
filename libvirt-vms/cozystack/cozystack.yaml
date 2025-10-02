@@ -4,11 +4,9 @@ metadata:
   name: cozystack
   namespace: cozy-system
 data:
-  bundle-name: "paas-full"
-  root-host: "192-168-122-217.nip.io"
-  api-server-endpoint: "https://192-168-122-217.nip.io:443"
-  expose-services: "dashboard,api"
+  bundle-name: "distro-full"
+  bundle-disable: "snapshot-controller"
   ipv4-pod-cidr: "10.244.0.0/16"
-  ipv4-pod-gateway: "10.244.0.1"
   ipv4-svc-cidr: "10.96.0.0/16"
-  ipv4-join-cidr: "100.64.0.0/16"
+  root-host: "192-168-123-74.nip.io"
+  api-server-endpoint: "https://192-168-123-74.nip.io:6443"

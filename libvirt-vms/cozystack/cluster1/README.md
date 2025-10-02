@@ -23,5 +23,8 @@ talosctl bootstrap -n ${NODE_IP} -e ${NODE_IP}
 
 talosctl kubeconfig -n ${NODE_IP} -e ${NODE_IP} -f nodes/node1.yaml
 
-export KUBECONFIG=$PWD/nodes/node1.yaml
+export KUBECONFIG=/home/uri/general/home-lab-cluster/libvirt-vms/cozystack/cluster1/nodes/node1.yaml
 
+
+rm ~/.kube/config
+talosctl kubeconfig -n ${NODE_IP} -e ${NODE_IP} -f ~/.kube/config
