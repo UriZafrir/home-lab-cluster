@@ -16,11 +16,10 @@ cluster:
     certSANs:
     - 127.0.0.1
     admissionControl:
-      - name:
+      - name: PodSecurity
         configuration:
           exemptions:
             namespaces:
-              - kube-system
               - metallb-system
   proxy:
     disabled: true
