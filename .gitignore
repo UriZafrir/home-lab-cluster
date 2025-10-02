@@ -1,13 +1,12 @@
 /charts/
 libvirt-vms/cozystack/cluster1/secrets.yaml
-libvirt-vms/single-node-cluster/controlplane.yaml
 libvirt-vms/terraform/terraform.tfstate
 libvirt-vms/terraform/terraform.tfstate.backup
-libvirt-vms/cozystack/cluster1/patch.yaml
 libvirt-vms/cozystack/cluster1/worker.yaml
 libvirt-vms/cozystack/cluster1/talosconfig
+libvirt-vms/cozystack/cluster1/controlplane.yaml
+libvirt-vms/cozystack/cluster1/nodes/node1.yaml
 libvirt-vms/single-node-cluster/secrets.yaml
 libvirt-vms/single-node-cluster/talosconfig
 libvirt-vms/single-node-cluster/worker.yaml
-libvirt-vms/cozystack/cluster1/controlplane.yaml
-libvirt-vms/cozystack/cluster1/nodes/node1.yaml
+libvirt-vms/single-node-cluster/controlplane.yaml
