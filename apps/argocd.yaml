@@ -42,6 +42,8 @@ spec:
                 end
               end
               return hs
+            #this is to add kustomization to helm charts
+            kustomize.buildOptions: --enable-helm
             #this is for crossplane
             # application.resourceTrackingMethod: annotation
             # resource.customizations: |
