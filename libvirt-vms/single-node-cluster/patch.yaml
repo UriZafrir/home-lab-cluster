@@ -7,3 +7,12 @@ cluster:
     - 10.244.0.0/16
     serviceSubnets:
     - 10.96.0.0/16
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: local-path-provisioner
+provisioning:
+  diskSelector:
+    match: disk.transport == 'virtio'
+  minSize: 100GB
+  maxSize: 100GB

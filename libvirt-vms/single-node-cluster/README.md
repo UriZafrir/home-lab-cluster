@@ -24,6 +24,9 @@ talosctl kubeconfig -n ${NODE_IP} -e ${NODE_IP} -f ~/.kube/config
 #for reapplying the generated config use without --insecure:
 #talosctl apply-config --endpoints ${NODE_IP} -n ${NODE_IP} -f controlplane.yaml
 
+#for volumes
+talosctl get disks -n ${NODE_IP} -e ${NODE_IP}
+talosctl get volumestatus -e ${NODE_IP} -n ${NODE_IP}
 
 
 #cilium
