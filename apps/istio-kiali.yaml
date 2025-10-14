@@ -6,18 +6,18 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   project: default
   sources:
     - repoURL: https://kiali.org/helm-charts
       chart: kiali-server
-      targetRevision: 2.15.0
+      targetRevision: 2.17.0
       helm:
         releaseName: kiali
         valuesObject:
-          auth:
-            strategy: "anonymous"
+          # auth:
+          #   strategy: "anonymous"
           deployment:
             service_type: LoadBalancer
   destination:
