@@ -11,19 +11,23 @@ spec:
   project: default
   sources:
     - repoURL: https://kiali.org/helm-charts
-      chart: kiali-server
+      chart: kiali-operator
       targetRevision: 2.17.0
       helm:
         releaseName: kiali
         valuesObject:
-          auth:
-            strategy: "anonymous"
-          deployment:
-            service_type: LoadBalancer
-        external_services:
-          prometheus:
-            # Prometheus service name is "metrics" and is in the "telemetry" namespace
-            url: "http://prometheus-server.monitoring:80/"
+          cr:
+            create: true 
+            namespace: istio-system
+            spec:
+              external_services:
+                prometheus:
+                  url: "http://prometheus-server.monitoring:80/"
+              deployment:
+                cluster_wide_access: true
+                service_type: LoadBalancer
+              auth:
+                strategy: "anonymous"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: istio-system
