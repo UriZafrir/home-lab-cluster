@@ -4,8 +4,6 @@ kind: IPAddressPool
 metadata:
   name: first-pool
   namespace: metallb-system
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
 spec:
   addresses:
   - 192.168.123.100-192.168.123.254
