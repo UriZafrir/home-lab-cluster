@@ -14,8 +14,9 @@ spec:
       helm:
         releaseName: local-path-provisioner
         valuesObject:
-          # installCRDs: true
-          # podDnsPolicy: "ClusterFirst"
+          storageClass:
+            defaultClass: true
+
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/local-path-provisioner
