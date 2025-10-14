@@ -14,18 +14,18 @@ spec:
       helm:
         releaseName: cilium
         valuesObject:
-          #for host firewall:
-          hostFirewall:
-            enabled: true
-          #for UI:
-          hubble:
-            enabled: true
-            relay:
-              enabled: true
-            ui:
-              enabled: true
-              service:
-                type: LoadBalancer
+          # #for host firewall:
+          # hostFirewall:
+          #   enabled: true
+          # #for UI:
+          # hubble:
+          #   enabled: true
+          #   relay:
+          #     enabled: true
+          #   ui:
+          #     enabled: true
+          #     service:
+          #       type: LoadBalancer
           #for cilium kube proxy replacement:
           ipam:
             mode: kubernetes
