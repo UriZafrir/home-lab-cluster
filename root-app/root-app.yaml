@@ -11,7 +11,7 @@ spec:
   # Source of the application manifests
   source:
     repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-    targetRevision: HEAD
+    targetRevision: talos
     path: ./apps
   # Destination cluster and namespace to deploy the application
   destination:
