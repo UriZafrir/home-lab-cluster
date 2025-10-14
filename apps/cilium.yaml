@@ -26,6 +26,14 @@ spec:
           #     enabled: true
           #     service:
           #       type: LoadBalancer
+          # mTLS
+          # authentication:
+          #   mutual:
+          #     spire: enabled
+          #for encrption:
+          encryption:
+            enabled: true
+            type: ipsec
           #for cilium kube proxy replacement:
           ipam:
             mode: kubernetes
