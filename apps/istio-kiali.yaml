@@ -20,6 +20,10 @@ spec:
             strategy: "anonymous"
           deployment:
             service_type: LoadBalancer
+        external_services:
+          prometheus:
+            # Prometheus service name is "metrics" and is in the "telemetry" namespace
+            url: "http://prometheus-server.monitoring:80/"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: istio-system
