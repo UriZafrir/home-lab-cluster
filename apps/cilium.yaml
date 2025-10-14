@@ -18,14 +18,14 @@ spec:
           # hostFirewall:
           #   enabled: true
           # #for UI:
-          # hubble:
-          #   enabled: true
-          #   relay:
-          #     enabled: true
-          #   ui:
-          #     enabled: true
-          #     service:
-          #       type: LoadBalancer
+          hubble:
+            enabled: true
+            relay:
+              enabled: true
+            ui:
+              enabled: true
+              service:
+                type: LoadBalancer
           # mTLS
           # authentication:
           #   mutual:
