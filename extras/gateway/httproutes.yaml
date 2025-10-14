@@ -15,4 +15,5 @@ spec:
             value: /
       backendRefs:
         - name: prometheus-server
+          namespace: monitoring 
           port: 80
