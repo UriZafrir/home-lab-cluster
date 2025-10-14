@@ -11,6 +11,15 @@ spec:
     - repoURL: https://charts.containeroo.ch
       chart: local-path-provisioner
       targetRevision: 0.0.33
+      kustomize:
+        patches:
+          - patch: |-
+              apiVersion: v1
+              kind: Namespace
+              metadata:
+                name: local-path-provisioner
+                labels:
+                  pod-security.kubernetes.io/enforce: privileged      
       helm:
         releaseName: local-path-provisioner
         valuesObject:
@@ -32,3 +41,10 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+- patch: |-
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: local-path-storage
+      labels:
+        pod-security.kubernetes.io/enforce: privileged
