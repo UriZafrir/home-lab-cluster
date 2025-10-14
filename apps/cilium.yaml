@@ -30,10 +30,17 @@ spec:
           # authentication:
           #   mutual:
           #     spire: enabled
+          #     install:
+          #       enabled: true
           #for encrption:
-          encryption:
-            enabled: true
-            type: ipsec
+          # encryption:
+          #   enabled: true
+          #   type: ipsec
+          #for istio integration:
+          socketLB:
+            hostNamespaceOnly: true
+          cni:
+            exclusive: false
           #for cilium kube proxy replacement:
           ipam:
             mode: kubernetes
