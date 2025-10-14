@@ -27,7 +27,7 @@ talosctl kubeconfig -n ${NODE_IP} -e ${NODE_IP} -f ~/.kube/config
 #for volumes
 talosctl get disks -n ${NODE_IP} -e ${NODE_IP}
 talosctl get volumestatus -e ${NODE_IP} -n ${NODE_IP}
-
+talosctl ls /var/mnt/local-path-provisioner
 
 #cilium
 #https://www.talos.dev/v1.11/kubernetes-guides/network/deploying-cilium/
