@@ -21,6 +21,7 @@ cluster:
           exemptions:
             namespaces:
               - metallb-system
+              - istio-system
   proxy:
     disabled: true
   # discovery:
