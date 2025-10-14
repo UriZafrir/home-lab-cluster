@@ -31,9 +31,9 @@ spec:
           #   mutual:
           #     spire: enabled
           #for encrption:
-          encryption:
-            enabled: true
-            type: ipsec
+          # encryption:
+          #   enabled: true
+          #   type: ipsec
           #for cilium kube proxy replacement:
           ipam:
             mode: kubernetes
