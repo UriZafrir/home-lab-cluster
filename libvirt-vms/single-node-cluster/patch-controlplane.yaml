@@ -2,8 +2,8 @@ machine:
   network:
     interfaces:
     - interface: eth0
-      vip:
-        ip: 192.168.123.130
+      # vip:
+      #   ip: 192.168.122.130
 cluster:
   allowSchedulingOnControlPlanes: true
   controllerManager:
@@ -29,4 +29,4 @@ cluster:
   #   enabled: false
   etcd:
     advertisedSubnets:
-    - 192.168.123.0/24
+    - 192.168.122.0/24

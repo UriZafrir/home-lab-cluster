@@ -2,7 +2,7 @@
 talosctl gen secrets
 <!-- talosctl gen config single-node-cluster https://${NODE_IP}:6443 --install-disk /dev/vda --config-patch @cluster-patch.yaml --with-secrets secrets.yaml -->
 
-NODE_IP=192.168.123.90
+NODE_IP=192.168.122.126
 
 talosctl gen config \
     cozystack https://${NODE_IP}:6443 \
@@ -22,7 +22,10 @@ rm ~/.kube/config
 talosctl kubeconfig -n ${NODE_IP} -e ${NODE_IP} -f ~/.kube/config
 
 #for reapplying the generated config use without --insecure:
-#talosctl apply-config --endpoints ${NODE_IP} -n ${NODE_IP} -f controlplane.yaml
+#talosctl apply-config -e ${NODE_IP} -n ${NODE_IP} -f controlplane.yaml
+
+#reset node:
+#talosctl reset --graceful --reboot --nodes ${NODE_IP} -e ${NODE_IP}
 
 #for volumes
 talosctl get disks -n ${NODE_IP} -e ${NODE_IP}
@@ -47,4 +50,5 @@ helm upgrade --install \
     --set operator.replicas=1
 
 kubectl create ns argocd
-helm upgrade --install argocd argo/argo-cd --version 8.5.7 -n argocd --set server.service.type=NodePort --debug
+helm upgrade --install argocd argo/argo-cd --version 8.5.7 -n argocd --set server.service.type=NodePort --values argocd-values.yaml --debug
+
