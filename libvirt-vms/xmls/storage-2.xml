@@ -1,0 +1,8 @@
+<volume>
+  <name>talos2.qcow2</name>
+  <capacity>107374182400</capacity>
+  <allocation>0</allocation>
+  <target>
+    <format type="qcow2"/>
+  </target>
+</volume>

@@ -1,14 +1,14 @@
 <domain type="kvm">
   <name>talos-1</name>
-  <uuid>aea627dc-8e67-4c9a-830b-e635b455dd27</uuid>
+  <uuid>f18e95f7-7470-40ce-bbe5-55948f96f3a5</uuid>
   <metadata>
     <libosinfo:libosinfo xmlns:libosinfo="http://libosinfo.org/xmlns/libvirt/domain/1.0">
       <libosinfo:os id="http://libosinfo.org/linux/2024"/>
     </libosinfo:libosinfo>
   </metadata>
-  <memory unit="KiB">50176000</memory>
-  <currentMemory unit="KiB">50176000</currentMemory>
-  <vcpu placement="static">12</vcpu>
+  <memory unit="KiB">51200000</memory>
+  <currentMemory unit="KiB">51200000</currentMemory>
+  <vcpu placement="static">9</vcpu>
   <os>
     <type arch="x86_64" machine="pc-q35-10.0">hvm</type>
     <boot dev="hd"/>
@@ -35,7 +35,7 @@
     <emulator>/run/libvirt/nix-emulators/qemu-system-x86_64</emulator>
     <disk type="file" device="disk">
       <driver name="qemu" type="qcow2"/>
-      <source file="/mnt/data/pool-1/talos.qcow2"/>
+      <source file="/mnt/data/pool-1/talos-1.qcow2"/>
       <target dev="vda" bus="virtio"/>
       <address type="pci" domain="0x0000" bus="0x04" slot="0x00" function="0x0"/>
     </disk>
@@ -125,9 +125,9 @@
     <controller type="virtio-serial" index="0">
       <address type="pci" domain="0x0000" bus="0x03" slot="0x00" function="0x0"/>
     </controller>
-    <interface type="network">
-      <mac address="52:54:00:29:f3:0e"/>
-      <source network="talos-1"/>
+    <interface type="bridge">
+      <mac address="52:54:00:b6:c2:c5"/>
+      <source bridge="br0"/>
       <model type="virtio"/>
       <address type="pci" domain="0x0000" bus="0x01" slot="0x00" function="0x0"/>
     </interface>
