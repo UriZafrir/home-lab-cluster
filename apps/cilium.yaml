@@ -71,6 +71,9 @@ spec:
           k8sServicePort: 7445
           operator:
             replicas: 1
+          #https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/
+            rollOutPods: true
+          rollOutCiliumPods: true
     # - repoURL: https://github.com/UriZafrir/ansible-vllm-k8s.git
     #   targetRevision: talos
     #   path: extras/cilium-extras
