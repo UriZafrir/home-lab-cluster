@@ -10,11 +10,14 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=invalid"]
   generators:
-  - git:
-      repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      revision: talos
-      files:
-        - path: applicationset-apps/*.json
+  - matrix:
+      generators:
+      - git:
+          repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+          revision: talos
+          files:
+            - path: applicationset-apps/*.json
+      - clusters: {}
   template:
     metadata:
       name: '{{.name}}'
