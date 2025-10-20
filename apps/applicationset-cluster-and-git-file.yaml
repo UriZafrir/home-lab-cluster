@@ -8,7 +8,7 @@ metadata:
   namespace: argocd
 spec:
   goTemplate: true
-  # goTemplateOptions: ["missingkey=error"]
+  goTemplateOptions: ["missingkey=invalid"]
   generators:
   - git:
       repoURL: https://github.com/UriZafrir/home-lab-cluster.git
@@ -26,10 +26,12 @@ spec:
         path: applicationset-apps/{{.name}}
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{- if .namespace }}{{ .namespace }}{{- else }}{{ .name }}{{- end }}'
-# {{- if and .syncPolicy (eq .syncPolicy "automated") }}
-#       syncPolicy:
-#         automated:
-#           prune: true
-#           selfHeal: true
-# {{- end }}
+        namespace: '{{.namespace | default .name}}'
+  templatePatch: |
+    {{- if and .syncPolicy (eq .syncPolicy "automated") }}
+    spec:
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+    {{- end }}
