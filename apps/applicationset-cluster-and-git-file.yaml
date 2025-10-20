@@ -27,9 +27,9 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{- if .namespace }}{{ .namespace }}{{- else }}{{ .name }}{{- end }}'
-{{- if and .syncPolicy (eq .syncPolicy "automated") }}
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-{{- end }}
+# {{- if and .syncPolicy (eq .syncPolicy "automated") }}
+#       syncPolicy:
+#         automated:
+#           prune: true
+#           selfHeal: true
+# {{- end }}
