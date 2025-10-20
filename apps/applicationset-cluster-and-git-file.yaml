@@ -6,7 +6,7 @@ metadata:
   name: applicationset-cluster-and-git-file
 spec:
   goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
+  # goTemplateOptions: ["missingkey=error"]
   generators:
     # matrix 'parent' generator
   # git generator, 'child' #1
@@ -14,7 +14,7 @@ spec:
       repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       revision: talos
       files:
-        - path: applicationset-apps/*.yaml
+        - path: applicationset-apps/*.json
           # cluster generator, 'child' #2
   template:
     metadata:
