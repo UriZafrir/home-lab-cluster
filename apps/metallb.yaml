@@ -14,6 +14,8 @@ spec:
       helm:
         releaseName: metallb
         valuesObject:
+          speaker:
+            logLevel: debug
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: talos
       path: extras/metallb
