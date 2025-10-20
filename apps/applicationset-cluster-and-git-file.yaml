@@ -31,13 +31,19 @@ spec:
         server: https://kubernetes.default.svc
         namespace: '{{.namespace | default .name}}'
   templatePatch: |
-    {{- if and .syncPolicy (eq .syncPolicy "automated") }}
     spec:
       syncPolicy:
+        {{- if and .syncPolicy (eq .syncPolicy "automated") }}
         automated:
           prune: true
           selfHeal: true
-    {{- end }}
+        {{- end }}
+        {{- if .syncOptions }}
+        syncOptions:
+        {{- range .syncOptions }}
+        - {{ . }}
+        {{- end }}
+        {{- end }}
     {{- if .ignoreDifferences }}
     ignoreDifferences:
       {{- range .ignoreDifferences }}
@@ -50,3 +56,4 @@ spec:
           {{- end }}
       {{- end }}
     {{- end }}
+
