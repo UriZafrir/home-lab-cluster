@@ -5,9 +5,6 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  annotations:
-      # Add this annotation to prevent deletion of resources on Application deletion
-      argocd.argoproj.io/preserveResourcesOnDeletion: 'true'
 spec:
   project: default
   sources:
@@ -19,7 +16,7 @@ spec:
     namespace: gateway-api-crds
   syncPolicy:
     automated:
-      prune: true
+      prune: false
       selfHeal: true
     syncOptions:
     # - CreateNamespace=true
