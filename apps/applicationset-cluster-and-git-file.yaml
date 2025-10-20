@@ -9,22 +9,16 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
     # matrix 'parent' generator
-    - matrix:
-        generators:
-          # git generator, 'child' #1
-          - git:
-              repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-              revision: talos
-              files:
-                - path: applicationset-apps/*.yaml
+  # git generator, 'child' #1
+  - git:
+      repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      revision: talos
+      files:
+        - path: applicationset-apps/*.yaml
           # cluster generator, 'child' #2
-          - clusters:
-              selector:
-                matchLabels:
-                  argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
-      name: '{{.name}}-{{.cluster.name}}'
+      name: '{{.name}}'
     spec:
       project: default
       source:
@@ -32,8 +26,8 @@ spec:
         targetRevision: talos
         path: applicationset-apps/{{.name}}
       destination:
-        server: '{{.cluster.server}}'
-        namespace: '{{default .name .targetNamespace}}'
+        server: https://kubernetes.default.svc
+        namespace: '{{.name}}'
       # syncPolicy:
       # {{- if not .manualSync }}
       #   automated:
