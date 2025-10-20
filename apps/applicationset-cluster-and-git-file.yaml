@@ -24,9 +24,9 @@ spec:
       destination:
         server: '{{.cluster.name}}'
         namespace: '{{default .name .targetNamespace}}'
-      syncPolicy:
-      {{- if not .manualSync }}
-        automated:
-          prune: true
-          selfHeal: true
-      {{- end }}
+      # syncPolicy:
+      # {{- if not .manualSync }}
+      #   automated:
+      #     prune: true
+      #     selfHeal: true
+      # {{- end }}
