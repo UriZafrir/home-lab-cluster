@@ -35,3 +35,15 @@ spec:
           prune: true
           selfHeal: true
     {{- end }}
+    {{- if .ignoreDifferences }}
+    ignoreDifferences:
+      {{- range .ignoreDifferences }}
+      - group: {{ .group }}
+        kind: {{ .kind }}
+        name: {{ .name }}
+        jsonPointers:
+          {{- range .jsonPointers }}
+          - {{ . }}
+          {{- end }}
+      {{- end }}
+    {{- end }}
