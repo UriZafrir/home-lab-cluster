@@ -1,3 +1,13 @@
+
+virsh vol-create pool ../xmls/storage-1.xml
+virsh vol-create pool ../xmls/storage-2.xml
+
+
+virsh vol-delete talos2.qcow2 --pool pool
+virsh vol-list --pool pool
+
+virsh define
+
 # create routed network (net-create is for transient)
 sudo virsh net-define network-routed-123.xml
 sudo virsh net-start talos-1

@@ -25,7 +25,7 @@ talosctl kubeconfig -n ${NODE_IP} -e ${NODE_IP} -f ~/.kube/config
 #talosctl apply-config -e ${NODE_IP} -n ${NODE_IP} -f controlplane.yaml
 
 #reset node:
-#talosctl reset --graceful --reboot --nodes ${NODE_IP} -e ${NODE_IP}
+#talosctl reset --graceful=false --reboot --nodes ${NODE_IP} -e ${NODE_IP}
 
 #for volumes
 talosctl get disks -n ${NODE_IP} -e ${NODE_IP}
