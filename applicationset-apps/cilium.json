@@ -1,3 +1,4 @@
 {
-  "name": "kube-system"
+  "name": "cilium",
+  "namespace": "kube-system"
 }
