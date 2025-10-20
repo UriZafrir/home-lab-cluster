@@ -32,7 +32,7 @@ spec:
         targetRevision: talos
         path: applicationset-apps/{{.name}}
       destination:
-        server: '{{.cluster.name}}'
+        server: '{{.cluster.server}}'
         namespace: '{{default .name .targetNamespace}}'
       # syncPolicy:
       # {{- if not .manualSync }}
