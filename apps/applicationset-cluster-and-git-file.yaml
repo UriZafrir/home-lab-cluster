@@ -28,7 +28,7 @@ spec:
         path: applicationset-apps/{{.name}}
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{.name}}'
+        namespace: '{{- if .namespace }}{{ .namespace }}{{- else }}{{ .name }}{{- end }}'
       # syncPolicy:
       # {{- if not .manualSync }}
       #   automated:
