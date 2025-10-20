@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: applicationset-cluster-and-git-file
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - clusters: {}
+    - git:
+        repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+        revision: talos
+        files:
+        - path: "applicationset-apps/*.yaml"
+  template:
+    metadata:
+      name: '{{.name}}-{{.cluster.name}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+        targetRevision: talos
+        path: applicationset-apps/{{.name}}
+      destination:
+        server: '{{.cluster.name}}'
+        namespace: '{{default .name .targetNamespace}}'
+      syncPolicy:
+        {{if not .manualSync}}automated:
+          prune: true
+          selfHeal: true{{end}}
+
