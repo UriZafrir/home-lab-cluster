@@ -2,7 +2,7 @@
 talosctl gen secrets
 <!-- talosctl gen config single-node-cluster https://${NODE_IP}:6443 --install-disk /dev/vda --config-patch @cluster-patch.yaml --with-secrets secrets.yaml -->
 
-NODE_IP=192.168.46.109
+NODE_IP=192.168.70.180
 
 talosctl gen config \
     cozystack https://${NODE_IP}:6443 \
@@ -19,7 +19,7 @@ talosctl -n ${NODE_IP} -e ${NODE_IP} bootstrap
 
 
 rm ~/.kube/config
-talosctl kubeconfig -n ${NODE_IP} -e ${NODE_IP} -f ~/.kube/config
+rm ~/.kube/config && talosctl kubeconfig -n ${NODE_IP} -e ${NODE_IP} -f ~/.kube/config
 
 #for reapplying the generated config use without --insecure:
 #talosctl apply-config -e ${NODE_IP} -n ${NODE_IP} -f controlplane.yaml
@@ -31,6 +31,9 @@ talosctl kubeconfig -n ${NODE_IP} -e ${NODE_IP} -f ~/.kube/config
 talosctl get disks -n ${NODE_IP} -e ${NODE_IP}
 talosctl get volumestatus -e ${NODE_IP} -n ${NODE_IP}
 talosctl ls /var/mnt/local-path-provisioner
+talosctl get links -n ${NODE_IP} -e ${NODE_IP}
+
+#if restarting cluster and using xml for vm need to not have a mac and ip somehow
 
 #cilium
 #https://www.talos.dev/v1.11/kubernetes-guides/network/deploying-cilium/
@@ -47,7 +50,10 @@ helm upgrade --install \
     --set cgroup.hostRoot=/sys/fs/cgroup \
     --set k8sServiceHost=localhost \
     --set k8sServicePort=7445 \
-    --set operator.replicas=1
+    --set operator.replicas=1 \
+    --set operator.rollOutPods=true \
+    --set rollOutCiliumPods=true
+
 
 kubectl create ns argocd
 helm upgrade --install argocd argo/argo-cd --version 8.5.7 -n argocd --set server.service.type=NodePort --values argocd-values.yaml --debug
