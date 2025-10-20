@@ -1,6 +1,5 @@
 apiVersion: v2
 name: cilium
-description: A Helm chart with cert-manager as a dependency
 type: application
 version: 0.1.0
 appVersion: "1.0.0"
