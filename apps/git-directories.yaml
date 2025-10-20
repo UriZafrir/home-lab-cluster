@@ -16,6 +16,7 @@ spec:
     metadata:
       name: '{{.path.basename}}'
     spec:
+      project: "default"
       source:
         repoURL: https://github.com/UriZafrir/home-lab-cluster.git
         targetRevision: talos
