@@ -1,3 +1,4 @@
 {
-  "name": "gateway-api-crds"
+  "name": "gateway-api-crds",
+  "syncPolicy": "automated"
 }

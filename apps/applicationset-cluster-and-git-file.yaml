@@ -1,5 +1,6 @@
 #argocd login 192.168.70.180:30443
 #argocd appset generate applicationset-cluster-and-git-file.yaml
+#https://gotemplate.io/
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -9,14 +10,11 @@ spec:
   goTemplate: true
   # goTemplateOptions: ["missingkey=error"]
   generators:
-    # matrix 'parent' generator
-  # git generator, 'child' #1
   - git:
       repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       revision: talos
       files:
         - path: applicationset-apps/*.json
-          # cluster generator, 'child' #2
   template:
     metadata:
       name: '{{.name}}'
@@ -29,9 +27,9 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{- if .namespace }}{{ .namespace }}{{- else }}{{ .name }}{{- end }}'
-      # syncPolicy:
-      # {{- if not .manualSync }}
-      #   automated:
-      #     prune: true
-      #     selfHeal: true
-      # {{- end }}
+{{- if and .syncPolicy (eq .syncPolicy "automated") }}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+{{- end }}
