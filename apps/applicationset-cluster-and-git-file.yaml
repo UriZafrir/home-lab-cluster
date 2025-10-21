@@ -18,20 +18,20 @@ spec:
           files:
             - path: applicationset-apps/*.json
       - clusters: {}
-  strategy:
-    type: RollingSync
-    rollingSync:
-      steps:
-        - matchExpressions:
-            - key: progressiveSync
-              operator: In
-              values:
-                - first
-        - matchExpressions:
-            - key: progressiveSync
-              operator: NotIn
-              values:
-                - first
+  # strategy:
+  #   type: RollingSync
+  #   rollingSync:
+  #     steps:
+  #       - matchExpressions:
+  #           - key: progressiveSync
+  #             operator: In
+  #             values:
+  #               - first
+  #       - matchExpressions:
+  #           - key: progressiveSync
+  #             operator: NotIn
+  #             values:
+  #               - first
   template:
     metadata:
       name: '{{.name}}'
