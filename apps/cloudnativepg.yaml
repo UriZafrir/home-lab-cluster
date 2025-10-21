@@ -14,6 +14,9 @@ spec:
       helm:
         releaseName: cnpg
         valuesObject:
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: HEAD
+      path: extras/cloudnative-pg
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cnpg-system
