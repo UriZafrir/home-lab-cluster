@@ -16,7 +16,7 @@ spec:
         valuesObject:
           server:
             replicaCount: 1 
-            frontend:
+            web:
               service:
                 type: LoadBalancer
           cassandra:
