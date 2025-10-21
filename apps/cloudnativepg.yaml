@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cloudnativepg
+  name: cloudnative-pg
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,14 +9,14 @@ spec:
   project: default
   sources:
     - repoURL: https://cloudnative-pg.io/charts/
-      chart: cloudnativepg
+      chart: cloudnative-pg
       targetRevision: 0.26.0
       helm:
-        releaseName: cloudnativepg
+        releaseName: cloudnative-pg
         valuesObject:
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: cloudnativepg
+    namespace: cloudnative-pg
   syncPolicy:
     automated:
       prune: true
