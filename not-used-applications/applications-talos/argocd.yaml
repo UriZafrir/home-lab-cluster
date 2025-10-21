@@ -44,6 +44,7 @@ spec:
               return hs
             #this is to add kustomization to helm charts https://argo-cd.readthedocs.io/en/stable/user-guide/kustomize/#kustomizing-helm-charts
             kustomize.buildOptions: --enable-helm
+            applicationSetController.enable.progressive.syncs: true
             #this is for crossplane
             # application.resourceTrackingMethod: annotation
             # resource.customizations: |
