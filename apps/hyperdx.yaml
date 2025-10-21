@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hyperdx
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://hyperdxio.github.io/helm-charts
+      chart: hyperdx
+      targetRevision: helm search repo hyperdx/hdx-oss-v2 --versions
+
+      helm:
+        releaseName: hyperdx
+        valuesObject:
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: HEAD
+    #   path: extras/cloudnative-pg
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: hyperdx
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
