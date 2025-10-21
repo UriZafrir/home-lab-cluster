@@ -17,5 +17,5 @@ configs:
         end
       end
       return hs
-    #this is to add kustomization to helm charts https://argo-cd.readthedocs.io/en/stable/user-guide/kustomize/#kustomizing-helm-charts
-    applicationSetController.enable.progressive.syncs: true
+    argocd-cmd-params-cm: |
+      applicationsetcontroller.enable.progressive.syncs: true
