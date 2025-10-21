@@ -17,5 +17,5 @@ configs:
         end
       end
       return hs
-    argocd-cmd-params-cm: |
-      applicationsetcontroller.enable.progressive.syncs: true
+    # argocd-cmd-params-cm: |
+    #   applicationsetcontroller.enable.progressive.syncs: true
