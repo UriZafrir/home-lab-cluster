@@ -56,7 +56,7 @@ helm upgrade --install \
 
 
 kubectl create ns argocd
-helm upgrade --install argocd argo/argo-cd --version 8.5.7 -n argocd --values argocd-values.yaml --debug
+helm upgrade --install argocd argo/argo-cd --version 8.5.7 -n argocd -f argocd-values.yaml  --debug
 kubectl apply -f ../../secrets/argocd-repo.yaml
 envsubst < ../../secrets/argocd-repo.yaml | kubectl apply -f -
 kubectl apply -f ../../root-app/root-app.yaml 
