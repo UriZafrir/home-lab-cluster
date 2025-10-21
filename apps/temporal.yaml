@@ -16,9 +16,9 @@ spec:
         valuesObject:
           server:
             replicaCount: 1 
-            web:
-              service:
-                type: LoadBalancer
+          web:
+            service:
+              type: LoadBalancer
           cassandra:
             config:
               cluster_size: 1 
