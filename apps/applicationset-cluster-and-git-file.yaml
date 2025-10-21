@@ -31,6 +31,13 @@ spec:
         server: https://kubernetes.default.svc
         namespace: '{{.namespace | default .name}}'
   templatePatch: |
+    metadata:
+      {{- if .labels }}
+      labels:
+        {{- range $key, $value := .labels }}
+        {{ $key }}: "{{ $value }}"
+        {{- end }}
+      {{- end }}
     spec:
       syncPolicy:
         {{- if and .syncPolicy (eq .syncPolicy "automated") }}

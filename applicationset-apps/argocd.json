@@ -1,3 +1,6 @@
 {
-  "name": "argocd"
+  "name": "argocd",
+  "labels": {
+    "progressiveSync": "first"
+  }
 }
