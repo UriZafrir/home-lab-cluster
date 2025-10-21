@@ -23,8 +23,9 @@ cluster:
               - metallb-system
               - istio-system
               - monitoring
-  proxy:
-    disabled: true
+  # #this is needed for cilium
+  # proxy:
+  #   disabled: true
   # discovery:
   #   enabled: false
   etcd:
