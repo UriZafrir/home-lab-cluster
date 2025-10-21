@@ -25,6 +25,8 @@ spec:
             enabled: false 
           grafana:
             enabled: false 
+          elasticsearch:
+            imageTag: 7.17.26
   destination:
     server: "https://kubernetes.default.svc"
     namespace: temporal
