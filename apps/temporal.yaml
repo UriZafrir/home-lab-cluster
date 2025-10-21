@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: temporal
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://temporalio.github.io/helm-charts
+      chart: temporal
+      targetRevision: 0.68.1
+      helm:
+        releaseName: temporal
+        valuesObject:
+          server:
+            service:
+              type: LoadBalancer
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: HEAD
+    #   path: extras/temporal
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: temporal
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
