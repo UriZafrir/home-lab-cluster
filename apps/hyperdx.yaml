@@ -10,8 +10,7 @@ spec:
   sources:
     - repoURL: https://hyperdxio.github.io/helm-charts
       chart: hyperdx
-      targetRevision: helm search repo hyperdx/hdx-oss-v2 --versions
-
+      targetRevision: 0.8.0
       helm:
         releaseName: hyperdx
         valuesObject:
@@ -27,3 +26,4 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+
