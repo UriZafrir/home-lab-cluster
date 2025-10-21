@@ -1,1 +1,13 @@
 secrets/argocd-repo.yaml filter=git-crypt diff=git-crypt
+
+libvirt-vms/cozystack/cluster1/secrets.yaml filter=git-crypt diff=git-crypt
+libvirt-vms/terraform/terraform.tfstate filter=git-crypt diff=git-crypt
+libvirt-vms/terraform/terraform.tfstate.backup filter=git-crypt diff=git-crypt
+libvirt-vms/cozystack/cluster1/worker.yaml filter=git-crypt diff=git-crypt
+libvirt-vms/cozystack/cluster1/talosconfig filter=git-crypt diff=git-crypt
+libvirt-vms/cozystack/cluster1/controlplane.yaml filter=git-crypt diff=git-crypt
+libvirt-vms/cozystack/cluster1/nodes/node1.yaml filter=git-crypt diff=git-crypt
+libvirt-vms/single-node-cluster/secrets.yaml filter=git-crypt diff=git-crypt
+libvirt-vms/single-node-cluster/talosconfig filter=git-crypt diff=git-crypt
+libvirt-vms/single-node-cluster/worker.yaml filter=git-crypt diff=git-crypt
+libvirt-vms/single-node-cluster/controlplane.yaml filter=git-crypt diff=git-crypt
