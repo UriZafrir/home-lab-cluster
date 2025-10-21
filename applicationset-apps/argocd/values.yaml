@@ -1,9 +1,6 @@
 server:
   service:
     type: NodePort
-# configs:
-#   cm:
-#     kustomize.buildOptions: "--enable-helm"
 configs:
   cm:
     #for argocd sync waves across apps, need a health check
@@ -21,5 +18,4 @@ configs:
       end
       return hs
     #this is to add kustomization to helm charts https://argo-cd.readthedocs.io/en/stable/user-guide/kustomize/#kustomizing-helm-charts
-    kustomize.buildOptions: --enable-helm
     applicationSetController.enable.progressive.syncs: true
