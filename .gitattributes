@@ -1,0 +1,1 @@
+secrets/argocd-repo.yaml filter=git-crypt diff=git-crypt

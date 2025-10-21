@@ -10,3 +10,4 @@ libvirt-vms/single-node-cluster/secrets.yaml
 libvirt-vms/single-node-cluster/talosconfig
 libvirt-vms/single-node-cluster/worker.yaml
 libvirt-vms/single-node-cluster/controlplane.yaml
+.env
