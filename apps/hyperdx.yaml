@@ -10,7 +10,7 @@ spec:
   sources:
     - repoURL: https://hyperdxio.github.io/helm-charts
       chart: hyperdx
-      targetRevision: 0.8.0
+      # targetRevision: 0.8.0
       helm:
         releaseName: hyperdx
         valuesObject:
