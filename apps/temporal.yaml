@@ -15,11 +15,16 @@ spec:
         releaseName: temporal
         valuesObject:
           server:
-            service:
-              type: LoadBalancer
-    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-    #   targetRevision: HEAD
-    #   path: extras/temporal
+            replicaCount: 1 
+          cassandra:
+            config:
+              cluster_size: 1 
+          elasticsearch:
+            replicas: 1 
+          prometheus:
+            enabled: false 
+          grafana:
+            enabled: false 
   destination:
     server: "https://kubernetes.default.svc"
     namespace: temporal
