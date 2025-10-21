@@ -1,0 +1,9 @@
+{
+  "name": "metrics-server",
+  "labels": {
+    "progressiveSync": "second"
+  },
+  "syncOptions": [
+    "CreateNamespace=true"
+  ]
+}
