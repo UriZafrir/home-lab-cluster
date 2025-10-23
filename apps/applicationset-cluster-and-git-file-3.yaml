@@ -25,7 +25,7 @@ spec:
   #     - clusters: {}
   template:
     metadata:
-      name: '{{.name}}'
+      name: abc #'{{.name}}'
     spec:
       project: default
       source:
