@@ -15,14 +15,6 @@ spec:
       revision: talos
       files:
       - path: 'applicationset-apps/*.json'
-  # - matrix:
-  #     generators:
-  #     - git:
-  #         repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-  #         revision: talos
-  #         files:
-  #         - path: 'applicationset-apps/**/.argocd.json'
-  #     - clusters: {}
   template:
     metadata:
       name: '{{.name}}'
@@ -43,6 +35,21 @@ spec:
         - CreateNamespace=true
         - ServerSideApply=true
   templatePatch: |
+    spec:
+    {{- if eq .name "cert-manager" }}
+        manual:
+          prune: false
+          selfHeal: true
+    {{- end }}
+
+  # templatePatch: |
+  #   {{- if eq .name "cert-manager" }}
+  #   spec:
+  #     syncPolicy:
+  #       manual:
+  #         prune: false
+  #         selfHeal: true
+  #   {{- end }}
     # metadata:
     #   {{- if .labels }}
     #   labels:
