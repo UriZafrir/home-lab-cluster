@@ -14,7 +14,7 @@ spec:
       repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       revision: talos
       files:
-      - path: 'applicationset-apps/**/.argocd.json'
+      - path: 'applicationset-apps/*.json'
   # - matrix:
   #     generators:
   #     - git:
@@ -25,7 +25,7 @@ spec:
   #     - clusters: {}
   template:
     metadata:
-      name: abc #'{{.name}}'
+      name: '{{.name}}'
     spec:
       project: default
       source:
@@ -41,37 +41,38 @@ spec:
           selfHeal: true
         syncOptions:
         - CreateNamespace=true
+        - ServerSideApply=true
   templatePatch: |
-    metadata:
-      {{- if .labels }}
-      labels:
-        {{- range $key, $value := .labels }}
-        {{ $key }}: "{{ $value }}"
-        {{- end }}
-      {{- end }}
-    spec:
-      syncPolicy:
-        {{- if and .syncPolicy (eq .syncPolicy "automated") }}
-        automated:
-          prune: true
-          selfHeal: true
-        {{- end }}
-        {{- if .syncOptions }}
-        syncOptions:
-        {{- range .syncOptions }}
-        - {{ . }}
-        {{- end }}
-        {{- end }}
-    {{- if .ignoreDifferences }}
-    ignoreDifferences:
-      {{- range .ignoreDifferences }}
-      - group: {{ .group }}
-        kind: {{ .kind }}
-        name: {{ .name }}
-        jsonPointers:
-          {{- range .jsonPointers }}
-          - {{ . }}
-          {{- end }}
-      {{- end }}
-    {{- end }}
+    # metadata:
+    #   {{- if .labels }}
+    #   labels:
+    #     {{- range $key, $value := .labels }}
+    #     {{ $key }}: "{{ $value }}"
+    #     {{- end }}
+    #   {{- end }}
+    # spec:
+    #   syncPolicy:
+    #     {{- if and .syncPolicy (eq .syncPolicy "automated") }}
+    #     automated:
+    #       prune: true
+    #       selfHeal: true
+    #     {{- end }}
+    #     {{- if .syncOptions }}
+    #     syncOptions:
+    #     {{- range .syncOptions }}
+    #     - {{ . }}
+    #     {{- end }}
+    #     {{- end }}
+    # {{- if .ignoreDifferences }}
+    # ignoreDifferences:
+    #   {{- range .ignoreDifferences }}
+    #   - group: {{ .group }}
+    #     kind: {{ .kind }}
+    #     name: {{ .name }}
+    #     jsonPointers:
+    #       {{- range .jsonPointers }}
+    #       - {{ . }}
+    #       {{- end }}
+    #   {{- end }}
+    # {{- end }}
 
