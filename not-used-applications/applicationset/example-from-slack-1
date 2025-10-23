@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: discovery-filtered-clusters
+  namespace: kube-infra
+spec:
+  generators:
+  - git:
+      repoURL: git@github.com:didlawowo/continuous-delivery.git
+      revision: main
+      files:
+      - path: 'deployed-charts/**/.argocd.json'
+  template:
+    metadata:
+      name: '{{name}}-{{path.basename}}'
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: '{{ default "default" .project }}'
+      sources:
+      - repoURL: git@github.com:didlawowo/continuous-delivery.git
+        targetRevision: '{{values.clusters.valuesRevision | default "main"}}'
+        ref: values
+      - repoURL: '{{source.repoURL}}'
+        targetRevision: '{{values.clusters.chartRevision | default source.targetRevision}}'
+        chart: '{{source.chart}}'
+        path: '{{source.path}}'
+        helm:
+          releaseName: '{{path.basename}}'
+          valueFiles:
+          - $values/{{path.path}}/values.yaml
+          - $values/{{path.path}}/values.{{name}}.yaml
+      destination:
+        name: '{{name}}'
+        namespace: '{{values.destination.namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace={{values.syncPolicy.syncOptions.CreateNamespace | default "true"}}
+        - ServerSideApply={{values.syncPolicy.syncOptions.ServerSideApply | default "false"}} 

@@ -4,6 +4,8 @@ metadata:
   name: applicationset-from-slack-1
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
       repoURL: https://github.com/UriZafrir/home-lab-cluster.git
@@ -13,7 +15,7 @@ spec:
   template:
     metadata:
       # name: '{{name}}-{{path.basename}}'
-      name: '{{path.basename}}'
+      name: '{{.path.basename}}'
       finalizers:
       - resources-finalizer.argocd.argoproj.io
     spec:
@@ -21,33 +23,15 @@ spec:
       source:
         repoURL: https://github.com/UriZafrir/home-lab-cluster.git
         targetRevision: talos
-        path: applicationset-apps/{{path.basename}}
-      # destination:
-      #   name: '{{name}}'
-      #   namespace: '{{values.destination.namespace}}'
-      # destination:
-      #   server: https://kubernetes.default.svc
-      #   namespace: '{{.namespace | default .name}}'
-    # spec:
-    #   project: '{{ default "default" .project }}'
-    #   sources:
-    #   - repoURL: '{{source.repoURL}}'
-    #     targetRevision: '{{values.clusters.chartRevision | default source.targetRevision}}'
-    #     chart: '{{source.chart}}'
-    #     path: '{{source.path}}'
-    #     helm:
-    #       releaseName: '{{path.basename}}'
-    #       valueFiles:
-    #       - $values/{{path.path}}/values.yaml
-    #       - $values/{{path.path}}/values.{{name}}.yaml
+        path: applicationset-apps/{{.path.basename}}
       destination:
         # name: '{{name}}'
         server: https://kubernetes.default.svc
-        namespace: '{{values.destination.namespace | default .name}}'
+        namespace: '{{.values.destination.namespace}}'
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
-        - CreateNamespace={{values.syncPolicy.syncOptions.CreateNamespace | default "true"}}
-        - ServerSideApply={{values.syncPolicy.syncOptions.ServerSideApply | default "false"}} 
+        - CreateNamespace={{.values.syncPolicy.syncOptions.CreateNamespace | default "true"}}
+        - ServerSideApply={{.values.syncPolicy.syncOptions.ServerSideApply | default "false"}} 
