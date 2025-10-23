@@ -14,7 +14,6 @@ spec:
       - path: 'applicationset-apps/**/.argocd.yaml'
   template:
     metadata:
-      # name: '{{name}}-{{path.basename}}'
       name: '{{.path.basename}}'
       finalizers:
       - resources-finalizer.argocd.argoproj.io
@@ -25,13 +24,20 @@ spec:
         targetRevision: talos
         path: applicationset-apps/{{.path.basename}}
       destination:
-        # name: '{{name}}'
         server: https://kubernetes.default.svc
-        namespace: '{{.values.destination.namespace}}'
+        namespace: '{{.destination.namespace}}'
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
-        - CreateNamespace={{.values.syncPolicy.syncOptions.CreateNamespace | default "true"}}
-        - ServerSideApply={{.values.syncPolicy.syncOptions.ServerSideApply | default "false"}} 
+        - CreateNamespace=true
+        - ServerSideApply=true
+  templatePatch: |
+      {{- if eq .path.basename "argocd" }} 
+      spec:
+        syncPolicy:
+          manual:
+            prune: false
+            selfHeal: true
+      {{-  end }}
