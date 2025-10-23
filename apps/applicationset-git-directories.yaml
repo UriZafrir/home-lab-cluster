@@ -30,3 +30,11 @@ spec:
           selfHeal: true
         syncOptions:
         - CreateNamespace=true
+  templatePatch: |
+      {{- if eq .path.basename "cert-manager" }} 
+      spec:
+        syncPolicy:
+          manual:
+            prune: true
+            selfHeal: true
+      {{-  end }}
