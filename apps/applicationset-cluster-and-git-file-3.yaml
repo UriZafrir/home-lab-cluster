@@ -10,14 +10,19 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=invalid"]
   generators:
-  - matrix:
-      generators:
-      - git:
-          repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-          revision: talos
-          files:
-          - path: 'applicationset-apps/**/.argocd.json'
-      - clusters: {}
+  - git:
+      repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      revision: talos
+      files:
+      - path: 'applicationset-apps/**/.argocd.json'
+  # - matrix:
+  #     generators:
+  #     - git:
+  #         repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+  #         revision: talos
+  #         files:
+  #         - path: 'applicationset-apps/**/.argocd.json'
+  #     - clusters: {}
   template:
     metadata:
       name: '{{.name}}'
