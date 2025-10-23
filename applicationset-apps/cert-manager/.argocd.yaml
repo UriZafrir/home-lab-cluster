@@ -1,9 +1,0 @@
-{
-  "name": "cert-manager",
-  "labels": {
-    "progressiveSync": "first"
-  },
-  "syncOptions": [
-    "CreateNamespace=true"
-  ]
-}
