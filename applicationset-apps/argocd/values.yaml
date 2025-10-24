@@ -1,4 +1,4 @@
-argocd:
+argo-cd:
   server:
     service:
       type: NodePort
