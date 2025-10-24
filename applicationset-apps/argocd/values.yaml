@@ -1,12 +1,8 @@
 server:
   service:
     type: NodePort
-# applicationSet:
-#   service:
-#     type: NodePort
 configs:
   cm:
-    #for argocd sync waves across apps, need a health check
     resource.customizations.health.argoproj.io_Application: |
       hs = {}
       hs.status = "Progressing"
@@ -20,5 +16,3 @@ configs:
         end
       end
       return hs
-    # argocd-cmd-params-cm: |
-    #   applicationsetcontroller.enable.progressive.syncs: true
