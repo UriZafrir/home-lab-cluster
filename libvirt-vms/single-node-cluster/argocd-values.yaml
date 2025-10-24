@@ -3,7 +3,6 @@ server:
     type: NodePort
 configs:
   cm:
-    #for argocd sync waves across apps, need a health check
     resource.customizations.health.argoproj.io_Application: |
       hs = {}
       hs.status = "Progressing"

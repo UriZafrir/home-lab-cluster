@@ -4,7 +4,7 @@ argo-cd:
       type: NodePort
   configs:
     cm:
-      resource.customizations.health.argoproj.io_Application: |
+      resource.customizations.health.argoproj.io_Application: |-
         hs = {}
         hs.status = "Progressing"
         hs.message = ""
@@ -17,3 +17,5 @@ argo-cd:
           end
         end
         return hs
+    params:
+      applicationsetcontroller.enable.progressive.syncs: true
