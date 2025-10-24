@@ -14,7 +14,7 @@ spec:
       repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       revision: talos
       files:
-      - path: 'applicationset-apps/*.json'
+      - path: 'applicationset-apps/**/.argocd.yaml'
   template:
     metadata:
       name: '{{.name}}'
@@ -35,9 +35,11 @@ spec:
         - CreateNamespace=true
         - ServerSideApply=true
   templatePatch: |
-    spec:
     {{- if eq .name "cert-manager" }}
-        manual:
+    spec:
+      syncPolicy:
+        automated:
+          enabled: false
           prune: false
           selfHeal: true
     {{- end }}
