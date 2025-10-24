@@ -35,7 +35,7 @@ spec:
         - CreateNamespace=true
         - ServerSideApply=true
   templatePatch: |
-    {{- if eq .name "argocd" }}
+    {{- if or (eq .name "argocd") (eq .name "cilium") }}
     spec:
       syncPolicy:
         automated:

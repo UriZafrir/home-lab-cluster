@@ -1,0 +1,61 @@
+cilium:
+  # #for host firewall:
+  # hostFirewall:
+  #   enabled: true
+  # #for UI:
+  hubble:
+    enabled: true
+    relay:
+      enabled: true
+    ui:
+      enabled: true
+      service:
+        type: LoadBalancer
+  # mTLS
+  # authentication:
+  #   mutual:
+  #     spire: enabled
+  #     install:
+  #       enabled: true
+  #for encrption:
+  # encryption:
+  #   enabled: true
+  #   type: ipsec
+  #for istio integration:
+  socketLB:
+    hostNamespaceOnly: true
+  cni:
+    exclusive: false
+  #for cilium kube proxy replacement:
+  ipam:
+    mode: kubernetes
+  kubeProxyReplacement: true
+  securityContext:
+    capabilities:
+      ciliumAgent:
+        - CHOWN
+        - KILL
+        - NET_ADMIN
+        - NET_RAW
+        - IPC_LOCK
+        - SYS_ADMIN
+        - SYS_RESOURCE
+        - DAC_OVERRIDE
+        - FOWNER
+        - SETGID
+        - SETUID
+      cleanCiliumState:
+        - NET_ADMIN
+        - SYS_ADMIN
+        - SYS_RESOURCE
+  cgroup:
+    autoMount:
+      enabled: false
+    hostRoot: /sys/fs/cgroup
+  k8sServiceHost: localhost
+  k8sServicePort: 7445
+  operator:
+    replicas: 1
+  #https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/
+    rollOutPods: true
+  rollOutCiliumPods: true
