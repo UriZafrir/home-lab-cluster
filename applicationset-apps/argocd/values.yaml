@@ -1,6 +1,9 @@
 server:
   service:
     type: NodePort
+applicationSet:
+  service:
+    type: NodePort
 configs:
   cm:
     #for argocd sync waves across apps, need a health check
