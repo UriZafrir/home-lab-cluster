@@ -1,8 +1,8 @@
 cluster:
   network:
     # # this is needed for cilium
-    # cni:
-    #   name: none
+    cni:
+      name: none
     # dnsDomain: nip.io
     podSubnets:
     - 10.244.0.0/16

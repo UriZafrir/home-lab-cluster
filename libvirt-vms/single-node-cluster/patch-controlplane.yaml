@@ -24,8 +24,9 @@ cluster:
               - istio-system
               - monitoring
   # #this is needed for cilium
-  # proxy:
-  #   disabled: true
+  proxy:
+    disabled: true
+  # this isn't
   # discovery:
   #   enabled: false
   etcd:
