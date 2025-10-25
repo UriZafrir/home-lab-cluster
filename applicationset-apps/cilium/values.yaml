@@ -68,3 +68,9 @@ cilium:
   # Announce IPs from services' `.status.loadbalancer.ingress` field (automatically assigned by LB-IPAM).
   l2announcements:
     enabled: true
+  gatewayAPI:
+    enabled: true
+  envoy:
+    securityContext:
+      capabilities:
+        keepCapNetBindService: true
