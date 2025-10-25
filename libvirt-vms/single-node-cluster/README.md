@@ -32,6 +32,8 @@ talosctl get disks -n ${NODE_IP} -e ${NODE_IP}
 talosctl get volumestatus -e ${NODE_IP} -n ${NODE_IP}
 talosctl ls /var/mnt/local-path-provisioner
 talosctl get links -n ${NODE_IP} -e ${NODE_IP}
+talosctl get nftableschain -o yaml -n ${NODE_IP} -e ${NODE_IP}
+
 
 #if restarting cluster and using xml for vm need to not have a mac and ip somehow
 
