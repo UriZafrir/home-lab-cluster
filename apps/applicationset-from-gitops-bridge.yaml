@@ -17,7 +17,7 @@ spec:
       source:
         repoURL: https://github.com/UriZafrir/home-lab-cluster.git
         targetRevision: talos
-        path: not-used-applications/temp/*
+        path: not-used-applications/temp
       destination:
         server: https://kubernetes.default.svc
         namespace: argocd
