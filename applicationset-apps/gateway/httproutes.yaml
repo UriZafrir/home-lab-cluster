@@ -7,13 +7,13 @@ spec:
     - name: general-gateway
       namespace: gateway
   hostnames:
-    - "prometheus.192.168.123.100.nip.io"
+    - "argocd.192.168.124.1.nip.io"
   rules:
     - matches:
         - path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: prometheus-server
-          namespace: monitoring 
+        - name: argocd-server
+          namespace: argocd 
           port: 80
