@@ -1,0 +1,25 @@
+#https://github.com/gitops-bridge-dev/gitops-bridge/blob/main/argocd/iac/terraform/examples/eks/getting-started/bootstrap/addons.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-addons
+  namespace: argocd
+spec:
+  # syncPolicy:
+  #   preserveResourcesOnDeletion: true
+  generators:
+    - clusters: {}
+  template:
+    metadata:
+      name: cluster-addons
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+        targetRevision: talos
+        path: not-used-applications/temp/*
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: argocd
+      syncPolicy:
+        automated: {}
