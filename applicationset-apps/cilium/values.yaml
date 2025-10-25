@@ -59,3 +59,12 @@ cilium:
   #https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/
     rollOutPods: true
   rollOutCiliumPods: true
+  #L2 announcements:
+  # Increase rate limit when doing L2 announcements
+  k8sClientRateLimit:
+    qps: 50
+    burst: 100
+
+  # Announce IPs from services' `.status.loadbalancer.ingress` field (automatically assigned by LB-IPAM).
+  l2announcements:
+    enabled: true
