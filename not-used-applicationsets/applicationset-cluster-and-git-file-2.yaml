@@ -21,6 +21,9 @@ spec:
         repoURL: git@github.com:Applied-Compute/infra.git
         targetRevision: HEAD
         path: applicationset-apps/{{.name}}
+        helm:
+          valueFiles:
+          - gitops/applicationset-apps/global-values.yaml          
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.namespace | default .name}}'
