@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: applicationset-cluster-and-git-file
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=invalid"]
+  generators:
+  - git:
+      repoURL: git@github.com:Applied-Compute/infra.git
+      revision: HEAD
+      files:
+      - path: 'gitops/applicationset-apps/*.json'
+  template:
+    metadata:
+      name: '{{.name}}'
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:Applied-Compute/infra.git
+        targetRevision: HEAD
+        path: applicationset-apps/{{.name}}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.namespace | default .name}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: true
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
+  # templatePatch: |
+  #   {{- if or (eq .name "argocd") (eq .name "cilium") }}
+  #   spec:
+  #     syncPolicy:
+  #       automated:
+  #         enabled: false
+  #         prune: false
+  #         selfHeal: true
+  #   {{- end }}
