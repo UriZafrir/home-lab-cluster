@@ -1,10 +1,22 @@
+curl -sfL https://get.k3s.io | \
+  INSTALL_K3S_EXEC="server \
+      --disable=traefik \
+      --disable=servicelb \
+      --flannel-backend=none \
+      --disable-network-policy \
+      --disable-kube-proxy" \
+  sh -
+
+mkdir ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown uri:uri ~/.kube/config
 
 #cilium
 #https://www.talos.dev/v1.11/kubernetes-guides/network/deploying-cilium/
 helm upgrade --install \
     cilium \
     cilium/cilium \
-    --version 1.18.0 \
+    --version 1.19.0-pre.3 \
     --namespace kube-system \
     --set ipam.mode=kubernetes \
     --set kubeProxyReplacement=true \
