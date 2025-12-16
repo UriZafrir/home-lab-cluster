@@ -14,6 +14,9 @@ spec:
       helm:
         releaseName: cilium
         valuesObject:
+          #for gateway api
+          gatewayAPI:
+            enabled: true
           # #for host firewall:
           # hostFirewall:
           #   enabled: true
