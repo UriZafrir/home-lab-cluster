@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-cni
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  # annotations:
+  #   argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  source:
+    chart: cni
+    repoURL: https://istio-release.storage.googleapis.com/charts
+    targetRevision: 1.27.2
+    helm:
+      valuesObject:
+        profile: ambient
+        # global:
+        #   platform: k3s
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: istio-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    # syncOptions:
+    # - CreateNamespace=true
+  # ignoreDifferences:
+  #   - group: admissionregistration.k8s.io
+  #     kind: ValidatingWebhookConfiguration
+  #     name: istio-validator-istio-system
+  #     jsonPointers:
+  #       - /webhooks/0/failurePolicy
+  #   - group: admissionregistration.k8s.io
+  #     kind: ValidatingWebhookConfiguration
+  #     name: istiod-default-validator
+  #     jsonPointers:
+  #       - /webhooks/0/failurePolicy

@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: 80.4.1
+      helm:
+        releaseName: kube-prometheus-stack
+        valuesObject:
+          # crds:
+          #   enabled: false
+          kubernetesServiceMonitors:
+            enabled: false
+          defaultRules:
+            create: false
+          prometheus:
+            service:
+              type: LoadBalancer
+          #make prometheus discover serviceMonitors from all namespaces:
+            prometheusSpec:
+              serviceMonitorNamespaceSelector:
+                matchLabels: {}  # Selects all namespaces
+              serviceMonitorSelectorNilUsesHelmValues: false  # No label filtering
+          grafana:
+            enabled: false
+            service:
+              type: LoadBalancer
+          alertmanager:
+            enabled: false
+            service:
+              type: LoadBalancer
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: HEAD
+    #   path: extras/kube-prometheus-stack
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
