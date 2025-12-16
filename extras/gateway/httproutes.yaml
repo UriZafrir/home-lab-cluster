@@ -7,7 +7,7 @@ spec:
     - name: general-gateway
       namespace: gateway
   hostnames:
-    - "prometheus.192.168.122.101.nip.io"
+    - "prometheus.192.168.122.103.nip.io"
   rules:
     - matches:
         - path:
