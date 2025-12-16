@@ -5,11 +5,18 @@ curl -sfL https://get.k3s.io | \
       --flannel-backend=none \
       --disable-network-policy \
       --disable-kube-proxy" \
+      --default-local-storage-path=/media/uri/data/k3s-ubuntu-storage \
   sh -
 
 mkdir ~/.kube
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 sudo chown uri:uri ~/.kube/config
+
+#for k8sServicePort
+#kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}' 
+
+
+helm repo add cilium https://helm.cilium.io/
 
 #cilium
 #https://www.talos.dev/v1.11/kubernetes-guides/network/deploying-cilium/
@@ -25,14 +32,14 @@ helm upgrade --install \
     --set cgroup.autoMount.enabled=false \
     --set cgroup.hostRoot=/sys/fs/cgroup \
     --set k8sServiceHost=localhost \
-    --set k8sServicePort=7445 \
+    --set k8sServicePort=6443 \
     --set operator.replicas=1 \
     --set operator.rollOutPods=true \
     --set rollOutCiliumPods=true
 
-
+helm repo add argo https://argoproj.github.io/argo-helm
 kubectl create ns argocd
-helm upgrade --install argocd argo/argo-cd --version 9.0.3 -n argocd -f argocd-values.yaml  --debug
+helm upgrade --install argocd argo/argo-cd --version 9.1.7 -n argocd -f argocd-values.yaml --debug
 kubectl apply -f ../../secrets/argocd-repo.yaml
 envsubst < ../../secrets/argocd-repo.yaml | kubectl apply -f -
 kubectl apply -f ../../root-app/root-app.yaml 

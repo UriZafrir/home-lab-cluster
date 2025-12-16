@@ -1,0 +1,87 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cilium
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://helm.cilium.io/
+      chart: cilium
+      targetRevision: 1.18.0
+      helm:
+        releaseName: cilium
+        valuesObject:
+          # #for host firewall:
+          # hostFirewall:
+          #   enabled: true
+          # #for UI:
+          hubble:
+            enabled: true
+            relay:
+              enabled: true
+            ui:
+              enabled: true
+              service:
+                type: LoadBalancer
+          # mTLS
+          # authentication:
+          #   mutual:
+          #     spire: enabled
+          #     install:
+          #       enabled: true
+          #for encrption:
+          # encryption:
+          #   enabled: true
+          #   type: ipsec
+          #for istio integration:
+          socketLB:
+            hostNamespaceOnly: true
+          cni:
+            exclusive: false
+          #for cilium kube proxy replacement:
+          ipam:
+            mode: kubernetes
+          kubeProxyReplacement: true
+          securityContext:
+            capabilities:
+              ciliumAgent:
+                - CHOWN
+                - KILL
+                - NET_ADMIN
+                - NET_RAW
+                - IPC_LOCK
+                - SYS_ADMIN
+                - SYS_RESOURCE
+                - DAC_OVERRIDE
+                - FOWNER
+                - SETGID
+                - SETUID
+              cleanCiliumState:
+                - NET_ADMIN
+                - SYS_ADMIN
+                - SYS_RESOURCE
+          cgroup:
+            autoMount:
+              enabled: false
+            hostRoot: /sys/fs/cgroup
+          k8sServiceHost: localhost
+          k8sServicePort: 6443
+          operator:
+            replicas: 1
+          #https://blog.stonegarden.dev/articles/2024/02/bootstrapping-k3s-with-cilium/
+            rollOutPods: true
+          rollOutCiliumPods: true
+    # - repoURL: https://github.com/UriZafrir/ansible-vllm-k8s.git
+    #   targetRevision: talos
+    #   path: extras/cilium-extras
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kube-system
+  syncPolicy:
+    manual:
+      prune: false
+      selfHeal: true
+    syncOptions:
