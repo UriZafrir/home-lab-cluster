@@ -22,7 +22,7 @@ spec:
             spec:
               external_services:
                 prometheus:
-                  url: "http://prometheus-server.monitoring:80/"
+                  url: "http://kube-prometheus-stack-prometheus.monitoring:9090/"
               deployment:
                 cluster_wide_access: true
                 service_type: LoadBalancer
