@@ -9,11 +9,10 @@ metadata:
   #   argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
-  source:
+  sources:
     - repoURL: https://istio-release.storage.googleapis.com/charts
       chart: base
       targetRevision: 1.28.1
-  sources:
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/istio
