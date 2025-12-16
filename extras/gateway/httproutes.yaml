@@ -45,6 +45,7 @@ metadata:
 spec:
   parentRefs:
   - name: general-gateway
+    namespace: gateway
   rules:
   - matches:
     - path:
@@ -64,4 +65,5 @@ spec:
         value: /api/v1/products
     backendRefs:
     - name: productpage
+      namespace: bookinfo 
       port: 9080
