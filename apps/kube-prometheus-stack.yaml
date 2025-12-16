@@ -29,7 +29,7 @@ spec:
                 matchLabels: {}  # Selects all namespaces
               serviceMonitorSelectorNilUsesHelmValues: false  # No label filtering
           grafana:
-            enabled: false
+            enabled: true
             service:
               type: LoadBalancer
           alertmanager:
