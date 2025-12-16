@@ -46,6 +46,8 @@ spec:
   parentRefs:
   - name: general-gateway
     namespace: gateway
+  hostnames:
+    - "bookinfo.192.168.122.103.nip.io"
   rules:
   - matches:
     - path:
