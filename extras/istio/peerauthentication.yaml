@@ -9,3 +9,16 @@ spec:
       app: bookinfo
   mtls:
     mode: STRICT
+---
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: gateway
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: gateway
+  mtls:
+    mode: STRICT
+---
