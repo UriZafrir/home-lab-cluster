@@ -16,8 +16,10 @@ spec:
     helm:
       valuesObject:
         profile: ambient
-        # global:
-        #   platform: k3s
+        # meshConfig:
+        #   outboundTrafficPolicy:
+        #     mode: REGISTRY_ONLY # Or ALLOW_ANY
+
   destination:
     server: "https://kubernetes.default.svc"
     namespace: istio-system
