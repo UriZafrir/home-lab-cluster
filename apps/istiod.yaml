@@ -16,9 +16,9 @@ spec:
     helm:
       valuesObject:
         profile: ambient
-        # meshConfig:
-        #   outboundTrafficPolicy:
-        #     mode: REGISTRY_ONLY # Or ALLOW_ANY
+        meshConfig:
+          outboundTrafficPolicy:
+            mode: REGISTRY_ONLY # Or ALLOW_ANY
 
   destination:
     server: "https://kubernetes.default.svc"
