@@ -19,6 +19,8 @@ spec:
         #   cm:
         #     kustomize.buildOptions: "--enable-helm"
         configs:
+          params:
+            server.insecure: "true"
           cm:
             #for argocd sync waves across apps, need a health check
             resource.customizations.health.argoproj.io_Application: |
