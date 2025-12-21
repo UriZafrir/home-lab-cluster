@@ -26,10 +26,14 @@ spec:
   - kind: ServiceEntry
     group: networking.istio.io
     name: cnn
+    namespace: gateway
+
   rules:
   - backendRefs:
     - name: cnn-egress-gateway-istio
       port: 443
+      namespace: gateway
+
 ---
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
@@ -38,6 +42,7 @@ metadata:
 spec:
   parentRefs:
   - name: cnn-egress-gateway
+    namespace: gateway
   hostnames:
   - edition.cnn.com
   rules:
@@ -46,3 +51,4 @@ spec:
       group: networking.istio.io
       name: edition.cnn.com
       port: 443
+      namespace: gateway
