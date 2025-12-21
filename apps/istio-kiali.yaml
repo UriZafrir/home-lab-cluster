@@ -18,7 +18,7 @@ spec:
         valuesObject:
           cr:
             create: true 
-            namespace: kiali
+            namespace: monitoring
             spec:
               external_services:
                 prometheus:
@@ -28,9 +28,21 @@ spec:
                 service_type: LoadBalancer
               auth:
                 strategy: "anonymous"
+                grafana:
+                  enabled: true
+                  auth:
+                    type: basic
+                    ca_file: ""
+                    insecure_skip_verify: false
+                    password: secret:kube-prometheus-stack-grafana:admin-password
+                    token: ""
+                    type: "basic"
+                    use_kiali_token: false
+                    username: secret:kube-prometheus-stack-grafana:admin-user
+                  health_check_url: ""
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: kiali
+    namespace: monitoring
   syncPolicy:
     automated:
       prune: true
