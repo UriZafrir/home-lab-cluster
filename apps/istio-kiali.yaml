@@ -23,15 +23,9 @@ spec:
               external_services:
                 prometheus:
                   url: "http://kube-prometheus-stack-prometheus.monitoring:9090/"
-              deployment:
-                cluster_wide_access: true
-                service_type: LoadBalancer
-              auth:
-                strategy: "anonymous"
                 grafana:
                   enabled: true
                   internal_url: 'http://kube-prometheus-stack-grafana.monitoring:80/'
-
                   auth:
                     type: basic
                     ca_file: ""
@@ -42,6 +36,11 @@ spec:
                     use_kiali_token: false
                     username: secret:kube-prometheus-stack-grafana:admin-user
                   health_check_url: ""
+              deployment:
+                cluster_wide_access: true
+                service_type: LoadBalancer
+              auth:
+                strategy: "anonymous"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: monitoring
