@@ -108,5 +108,5 @@ spec:
             value: /
       backendRefs:
         - name: kiali
-          namespace: istio-system 
+          namespace: kiali 
           port: 20001
