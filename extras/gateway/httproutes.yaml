@@ -108,5 +108,5 @@ spec:
             value: /
       backendRefs:
         - name: kiali
-          namespace: kiali 
+          namespace: monitoring 
           port: 20001
