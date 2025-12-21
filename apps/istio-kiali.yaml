@@ -18,7 +18,7 @@ spec:
         valuesObject:
           cr:
             create: true 
-            namespace: istio-system
+            namespace: kiali
             spec:
               external_services:
                 prometheus:
