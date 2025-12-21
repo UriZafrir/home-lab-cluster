@@ -24,7 +24,7 @@ metadata:
   name: grafana-route
 spec:
   parentRefs:
-    - name: istio-gateway
+    - name: general-gateway
       namespace: gateway
   hostnames:
     - "grafana.192.168.122.103.nip.io"
