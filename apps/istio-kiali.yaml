@@ -30,6 +30,8 @@ spec:
                 strategy: "anonymous"
                 grafana:
                   enabled: true
+                  internal_url: 'http://kube-prometheus-stack-grafana.monitoring:80/'
+
                   auth:
                     type: basic
                     ca_file: ""
