@@ -30,10 +30,10 @@ spec:
                 strategy: "anonymous"
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: istio-system
+    namespace: kiali
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    # syncOptions:
-    # - CreateNamespace=true
+    syncOptions:
+    - CreateNamespace=true
