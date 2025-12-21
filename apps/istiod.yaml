@@ -16,6 +16,8 @@ spec:
     helm:
       valuesObject:
         profile: ambient
+        env:
+          PILOT_ENABLE_ALPHA_GATEWAY_API: "true"
         # meshConfig:
         #   outboundTrafficPolicy:
         #     mode: REGISTRY_ONLY # Or ALLOW_ANY
