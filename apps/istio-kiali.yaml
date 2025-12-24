@@ -40,7 +40,7 @@ spec:
                 cluster_wide_access: true
                 service_type: LoadBalancer
                 network_policy:
-                  enabled: true
+                  enabled: false
               auth:
                 strategy: "anonymous"
   destination:
