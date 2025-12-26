@@ -1,34 +1,48 @@
-# apiVersion: "cilium.io/v2"
-# kind: CiliumClusterwideNetworkPolicy
-# metadata:
-#   name: "to-fqdn"
-# spec:
-#   endpointSelector: {}
-#   egress:
-#     - toEndpoints:
-#       - matchLabels:
-#           "k8s:io.kubernetes.pod.namespace": kube-system
-#           "k8s:k8s-app": kube-dns
-#       toPorts:
-#         - ports:
-#            - port: "53"
-#              protocol: ANY
-#           rules:
-#             dns:
-#               - matchPattern: "*"
-#     - toCIDR:
-#       - 192.168.0.105/32
-#       toPorts:
-#         - ports:
-#            - port: "6443"
-#              protocol: TCP
-#     - toEndpoints:
-#       - matchLabels:
-#           "k8s:io.kubernetes.pod.namespace": istio-system
-#           "k8s:app": istiod
-#       toPorts:
-#         - ports:
-#            - port: "15012"
-#              protocol: TCP
-#     - toFQDNs:
-#         - matchName: "github.com"
+apiVersion: "cilium.io/v2"
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: "to-fqdn-and-api"
+spec:
+  # This applies to ALL pods in the cluster
+  endpointSelector: {}
+  egress:
+    # 1. Allow DNS lookups (Required for github.com to work)
+    - toEndpoints:
+      - matchLabels:
+          "k8s:io.kubernetes.pod.namespace": kube-system
+          "k8s:k8s-app": kube-dns
+      toPorts:
+        - ports:
+           - port: "53"
+             protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
+
+    # 2. FIX: Allow access to the Kubernetes API Server (The Host)
+    - toEntities:
+      - host
+      toPorts:
+        - ports:
+           - port: "6443"
+             protocol: TCP
+
+    # 3. Allow Istio Control Plane (istiod)
+    - toEndpoints:
+      - matchLabels:
+          "k8s:io.kubernetes.pod.namespace": istio-system
+          "k8s:app": istiod
+      toPorts:
+        - ports:
+           - port: "15012"
+             protocol: TCP
+
+    # 4. Allow Istio HBONE/Tunneling
+    - toPorts:
+      - ports:
+         - port: "15008"
+           protocol: TCP
+
+    # 5. Allow External Traffic to GitHub
+    - toFQDNs:
+        - matchName: "github.com"
