@@ -16,5 +16,5 @@ spec:
           rules:
             dns:
               - matchPattern: "*"
-    # - toFQDNs:
-    #     - matchName: "my-remote-service.com"
+    - toFQDNs:
+        - matchName: "github.com"
