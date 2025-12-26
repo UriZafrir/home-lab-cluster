@@ -1,15 +1,23 @@
-apiVersion: cilium.io/v2
-kind: CiliumClusterwideNetworkPolicy
-metadata:
-  name: deny-all-ingress-except-cidr
-spec:
-  endpointSelector: {}
-  ingressDeny:
-  - fromEntities:
-    - world
-  ingress:
-  - fromCIDR:  # Allows ingress from a specific CIDR as an exception
-    - 87.68.252.35/32
+# apiVersion: cilium.io/v2
+# kind: CiliumClusterwideNetworkPolicy
+# metadata:
+#   name: deny-all-egress
+# spec:
+#   endpointSelector: {}
+#   egress: []
+# ---
+# apiVersion: cilium.io/v2
+# kind: CiliumClusterwideNetworkPolicy
+# metadata:
+#   name: deny-all-ingress-except-cidr
+# spec:
+#   endpointSelector: {}
+#   ingressDeny:
+#   - fromEntities:
+#     - world
+#   ingress:
+#   - fromCIDR:  # Allows ingress from a specific CIDR as an exception
+#     - 87.68.252.35/32
 # apiVersion: cilium.io/v2
 # kind: CiliumClusterwideNetworkPolicy
 # metadata:
