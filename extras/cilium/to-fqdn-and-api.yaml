@@ -24,7 +24,13 @@ spec:
       - host
       toPorts:
         - ports:
-           - port: "6443"
+           - port: "6443"  # API Server
+             protocol: TCP
+           - port: "10250" # Kubelet (Metrics-Server access)
+             protocol: TCP
+           - port: "4244"  # Hubble Relay
+             protocol: TCP
+           - port: "9100"  # Node Exporter (Prometheus access)
              protocol: TCP
 
     # 3. Allow Istio Control Plane (istiod)
@@ -34,7 +40,9 @@ spec:
           "k8s:app": istiod
       toPorts:
         - ports:
-           - port: "15012"
+           - port: "15012" # mTLS
+             protocol: TCP
+           - port: "15014" # Control Plane Metrics (Prometheus access)
              protocol: TCP
 
     # 4. Allow Istio HBONE/Tunneling
