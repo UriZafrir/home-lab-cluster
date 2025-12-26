@@ -32,7 +32,8 @@ spec:
           #mTLS
           authentication:
             mutual:
-              spire: "enabled"
+              spire:
+                enabled: true
               install:
                 enabled: true
           #for encrption:
