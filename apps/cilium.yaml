@@ -29,17 +29,17 @@ spec:
               enabled: true
               service:
                 type: LoadBalancer
-          #mTLS
-          authentication:
-            mutual:
-              spire:
-                enabled: true
-              install:
-                enabled: true
-          #for encrption:
-          encryption:
-            enabled: true
-            type: wireguard #ipsec
+          # #mTLS
+          # authentication:
+          #   mutual:
+          #     spire:
+          #       enabled: true
+          #     install:
+          #       enabled: true
+          # #for encrption:
+          # encryption:
+          #   enabled: true
+          #   type: wireguard #ipsec
           #for istio integration:
           socketLB:
             hostNamespaceOnly: true
