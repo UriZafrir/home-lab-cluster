@@ -10,7 +10,7 @@ spec:
   sources:
     - repoURL: https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      targetRevision: 78.5.0
+      targetRevision: 80.4.1
       helm:
         releaseName: kube-prometheus-stack
         valuesObject:
@@ -29,7 +29,7 @@ spec:
                 matchLabels: {}  # Selects all namespaces
               serviceMonitorSelectorNilUsesHelmValues: false  # No label filtering
           grafana:
-            enabled: false
+            enabled: true
             service:
               type: LoadBalancer
           alertmanager:
