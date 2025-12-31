@@ -15,19 +15,19 @@ spec:
         namespaces:
           from: All
 ---
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: ReferenceGrant
-metadata:
-  name: allow-cilium-gateway-to-monitoring
-  namespace: monitoring  # Namespace of the backend service
-spec:
-  from:
-  - group: gateway.networking.k8s.io
-    kind: HTTPRoute
-    namespace: gateway  # Namespace of the HTTPRoute
-  to:
-  - group: ""
-    kind: Service  # Allow referencing Kubernetes Services
+# apiVersion: gateway.networking.k8s.io/v1beta1
+# kind: ReferenceGrant
+# metadata:
+#   name: allow-cilium-gateway-to-monitoring
+#   namespace: monitoring  # Namespace of the backend service
+# spec:
+#   from:
+#   - group: gateway.networking.k8s.io
+#     kind: HTTPRoute
+#     namespace: gateway  # Namespace of the HTTPRoute
+#   to:
+#   - group: ""
+#     kind: Service  # Allow referencing Kubernetes Services
 ---
 # apiVersion: gateway.networking.k8s.io/v1
 # kind: HTTPRoute
