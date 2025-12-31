@@ -25,6 +25,10 @@ spec:
             enabled: true
             relay:
               enabled: true
+            #for cilium app in argocd out of sync: 
+            tls:
+              auto:
+                method: cronJob
             ui:
               enabled: true
               service:
