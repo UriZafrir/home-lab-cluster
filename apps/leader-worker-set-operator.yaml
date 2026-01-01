@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: leader-worker-set-operator
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: oci://registry.k8s.io/lws/charts/lws
+      chart: lws
+      targetRevision: 0.7.0
+      helm:
+        releaseName: leader-worker-set-operator
+        valuesObject:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: lws-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
