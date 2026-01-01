@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: envoy-ai-gateway
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: oci://docker.io/envoyproxy/ai-gateway-helm
+      chart: ai-gateway-crds-helm
+      targetRevision: v0.0.0-latest
+      helm:
+        releaseName: envoy-ai-gateway
+        valuesObject:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: envoy-ai-gateway-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
