@@ -1,3 +1,4 @@
+#https://raw.githubusercontent.com/kserve/kserve/master/hack/setup/quick-install/kserve-standard-mode-full-install-with-manifests.sh
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
