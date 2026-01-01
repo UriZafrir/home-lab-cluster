@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     chart: otel-add-on 
-    repoURL: oci://ghcr.io/kedify/charts/otel-add-on
+    repoURL: oci://ghcr.io/kedify/charts
     targetRevision: 0.1.3
     helm:
       releaseName: keda-otel-add-on
