@@ -16,6 +16,8 @@ spec:
         valuesObject:
           inferenceExtension:
             enabled: true
+          agentgateway:
+            enabled: true
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/kgateway
