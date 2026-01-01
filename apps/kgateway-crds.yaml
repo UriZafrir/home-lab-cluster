@@ -14,6 +14,8 @@ spec:
       helm:
         releaseName: kgateway-crds
         valuesObject:
+          inferenceExtension:
+            enabled: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kgateway-system
