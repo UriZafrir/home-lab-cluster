@@ -16,6 +16,9 @@ spec:
         valuesObject:
           inferenceExtension:
             enabled: true
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/kgateway
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kgateway-system
