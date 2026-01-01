@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: inferencepool
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: oci://registry.k8s.io/gateway-api-inference-extension/charts/inferencepool
+      chart: inferencepool
+      targetRevision: v1.2.1
+      helm:
+        releaseName: inferencepool
+        valuesObject: 
+          inferencePool:
+            modelServers:
+              matchLabels:
+                app: vllm-llama3-8b-instruct
+          provider:
+            name: none
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kgateway-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
