@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: inferencepool
+  name: vllm-llama3-8b-instruct
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -12,7 +12,7 @@ spec:
       chart: inferencepool
       targetRevision: v1.2.1
       helm:
-        releaseName: inferencepool
+        releaseName: vllm-llama3-8b-instruct
         valuesObject: 
           inferencePool:
             modelServers:
