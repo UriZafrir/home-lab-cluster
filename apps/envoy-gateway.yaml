@@ -1,32 +1,33 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: envoy-gateway
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   sources:
-    - repoURL: https://charts.jetstack.io
-      chart: cert-manager
-      targetRevision: 1.17.1
+    - repoURL: docker.io/envoyproxy
+      chart: gateway-helm
+      targetRevision: 1.6.1
       helm:
-        releaseName: cert-manager
+        releaseName: envoy-gateway
         valuesObject:
-          # installCRDs: true
-          # podDnsPolicy: "ClusterFirst"
+          certgen:
+            rbac:
+              annotations:
+                argocd.argoproj.io/sync-wave: "-1"
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: HEAD
-      path: extras/cert-manager
+      targetRevision: ubuntu
+      path: extras/envoy-gateway
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: cert-manager
+    namespace: envoy-gateway-system
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+    - ServerSideApply=true
