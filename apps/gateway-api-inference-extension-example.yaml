@@ -13,7 +13,7 @@ spec:
       path: extras/gateway-api-inference-extension-example
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: gateway-api-inference-extension
+    namespace: kgateway-system
   syncPolicy:
     automated:
       prune: true
