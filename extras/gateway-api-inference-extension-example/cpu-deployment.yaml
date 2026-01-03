@@ -17,17 +17,17 @@ spec:
           image: "public.ecr.aws/q9t5s3a7/vllm-cpu-release-repo:v0.13.0" # formal images can be found in https://gallery.ecr.aws/q9t5s3a7/vllm-cpu-release-repo
           imagePullPolicy: Always
           command: ["sleep", "infinity"] #["python3", "-m", "vllm.entrypoints.openai.api_server"]
-          args:
-          - "--model"
-          - "Qwen/Qwen2.5-1.5B-Instruct"
-          - "--port"
-          - "8000"
-          - "--enable-lora"
-          - "--max-loras"
-          - "4"
-          - "--lora-modules"
-          - '{"name": "food-review-0", "path": "SriSanth2345/Qwen-1.5B-Tweet-Generations", "base_model_name": "Qwen/Qwen2.5-1.5B"}'
-          - '{"name": "food-review-1", "path": "SriSanth2345/Qwen-1.5B-Tweet-Generations", "base_model_name": "Qwen/Qwen2.5-1.5B"}'
+          # args:
+          # - "--model"
+          # - "Qwen/Qwen2.5-1.5B-Instruct"
+          # - "--port"
+          # - "8000"
+          # - "--enable-lora"
+          # - "--max-loras"
+          # - "4"
+          # - "--lora-modules"
+          # - '{"name": "food-review-0", "path": "SriSanth2345/Qwen-1.5B-Tweet-Generations", "base_model_name": "Qwen/Qwen2.5-1.5B"}'
+          # - '{"name": "food-review-1", "path": "SriSanth2345/Qwen-1.5B-Tweet-Generations", "base_model_name": "Qwen/Qwen2.5-1.5B"}'
           env:
             - name: PORT
               value: "8000"
