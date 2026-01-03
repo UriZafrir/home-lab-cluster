@@ -17,7 +17,7 @@ spec:
           inferencePool:
             modelServers:
               matchLabels:
-                inferencepool: vllm-llama3-8b-instruct-epp
+                app: vllm-llama3-8b-instruct
           provider:
             name: none
   destination:
