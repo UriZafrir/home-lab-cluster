@@ -6,7 +6,7 @@ spec:
   description: ""
   nodeSelector:
     matchLabels:
-      node-access: ssh
+      node.kubernetes.io/instance-type: k3s
   ingress:
   - fromEntities:
     - cluster
