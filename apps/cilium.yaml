@@ -18,8 +18,8 @@ spec:
           gatewayAPI:
             enabled: true
           # #for host firewall:
-          # hostFirewall:
-          #   enabled: true
+          hostFirewall:
+            enabled: true
           # #for UI:
           hubble:
             enabled: true
