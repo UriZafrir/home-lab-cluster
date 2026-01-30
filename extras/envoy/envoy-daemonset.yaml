@@ -22,9 +22,11 @@ spec:
         - containerPort: 80
           name: http
         command: ["sleep", "infinity"]
-        # command: ["envoy", "-c", "/etc/envoy/envoy.yaml"]
-        # env:
-        # - name: ENVOY_UID
-        #   value: "0"
-        # - name: ENVOY_GID
-        #   value: "0"
+        volumeMounts:
+        - name: envoy-config-volume
+          mountPath: /etc/envoy/envoy.yaml
+          subPath: envoy.conf
+      volumes:
+      - name: envoy-config-volume
+        configMap:
+          name: envoy-config
