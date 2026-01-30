@@ -6,12 +6,14 @@ metadata:
     app: nginx
 data:
   nginx.conf: |
+    resolver kube-dns.kube-system.svc.cluster.local valid=30s;
     http {
       server {
         listen 80;                    
         server_name jellyfin.192.168.0.105.nip.io;
           location / {
-            proxy_pass http://jellyfin.jellyfin.svc.cluster.local:8096;
+            set $jellyfin_upstream jellyfin.jellyfin.svc.cluster.local:8096;
+            proxy_pass http://$jellyfin_upstream;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
