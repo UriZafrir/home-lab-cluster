@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: envoy-daemonset
+  labels:
+    app: envoy
+spec:
+  selector:
+    matchLabels:
+      app: envoy
+  template:
+    metadata:
+      labels:
+        app: envoy
+    spec:
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      containers:
+      - name: envoy
+        image: envoyproxy/envoy:v1.37-latest
+        ports:
+        - containerPort: 80
+          hostPort: 80
+          name: http
+        # env:
+        # - name: ENVOY_UID
+        #   value: "0"
+        # - name: ENVOY_GID
+        #   value: "0"
