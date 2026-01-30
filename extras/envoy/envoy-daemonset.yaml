@@ -21,6 +21,8 @@ spec:
         ports:
         - containerPort: 80
           name: http
+        command: ["sleep", "infinity""]
+        # command: ["envoy", "-c", "/etc/envoy/envoy.yaml"]
         # env:
         # - name: ENVOY_UID
         #   value: "0"
