@@ -24,7 +24,7 @@ spec:
                 type: File
             - name: ca-cert
               hostPath:
-                path: /etc/docker/certs.d/registry-192-168-122-101.nip.io/ca.crt
+                path: /etc/docker/certs.d/registry-192-168-122-101.nip.io/ca.pem
                 type: File
           extraVolumeMounts:
             - name: client-cert
