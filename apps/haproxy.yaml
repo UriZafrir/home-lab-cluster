@@ -40,6 +40,7 @@ spec:
             defaults
               mode http
               timeout client 5m
+              timeout connect 10s    # ← ADD THIS
               timeout server 5m
               option forwardfor
 
@@ -51,7 +52,7 @@ spec:
 
             backend docker_registry
               http-request set-header X-Forwarded-Proto https if { ssl_fc }
-              server docker-registry.docker-registry.svc.cluster.local:5000 ssl verify required ca-file /certs/ca.crt check
+              server docker-registry docker-registry.docker-registry.svc.cluster.local:5000 ssl verify required ca-file /certs/ca.crt check
   destination:
     server: "https://kubernetes.default.svc"
     namespace: haproxy
