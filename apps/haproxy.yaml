@@ -17,6 +17,22 @@ spec:
         valuesObject:
           service:
             type: LoadBalancer
+          extraVolumes:
+            - name: client-cert
+              hostPath:
+                path: /etc/docker/certs.d/registry-192-168-122-101.nip.io/cert-and-key.pem
+                type: File
+            - name: ca-cert
+              hostPath:
+                path: /etc/docker/certs.d/registry-192-168-122-101.nip.io/ca.crt
+                type: File
+          extraVolumeMounts:
+            - name: client-cert
+              mountPath: /certs/client-crt-and-key.pem
+              readOnly: true
+            - name: ca-cert
+              mountPath: /certs/ca.crt
+              readOnly: true
           config: |
             global
               log stdout local0
