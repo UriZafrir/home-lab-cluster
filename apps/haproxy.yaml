@@ -1,3 +1,4 @@
+#https://www.haproxy.com/documentation/haproxy-configuration-tutorials/security/authentication/client-certificate-authentication/
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -16,6 +17,25 @@ spec:
         valuesObject:
           service:
             type: LoadBalancer
+          config: |
+            global
+              log stdout local0
+
+            defaults
+              mode http
+              timeout client 5m
+              timeout server 5m
+              option forwardfor
+
+            frontend fe_main
+              bind :80
+              redirect scheme https code 301 if !{ ssl_fc }
+              bind :443 ssl crt /certs/client-crt-and-key.pem verify required ca-file /certs/ca.crt
+              default_backend docker_registry
+
+            backend docker_registry
+              http-request set-header X-Forwarded-Proto https if { ssl_fc }
+              server docker-registry.docker-registry.svc.cluster.local:5000 ssl verify required ca-file /certs/ca.crt check
   destination:
     server: "https://kubernetes.default.svc"
     namespace: haproxy
