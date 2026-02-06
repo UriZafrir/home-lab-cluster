@@ -20,7 +20,7 @@ spec:
           extraVolumes:
             - name: client-cert
               hostPath:
-                path: /etc/docker/certs.d/registry-192-168-122-101.nip.io/cert-and-key.pem
+                path: /etc/docker/certs.d/cert-and-key.pem
                 type: File
             - name: ca-cert
               hostPath:
@@ -40,7 +40,7 @@ spec:
             defaults
               mode http
               timeout client 5m
-              timeout connect 10s    # ← ADD THIS
+              timeout connect 10s
               timeout server 5m
               option forwardfor
 
