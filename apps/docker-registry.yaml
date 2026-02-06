@@ -14,6 +14,7 @@ spec:
       helm:
         releaseName: docker-registry
         valuesObject:
+  destination:
     server: "https://kubernetes.default.svc"
     namespace: docker-registry
   syncPolicy:
