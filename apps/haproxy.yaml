@@ -87,10 +87,10 @@ spec:
 
 
 # openssl x509 -noout -text -in ca.crt 
-# openssl x509 -noout -text -in client.crt
+# openssl x509 -noout -text -in client.cert
 
 # cp ca.crt registry-192-168-122-101.nip.io/
-# cp client.crt registry-192-168-122-101.nip.io/
+# cp client.cert registry-192-168-122-101.nip.io/
 # cp client.key registry-192-168-122-101.nip.io/
 # cat client.cert >> cert-and-key.pem
 # cat client.key >> cert-and-key.pem
