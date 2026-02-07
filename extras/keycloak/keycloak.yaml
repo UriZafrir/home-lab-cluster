@@ -4,3 +4,5 @@ metadata:
   name: keycloak
 spec:
   instances: 1
+  db:
+    vendor: h2
