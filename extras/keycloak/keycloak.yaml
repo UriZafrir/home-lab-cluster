@@ -3,5 +3,4 @@ kind: Keycloak
 metadata:
   name: keycloak
 spec:
-  db:
-    vendor: h2
+  instances: 1
