@@ -5,4 +5,10 @@ metadata:
 spec:
   instances: 1
   db:
-    vendor: h2
+    vendor: postgres
+    usernameSecret:
+      name: postgres-app
+      key: username
+    passwordSecret:
+      name: postgres-app
+      key: password
