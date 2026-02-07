@@ -62,3 +62,39 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+
+
+
+# rm -rf /etc/docker/certs.d
+# mkdir -p /etc/docker/certs.d/registry-192-168-122-101.nip.io
+# cd /etc/docker/certs.d
+
+# openssl req -newkey rsa:2048 -nodes -x509 -days 3650 \
+#   -keyout privateCA.pem -out ca.crt \
+#   -subj "/CN=MyOrg-CA/C=IL"
+
+# openssl req \
+#   -newkey rsa:2048 \
+#   -nodes \
+#   -subj "/CN=registry-192-168-122-101.nip.io" \
+#   -keyout client.key \
+#   -out client.csr \
+#   -addext "subjectAltName=DNS:registry-192-168-122-101.nip.io"
+
+# openssl x509 -req -in client.csr -CA ca.crt -CAkey privateCA.pem \
+#   -CAcreateserial -out client.cert -days 3650 \
+#   -extfile <(echo "subjectAltName=DNS:registry-192-168-122-101.nip.io")
+
+
+# openssl x509 -noout -text -in ca.crt 
+# openssl x509 -noout -text -in client.crt
+
+# cp ca.crt registry-192-168-122-101.nip.io/
+# cp client.crt registry-192-168-122-101.nip.io/
+# cp client.key registry-192-168-122-101.nip.io/
+# cat client.cert >> cert-and-key.pem
+# cat client.key >> cert-and-key.pem
+# sudo curl https://registry-192-168-122-101.nip.io/v2/   --cacert ca.crt   --cert client.cert   --key client.key   -vvk
+
+# systemctl restart docker
+  
