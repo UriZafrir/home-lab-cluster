@@ -14,6 +14,9 @@ spec:
       helm:
         releaseName: cloudnative-pg
         valuesObject:
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/cloudnative-pg
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cloudnative-pg
