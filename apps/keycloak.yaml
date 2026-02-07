@@ -11,9 +11,9 @@ spec:
     - repoURL: https://github.com/keycloak/keycloak-k8s-resources
       targetRevision: 26.5.2
       path: kubernetes
-    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-    #   targetRevision: HEAD
-    #   path: extras/keycloak
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: HEAD
+      path: extras/keycloak
   destination:
     server: "https://kubernetes.default.svc"
     namespace: keycloak
