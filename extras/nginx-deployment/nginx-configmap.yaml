@@ -7,22 +7,18 @@ metadata:
 data:
   nginx.conf: |
     events {
-        worker_connections 1024;
+        worker_connections 1024; # Example directive
     }
     http {
       server {
-          listen 443 ssl;
-
-          ssl_certificate         /etc/nginx/certs/client.cert;
-          ssl_certificate_key     /etc/nginx/certs/client.key;
-
-          ssl_client_certificate  /etc/nginx/certs/ca.crt;
-          ssl_verify_client       on;
-
+        listen 80;                    
+        server_name keycloak.192.168.122.102.nip.io;
           location / {
-              proxy_pass http://docker-registry.docker-registry.svc.cluster.local:5000;
-          }
+            proxy_pass http://keycloak-service.keycloak.svc.cluster.local:8080;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
       }
     }
-
-
