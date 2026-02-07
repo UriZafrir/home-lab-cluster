@@ -15,3 +15,7 @@ spec:
     host: postgres-rw.keycloak.svc.cluster.local
   http:
     httpEnabled: true
+  ingress:
+    enabled: false
+  hostname:
+    strict: false
