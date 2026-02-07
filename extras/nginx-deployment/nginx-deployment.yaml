@@ -25,7 +25,13 @@ spec:
         - name: nginx-config
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
+        - name: registry-certs
+          mountPath: /etc/nginx/certs
       volumes:
       - name: nginx-config
         configMap:
           name: nginx-config
+      - name: registry-certs
+        hostPath:
+          path: /etc/docker/certs.d/registry-192-168-122-102.nip.io
+          type: Directory
