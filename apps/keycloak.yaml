@@ -9,7 +9,7 @@ spec:
   project: default
   sources:
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: HEAD
+      targetRevision: ubuntu
       path: extras/keycloak
   destination:
     server: "https://kubernetes.default.svc"
