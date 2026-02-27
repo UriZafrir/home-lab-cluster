@@ -26,10 +26,14 @@ spec:
                 blobdescriptor: inmemory
             http:
               #user addition
-              cors:
-                origins: ['http://192.168.122.101']
-                methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS']
-                headers: ['Authorization', 'Content-Type', 'Accept']
+              headers:
+                X-Content-Type-Options: [nosniff]
+                Access-Control-Allow-Origin: ['http://http://192.168.122.101']
+                Access-Control-Allow-Methods: ['HEAD', 'GET', 'OPTIONS', 'DELETE']
+                Access-Control-Allow-Headers: ['Authorization', 'Accept']
+                Access-Control-Max-Age: [1728000]
+                Access-Control-Allow-Credentials: [true]
+                Access-Control-Expose-Headers: ['Docker-Content-Digest']
               #end user addition
               addr: :5000
               headers:
