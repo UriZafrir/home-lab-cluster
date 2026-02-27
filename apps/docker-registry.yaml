@@ -16,6 +16,34 @@ spec:
         valuesObject:
           persistence:
             enabled: true
+          configData:
+            version: 0.1
+            log:
+              fields:
+                service: registry
+            storage:
+              cache:
+                blobdescriptor: inmemory
+            http:
+              #user addition
+              cors:
+                origins: ['http://192.168.122.101']
+                methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS']
+                headers: ['Authorization', 'Content-Type', 'Accept']
+              #end user addition
+              addr: :5000
+              headers:
+                X-Content-Type-Options: [nosniff]
+              debug:
+                addr: :5001
+                prometheus:
+                  enabled: false
+                  path: /metrics
+            health:
+              storagedriver:
+                enabled: true
+                interval: 10s
+                threshold: 3
   destination:
     server: "https://kubernetes.default.svc"
     namespace: docker-registry
