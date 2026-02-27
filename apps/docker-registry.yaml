@@ -16,6 +16,8 @@ spec:
         valuesObject:
           persistence:
             enabled: true
+          service:
+            type: LoadBalancer
           configData:
             version: 0.1
             log:
