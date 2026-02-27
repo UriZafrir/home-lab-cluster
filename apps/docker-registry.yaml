@@ -38,8 +38,6 @@ spec:
                 Access-Control-Expose-Headers: ['Docker-Content-Digest']
               #end user addition
               addr: :5000
-              headers:
-                X-Content-Type-Options: [nosniff]
               debug:
                 addr: :5001
                 prometheus:
