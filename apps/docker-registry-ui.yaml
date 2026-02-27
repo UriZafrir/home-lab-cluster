@@ -17,7 +17,7 @@ spec:
           ui:
             service:
               type: LoadBalancer
-            dockerRegistryUrl: "http://docker-registry.docker-registry.svc.cluster.local"
+            dockerRegistryUrl: "http://192.168.100.102"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: docker-registry
