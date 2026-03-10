@@ -7,14 +7,17 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    chart: jenkins-operator
-    repoURL: https://raw.githubusercontent.com/jenkinsci/kubernetes-operator/master/chart
-    targetRevision: 0.9.0-beta2
-    helm:
-      releaseName: jenkins-operator
-      valuesObject:
-        installCRDs: true
+  sources:
+    - repoURL: https://raw.githubusercontent.com/jenkinsci/kubernetes-operator/master/chart
+      chart: jenkins-operator
+      targetRevision: 0.9.0-beta2
+      helm:
+        releaseName: jenkins-operator
+        valuesObject:
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/jenkins
+
   destination:
     server: "https://kubernetes.default.svc"
     namespace: jenkins
