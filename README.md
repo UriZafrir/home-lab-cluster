@@ -8,6 +8,24 @@ curl -sfL https://get.k3s.io | \
       --default-local-storage-path=/media/uri/data/k3s-ubuntu-storage \
   sh -
 
+or
+
+sudo mkdir -p /etc/rancher/k3s
+
+cat <<EOF | sudo tee /etc/rancher/k3s/config.yaml > /dev/null
+disable:
+  - traefik
+  - servicelb
+flannel-backend: "none"
+disable-network-policy: true
+disable-kube-proxy: true
+default-local-storage-path: "/mnt/data/k3s-ubuntu-storage"
+EOF
+
+cat /etc/rancher/k3s/config.yaml
+
+curl -sfL https://get.k3s.io | sh -
+
 mkdir ~/.kube
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 sudo chown uri:uri ~/.kube/config
@@ -40,6 +58,5 @@ helm upgrade --install \
 helm repo add argo https://argoproj.github.io/argo-helm
 kubectl create ns argocd
 helm upgrade --install argocd argo/argo-cd --version 9.1.7 -n argocd -f argocd-values.yaml --debug
-kubectl apply -f ../../secrets/argocd-repo.yaml
-envsubst < ../../secrets/argocd-repo.yaml | kubectl apply -f -
-kubectl apply -f ../../root-app/root-app.yaml 
+envsubst < secrets/argocd-repo.yaml | kubectl apply -f -
+kubectl apply -f root-app/root-app.yaml 
