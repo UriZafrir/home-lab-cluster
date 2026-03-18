@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: signoz-k8s-infra
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: k8s-infra
+    repoURL: https://charts.signoz.io
+    targetRevision: 0.15.0
+    helm:
+      releaseName: signoz-k8s-infra
+      valuesObject:
+        global:
+          cloud: others
+          clusterName: k3s
+          deploymentEnvironment: production
+        otelCollectorEndpoint: signoz-otel-collector.signoz.svc:4317
+        otelInsecure: true
+        presets:
+          otlpExporter:
+            enabled: true
+          debugExporter: 
+            enabled: true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: signoz
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
