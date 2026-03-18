@@ -1,0 +1,26 @@
+signozapiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: signoz
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: signoz
+    repoURL: https://charts.signoz.io
+    targetRevision: 0.115.0
+    helm:
+      releaseName: signoz
+      valuesObject:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: signoz
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
