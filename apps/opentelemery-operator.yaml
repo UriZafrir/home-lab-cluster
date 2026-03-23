@@ -16,17 +16,6 @@ spec:
       helm:
         releaseName: opentelemetry-operator
         valuesObject:
-          # admissionWebhooks:
-          #   certManager:
-          #     enabled: true
-          # manager:
-          #   collectorImage:
-          #     repository: otel/opentelemetry-collector-contrib
-            #for prometheus to scrape it
-            # prometheusRule:
-            #   enabled: true
-            # serviceMonitor:
-            #   enabled: true
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: ubuntu
     #   path: extras/opentelemetry-operator
