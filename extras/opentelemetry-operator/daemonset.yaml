@@ -1,0 +1,18 @@
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-collector
+spec:
+  mode: daemonset  # This creates a DaemonSet
+  # image: otel/opentelemetry-collector-k8s
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          exporters: [logging]
