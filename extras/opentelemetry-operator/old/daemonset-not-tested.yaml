@@ -7,6 +7,9 @@ spec:
   # image: otel/opentelemetry-collector-k8s
   config: |
     receivers:
+      filelog:  # for container logs
+        include:
+          - /var/log/pods/*/*/*.log
       hostmetrics:
         collection_interval: 30s
         scrapers:
@@ -19,19 +22,23 @@ spec:
           paging: {}
           process: {}
 
-    processors: {}
-
     exporters:
-      # Native VictoriaMetrics OTLP HTTP metrics ingestion
-      otlphttp/victoriametrics:
-        # change service name / namespace as needed
-        metrics_endpoint: http://vmsingle.default.svc.cluster.local:8428/opentelemetry/v1/metrics  # VictoriaMetrics docs example [web:19]
+      otlphttp/vmcluster:
+        metrics_endpoint: http://vmselect-vmcluster.default.svc.cluster.local:8481/opentelemetry/v1/metrics
+        compression: gzip
+        encoding: proto
+
+      otlphttp/vlcluster:
+        logs_endpoint: http://vlselect-vlcluster.default.svc.cluster.local:8481/insert/opentelemetry/v1/logs
         compression: gzip
         encoding: proto
 
     service:
       pipelines:
+        logs:
+          receivers: [otlp]
+          exporters: [otlphttp/vlcluster]
+
         metrics:
-          receivers: [hostmetrics]
-          processors: []
-          exporters: [otlphttp/victoriametrics]
+          receivers: [otlp]
+          exporters: [otlphttp/vmcluster]
