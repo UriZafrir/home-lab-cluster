@@ -22,7 +22,7 @@ spec:
         memory: 500Mi
   vmselect:
     serviceSpec:
-      type: LoadBalancer
+      type: NodePort
     replicaCount: 1
     cacheMountPath: "/select-cache"
     storage:
