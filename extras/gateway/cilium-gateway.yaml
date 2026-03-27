@@ -47,4 +47,4 @@ spec:
       backendRefs:
         - name: vminsert-vmcluster
           namespace: victoria-metrics-operator 
-          port: 8481
+          port: 8480
