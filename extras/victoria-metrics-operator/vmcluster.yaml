@@ -36,4 +36,4 @@ spec:
   vminsert:
     replicaCount: 1
     extraArgs:
-      opentelemetry.usePrometheusNaming: true
+      opentelemetry.usePrometheusNaming: "true"
