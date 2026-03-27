@@ -21,6 +21,8 @@ spec:
         cpu: "0.5"
         memory: 500Mi
   vmselect:
+    serviceSpec:
+      type: LoadBalancer
     replicaCount: 1
     cacheMountPath: "/select-cache"
     storage:
