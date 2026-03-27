@@ -18,8 +18,8 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
 metadata:
-  name: allow-cilium-gateway-to-keycloak
-  namespace: keycloak  # Namespace of the backend service
+  name: allow-cilium-gateway-to-victoria-metrics-operator
+  namespace: victoria-metrics-operator  # Namespace of the backend service
 spec:
   from:
   - group: gateway.networking.k8s.io
@@ -38,7 +38,7 @@ spec:
     - name: cilium-gateway
       namespace: gateway
   hostnames:
-    - "keycloak.192.168.122.101.nip.io"
+    - "vmselect.192.168.122.101.nip.io"
   rules:
     - matches:
         - path:
@@ -47,4 +47,4 @@ spec:
       backendRefs:
         - name: keycloak-service
           namespace: keycloak 
-          port: 8080
+          port: 8481
