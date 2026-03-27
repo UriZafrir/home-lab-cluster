@@ -6,6 +6,9 @@ spec:
   mode: daemonset
   # image: otel/opentelemetry-collector-k8s
   config:
+    processors:
+      deltatocumulative:
+        max_stale: 5m
     receivers:
       filelog:
         include:
@@ -37,4 +40,5 @@ spec:
           exporters: [otlphttp/vlcluster]
         metrics:
           receivers: [hostmetrics]
+          processors: [deltatocumulative]
           exporters: [otlphttp/vmcluster]
