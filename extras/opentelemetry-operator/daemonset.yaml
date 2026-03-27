@@ -4,7 +4,7 @@ metadata:
   name: otel-collector
 spec:
   mode: daemonset
-  # image: otel/opentelemetry-collector-k8s
+  image: "otel/opentelemetry-collector-contrib"
   config:
     processors:
       deltatocumulative:
