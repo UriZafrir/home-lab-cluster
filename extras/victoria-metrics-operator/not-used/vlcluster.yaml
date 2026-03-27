@@ -1,6 +1,6 @@
 kind: VMCluster
 metadata:
-  name: example-persistent
+  name: vmcluster-persistent
 spec:
   # ...
   retentionPeriod: "4"
