@@ -8,12 +8,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://victoriametrics.github.io/helm-charts/
-      chart: victoria-metrics-operator
-      targetRevision: 0.59.3
-      helm:
-        releaseName: victoria-metrics-operator
-        valuesObject:
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/victoria-metrics-operator
   destination:
     server: "https://kubernetes.default.svc"
     namespace: victoria-metrics-operator
