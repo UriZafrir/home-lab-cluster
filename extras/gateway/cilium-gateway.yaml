@@ -44,6 +44,12 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /select/0/vmui
       backendRefs:
         - name: vmselect-vmcluster
           namespace: victoria-metrics-operator 
