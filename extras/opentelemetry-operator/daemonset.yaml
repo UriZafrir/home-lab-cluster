@@ -5,6 +5,19 @@ metadata:
 spec:
   mode: daemonset
   image: "otel/opentelemetry-collector-contrib"
+  volumeMounts:
+    - name: varlogpods
+      mountPath: /var/log/pods
+      readOnly: true
+  volumes:
+    - name: varlogpods
+      hostPath:
+        path: /var/log/pods
+        type: Directory
+  securityContext:
+    runAsUser: 0     # run as root
+    runAsGroup: 0
+    fsGroup: 0
   config:
     processors:
       deltatocumulative:
