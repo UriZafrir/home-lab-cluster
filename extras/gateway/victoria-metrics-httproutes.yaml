@@ -1,0 +1,66 @@
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: allow-cilium-gateway-to-victoria-metrics-operator
+  namespace: victoria-metrics-operator  # Namespace of the backend service
+spec:
+  from:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    namespace: gateway  # Namespace of the HTTPRoute
+  to:
+  - group: ""
+    kind: Service  # Allow referencing Kubernetes Services
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: vmselect-route-cilium
+spec:
+  parentRefs:
+    - name: cilium-gateway
+      namespace: gateway
+  hostnames:
+    - "vmselect.192.168.122.101.nip.io"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /select/0/vmui
+      backendRefs:
+        - name: vmselect-vmcluster
+          namespace: victoria-metrics-operator 
+          port: 8481
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: vlselect-route-cilium
+spec:
+  parentRefs:
+    - name: cilium-gateway
+      namespace: gateway
+  hostnames:
+    - "vlselect.192.168.122.101.nip.io"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /select/0/vmui
+      backendRefs:
+        - name: vlselect-vlcluster
+          namespace: victoria-metrics-operator 
+          port: 9471
