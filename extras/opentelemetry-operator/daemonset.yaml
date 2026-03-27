@@ -23,7 +23,7 @@ spec:
           network: {}
           load: {}
           paging: {}
-          process: {}
+          # process: {}
     exporters:
       otlphttp/vmcluster:
         metrics_endpoint: http://vminsert-vmcluster.victoria-metrics-operator.svc:8480/insert/0/opentelemetry/v1/metrics
