@@ -47,9 +47,9 @@ spec:
         compression: gzip
         encoding: proto
     service:
-      telemetry:
-        logs:
-          level: debug
+      # telemetry:
+      #   logs:
+      #     level: debug
       pipelines:
         logs:
           receivers: [filelog]
