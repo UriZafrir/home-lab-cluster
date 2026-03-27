@@ -3,13 +3,13 @@ kind: OpenTelemetryCollector
 metadata:
   name: otel-collector
 spec:
-  mode: daemonset  # This creates a DaemonSet
+  mode: daemonset
   # image: otel/opentelemetry-collector-k8s
-  config: |
+  config:
     receivers:
-      filelog:  # for container logs
+      filelog:
         include:
-          - /var/log/pods/*/*/*.log
+        - /var/log/pods/*/*/*.log
       hostmetrics:
         collection_interval: 30s
         scrapers:
@@ -21,24 +21,20 @@ spec:
           load: {}
           paging: {}
           process: {}
-
     exporters:
       otlphttp/vmcluster:
         metrics_endpoint: http://vminsert-vmcluster.victoria-metrics-operator.svc:9481/opentelemetry/v1/metrics
         compression: gzip
         encoding: proto
-
       otlphttp/vlcluster:
         logs_endpoint: http://vlinsert-vlcluster.victoria-metrics-operator.svc:8480/insert/opentelemetry/v1/logs
         compression: gzip
         encoding: proto
-
     service:
       pipelines:
         logs:
-          receivers: [otlp]
+          receivers: [filelog]
           exporters: [otlphttp/vlcluster]
-
         metrics:
-          receivers: [otlp]
+          receivers: [hostmetrics]
           exporters: [otlphttp/vmcluster]
