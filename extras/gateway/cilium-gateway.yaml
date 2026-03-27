@@ -45,6 +45,6 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: keycloak-service
-          namespace: keycloak 
+        - name: vminsert-vmcluster
+          namespace: victoria-metrics-operator 
           port: 8481
