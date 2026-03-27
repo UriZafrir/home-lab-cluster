@@ -26,11 +26,11 @@ spec:
           process: {}
     exporters:
       otlphttp/vmcluster:
-        metrics_endpoint: http://vminsert-vmcluster.victoria-metrics-operator.svc:9481/opentelemetry/v1/metrics
+        metrics_endpoint: http://vminsert-vmcluster.victoria-metrics-operator.svc:8480/opentelemetry/v1/metrics
         compression: gzip
         encoding: proto
       otlphttp/vlcluster:
-        logs_endpoint: http://vlinsert-vlcluster.victoria-metrics-operator.svc:8480/insert/opentelemetry/v1/logs
+        logs_endpoint: http://vlinsert-vlcluster.victoria-metrics-operator.svc:9481/insert/opentelemetry/v1/logs
         compression: gzip
         encoding: proto
     service:
