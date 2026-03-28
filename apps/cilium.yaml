@@ -14,8 +14,8 @@ spec:
       helm:
         releaseName: cilium
         valuesObject:
-          envoy:
-            enabled: false
+          # envoy:
+          #   enabled: false
           #for gateway api
           gatewayAPI:
             enabled: true
