@@ -29,7 +29,7 @@ spec:
           presets:
             logsCollection:
               enabled: true
-              # includeCollectorLogs: true
+              includeCollectorLogs: true
             hostMetrics:
               enabled: true
           config:
