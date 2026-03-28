@@ -32,6 +32,26 @@ spec:
           grafana.ini:
             users:
               default_theme: light
+          dashboardProviders:
+            dashboardproviders.yaml:
+              apiVersion: 1
+              providers:
+              - name: 'default'
+                orgId: 1
+                folder: ''
+                type: file
+                disableDeletion: false
+                editable: true
+                options:
+                  path: /var/lib/grafana/dashboards/default
+          dashboards:
+            default:
+              victoriametrics-cluster:
+                title: VictoriaMetrics - cluster   # optional; overrides the dashboard title in the downloaded JSON
+                gnetId: 11176
+                revision: 53
+                datasource: VictoriaMetrics - cluster
+
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/grafana
