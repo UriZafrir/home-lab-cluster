@@ -45,7 +45,20 @@ spec:
                 logs_endpoint: http://vlinsert-vlcluster.victoria-metrics-operator.svc:9481/insert/opentelemetry/v1/logs
                 compression: gzip
                 encoding: proto
-            
+            service:
+              pipelines:
+                metrics:
+                  exporters:
+                    - debug
+                  processors:
+                    - memory_limiter
+                    - batch
+                    - deltatocumulative
+                  receivers:
+                    - otlp
+                    # if internalTelemetryViaOTLP.metrics.enabled = true, prometheus receiver will be removed
+                    - prometheus
+                      
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/opentelemetry-collector
