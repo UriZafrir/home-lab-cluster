@@ -21,9 +21,9 @@ spec:
           #   enabled: true
           # additionalLabels:
           #     release: kube-prometheus-stack
-          ports:
-            metrics:
-              enabled: true
+          # ports:
+          #   metrics:
+          #     enabled: true
           image:
             repository: otel/opentelemetry-collector-contrib
           presets:
@@ -32,6 +32,16 @@ spec:
               includeCollectorLogs: true
             hostMetrics:
               enabled: true
+          config:
+            exporters:
+              otlphttp/vmcluster:
+                metrics_endpoint: http://vminsert-vmcluster.victoria-metrics-operator.svc:8480/insert/0/opentelemetry/v1/metrics
+                compression: gzip
+                encoding: proto
+              otlphttp/vlcluster:
+                logs_endpoint: http://vlinsert-vlcluster.victoria-metrics-operator.svc:9481/insert/opentelemetry/v1/logs
+                compression: gzip
+                encoding: proto
             
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
