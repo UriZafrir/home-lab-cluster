@@ -12,28 +12,24 @@ spec:
   sources:
     - repoURL: https://grafana.github.io/helm-charts
       chart: grafana
-      targetRevision: 10.0.0
+      targetRevision: 11.3.6
       helm:
         releaseName: grafana
         valuesObject:
           service:
             type: LoadBalancer
-          serviceMonitor:
-            enabled: true
           datasources:
             datasources.yaml:
               apiVersion: 1
               datasources:
-              - name: Prometheus
-                type: prometheus
-                url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+              - name: VictoriaMetrics Cluster
+                type: VictoriaMetrics
+                url: http://vmselect-vmcluster.victoria-metrics-operator.svc:8481/select/0/prometheus
                 access: proxy
                 isDefault: true
           grafana.ini:
             users:
               default_theme: light
-          admin:
-            existingSecret: grafana-secret
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/grafana
