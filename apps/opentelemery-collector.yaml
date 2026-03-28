@@ -33,6 +33,9 @@ spec:
             hostMetrics:
               enabled: true
           config:
+            processors:
+              deltatocumulative:
+                max_stale: 5m
             exporters:
               otlphttp/vmcluster:
                 metrics_endpoint: http://vminsert-vmcluster.victoria-metrics-operator.svc:8480/insert/0/opentelemetry/v1/metrics
