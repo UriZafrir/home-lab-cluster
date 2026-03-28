@@ -46,10 +46,15 @@ spec:
                   path: /var/lib/grafana/dashboards/default
           dashboards:
             default:
-              victoriametrics-cluster:
+              node-exporter:
                 title: node-exporter   # optional; overrides the dashboard title in the downloaded JSON
                 gnetId: 1860
                 revision: 42
+                datasource: VictoriaMetrics
+              k8s-dashboard:
+                title: k8s-dashboard   # optional; overrides the dashboard title in the downloaded JSON
+                gnetId: 15661
+                revision: 2
                 datasource: VictoriaMetrics
 
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
