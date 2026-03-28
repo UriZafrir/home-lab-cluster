@@ -7,3 +7,4 @@ spec:
   selectAllByDefault: true
   remoteWrite:
     - url: "http://vminsert-vmcluster.victoria-metrics-operator.svc:8480/insert/0/prometheus/api/v1/write"
+  replicaCount: 1
