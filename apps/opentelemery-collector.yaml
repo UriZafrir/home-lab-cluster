@@ -17,10 +17,10 @@ spec:
           service:
             enabled: true
           mode: daemonset
-          serviceMonitor:
-            enabled: true
-          additionalLabels:
-              release: kube-prometheus-stack
+          # serviceMonitor:
+          #   enabled: true
+          # additionalLabels:
+          #     release: kube-prometheus-stack
           ports:
             metrics:
               enabled: true
