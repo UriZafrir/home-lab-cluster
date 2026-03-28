@@ -56,8 +56,8 @@ spec:
                     - otlphttp/vmcluster
                     - debug
                   processors:
-                    # - memory_limiter
-                    # - batch
+                    - memory_limiter
+                    - batch
                     - deltatocumulative
                   receivers:
                     - hostmetrics
@@ -65,11 +65,10 @@ spec:
                   exporters:
                     - otlphttp/vlcluster
                     - debug
-                  # processors:
-                  #   - memory_limiter
-                  #   - batch
+                  processors:
+                    - memory_limiter
+                    - batch
                   receivers:
-                    # - otlp
                     - filelog
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
