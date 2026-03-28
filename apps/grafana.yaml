@@ -24,8 +24,8 @@ spec:
             datasources.yaml:
               apiVersion: 1
               datasources:
-              - name: VictoriaMetrics - cluster
-                type: victoriametrics-metrics-datasource
+              - name: VictoriaMetrics
+                type: prometheus
                 url: http://vmselect-vmcluster.victoria-metrics-operator.svc:8481/select/0/prometheus
                 access: proxy
                 isDefault: true
@@ -47,10 +47,10 @@ spec:
           dashboards:
             default:
               victoriametrics-cluster:
-                title: VictoriaMetrics - cluster   # optional; overrides the dashboard title in the downloaded JSON
-                gnetId: 11176
-                revision: 53
-                datasource: VictoriaMetrics - cluster
+                title: node-exporter   # optional; overrides the dashboard title in the downloaded JSON
+                gnetId: 1860
+                revision: 42
+                datasource: VictoriaMetrics
 
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
