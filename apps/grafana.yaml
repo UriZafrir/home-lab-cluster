@@ -47,12 +47,12 @@ spec:
           dashboards:
             default:
               node-exporter:
-                title: node-exporter   # optional; overrides the dashboard title in the downloaded JSON
+                title: node-exporter
                 gnetId: 1860
                 revision: 42
                 datasource: VictoriaMetrics
               k8s-dashboard:
-                title: k8s-dashboard   # optional; overrides the dashboard title in the downloaded JSON
+                title: k8s-dashboard
                 gnetId: 15661
                 revision: 2
                 datasource: VictoriaMetrics
