@@ -1,0 +1,9 @@
+apiVersion: operator.victoriametrics.com/v1
+kind: "VLAgent"
+metadata:
+  name: vlagent
+spec:
+  k8sCollector:
+    enabled: true
+  remoteWrite:
+    - url: "http://vlinsert-vlcluster.victoria-metrics-operator.svc:9481/internal/insert"
