@@ -23,7 +23,7 @@ spec:
               apiVersion: 1
               datasources:
               - name: VictoriaMetrics Cluster
-                type: VictoriaMetrics
+                type: victoriametrics-metrics-datasource
                 url: http://vmselect-vmcluster.victoria-metrics-operator.svc:8481/select/0/prometheus
                 access: proxy
                 isDefault: true
