@@ -1,0 +1,87 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: opentelemetry-collector
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
+      chart: opentelemetry-collector
+      targetRevision: 0.147.1
+      helm:
+        releaseName: opentelemetry-collector
+        valuesObject:
+          mode: daemonset
+          image:
+            repository: otel/opentelemetry-collector-contrib
+          extraEnvsFrom:
+            - secretRef:
+                name: clickhousecluster-clickhouse
+          presets:
+            logsCollection:
+              enabled: true
+              includeCollectorLogs: true
+            hostMetrics:
+              enabled: true
+            kubernetesAttributes:
+              enabled: true
+            kubeletMetrics:
+              enabled: true
+          extraVolumes:
+            - name: hostfs
+              hostPath:
+                path: /
+          extraVolumeMounts:
+            - name: hostfs
+              mountPath: /hostfs
+              readOnly: true
+              mountPropagation: HostToContainer
+          config:
+            processors:
+              batch:
+                send_batch_size: 1000
+                timeout: 10s
+            exporters:
+              clickhouse:
+                endpoint: "http://clickhousecluster-clickhouse-headless.clickhouse-operator-system.svc:8123"
+                database: "default"
+                username: "default"
+                password: "${MANAGEMENT-PASSWORD}"
+                ttl: 720h # Optional: sets data retention (e.g., 30 days)
+                # Optional: table names
+                traces_table_name: "traces"
+                logs_table_name: "logs" 
+                metrics_table_name: "metrics"
+            service:
+              pipelines:
+                metrics:
+                  exporters:
+                    - clickhouse
+                    - debug
+                  processors:
+                    - batch
+                  receivers:
+                    - hostmetrics
+                logs:
+                  exporters:
+                    - clickhouse
+                    - debug
+                  processors:
+                    - batch
+                  receivers:
+                    - filelog
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: HEAD
+    #   path: extras/opentelemetry-collector
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: opentelemetry-collector-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
