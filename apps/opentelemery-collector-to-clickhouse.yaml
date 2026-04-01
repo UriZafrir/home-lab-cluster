@@ -30,15 +30,15 @@ spec:
               enabled: true
             kubeletMetrics:
               enabled: true
-          extraVolumes:
-            - name: hostfs
-              hostPath:
-                path: /
-          extraVolumeMounts:
-            - name: hostfs
-              mountPath: /hostfs
-              readOnly: true
-              mountPropagation: HostToContainer
+          # extraVolumes:
+          #   - name: hostfs
+          #     hostPath:
+          #       path: /
+          # extraVolumeMounts:
+          #   - name: hostfs
+          #     mountPath: /hostfs
+          #     readOnly: true
+          #     mountPropagation: HostToContainer
           config:
             processors:
               batch:
