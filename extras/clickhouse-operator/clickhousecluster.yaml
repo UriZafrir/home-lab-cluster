@@ -1,12 +1,23 @@
 apiVersion: clickhouse.com/v1alpha1
-kind: ClickHouseCluster
+kind: KeeperCluster
 metadata:
-  name: clickhouse
+  name: keepercluster
 spec:
   replicas: 1
   dataVolumeClaimSpec:
     resources:
       requests:
         storage: 1Gi
-  # keeperClusterRef:
-  #   name: sample
+---
+apiVersion: clickhouse.com/v1alpha1
+kind: ClickHouseCluster
+metadata:
+  name: clickhousecluster
+spec:
+  replicas: 1
+  dataVolumeClaimSpec:
+    resources:
+      requests:
+        storage: 1Gi
+  keeperClusterRef:
+    name: keepercluster
