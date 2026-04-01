@@ -78,7 +78,7 @@ spec:
     #   path: extras/opentelemetry-collector
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: opentelemetry-collector-system
+    namespace: clickhouse-operator-system
   syncPolicy:
     automated:
       prune: true
