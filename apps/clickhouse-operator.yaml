@@ -15,6 +15,9 @@ spec:
       helm:
         releaseName: clickhouse-operator
         valuesObject:
+          certManager:
+              enable: true
+              install: true
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
     #   path: extras/clickhouse-operator
