@@ -9,9 +9,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: ghcr.io/clickhouse/clickhouse-operator-helm
+    - repoURL: oci://ghcr.io/clickhouse/clickhouse-operator-helm
       chart: clickhouse-operator
-      # targetRevision: 0.0.3
+      targetRevision: 0.0.3
       helm:
         releaseName: clickhouse-operator
         valuesObject:
