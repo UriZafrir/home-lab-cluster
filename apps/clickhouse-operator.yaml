@@ -19,7 +19,7 @@ spec:
               enable: true
               install: true
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: HEAD
+      targetRevision: ubuntu
       path: extras/clickhouse-operator
   destination:
     server: "https://kubernetes.default.svc"
