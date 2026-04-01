@@ -17,9 +17,12 @@ spec:
           mode: daemonset
           image:
             repository: otel/opentelemetry-collector-contrib
-          extraEnvsFrom:
-            - secretRef:
-                name: clickhousecluster-clickhouse
+          extraEnvs:
+            - name: MANAGEMENT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: clickhousecluster-clickhouse
+                  key: management-password  # Direct key reference ✅
           presets:
             logsCollection:
               enabled: true
@@ -49,7 +52,7 @@ spec:
                 endpoint: "http://clickhousecluster-clickhouse-headless.clickhouse-operator-system.svc:8123"
                 database: "default"
                 username: "default"
-                password: "${MANAGEMENT-PASSWORD}"
+                password: "${MANAGEMENT_PASSWORD}"
                 ttl: 720h # Optional: sets data retention (e.g., 30 days)
                 # Optional: table names
                 traces_table_name: "traces"
