@@ -14,6 +14,7 @@ spec:
       helm:
         releaseName: opentelemetry-collector
         valuesObject:
+          #https://clickhouse.com/docs/use-cases/observability/clickstack/integrations/kubernetes
           mode: daemonset
           image:
             repository: otel/opentelemetry-collector-contrib
@@ -25,15 +26,18 @@ spec:
               enabled: true
             kubernetesAttributes:
               enabled: true
+              extractAllPodLabels: true
+              extractAllPodAnnotations: true
             kubeletMetrics:
               enabled: true
-          # Add environment variable for the HyperDX API key
+          # kubectl create secret generic -n clickstack-operators-system hyperdx-secret --from-literal=HYPERDX_API_KEY=
           extraEnvs:
             - name: HYPERDX_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: clickstack-app-secrets
-                  key: api-key
+                  name: hyperdx-secret
+                  key: HYPERDX_API_KEY
+                  optional: true
           config:
             extensions:
               health_check:
@@ -45,16 +49,11 @@ spec:
             exporters:
               otlphttp:
                 endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4318"
-                tls:
-                  insecure: true
+                # tls:
+                #   insecure: true
                 headers:
-                  authorization: "${HYPERDX_API_KEY}"
-              # otlp_grpc:
-              #   endpoint: "clickstack-otel-collector.clickstack-operators-system.svc:4317"
-              #   tls:
-              #     insecure: true
-              #   headers:
-              #     authorization: "${HYPERDX_API_KEY}"
+                  authorization: "${env:HYPERDX_API_KEY}"
+                compression: gzip
             service:
               extensions: [health_check]
               pipelines:
