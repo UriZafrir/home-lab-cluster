@@ -27,21 +27,41 @@ spec:
               enabled: true
             kubeletMetrics:
               enabled: true
+          # Add environment variable for the API key
+          extraEnvs:
+            - name: OTELUSERPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: clickstack-clickhouse-secrets
+                  key: otelUserPassword
           config:
+            extensions:
+              bearer_token_auth:
+                token: ${OTELUSERPASSWORD}
             processors:
               batch:
                 send_batch_size: 1000
                 timeout: 10s
             exporters:
-              otlphttp:
-                endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4318"
+              # otlphttp:
+              #   endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4318"
+              #   tls:
+              #     insecure: true
+              #   auth:
+              #     authenticator: bearer_token_auth
+              # Also keep gRPC option available
+              otlp/grpc:
+                endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4317"
                 tls:
                   insecure: true
+                auth:
+                  authenticator: bearer_token_auth
             service:
+              extensions: [bearer_token_auth]
               pipelines:
                 metrics:
                   exporters:
-                    - otlphttp
+                    - otlp/grpc
                     - debug
                   processors:
                     - batch
@@ -49,7 +69,7 @@ spec:
                     - hostmetrics
                 logs:
                   exporters:
-                    - otlphttp
+                    - otlp/grpc
                     - debug
                   processors:
                     - batch
