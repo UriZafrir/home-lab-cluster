@@ -33,7 +33,7 @@ spec:
                 send_batch_size: 1000
                 timeout: 10s
             exporters:
-              otlp/grpc:
+              otlphttp:
                 endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4318"
                 tls:
                   insecure: true
@@ -41,7 +41,7 @@ spec:
               pipelines:
                 metrics:
                   exporters:
-                    - otlp/grpc
+                    - otlphttp
                     - debug
                   processors:
                     - batch
@@ -49,7 +49,7 @@ spec:
                     - hostmetrics
                 logs:
                   exporters:
-                    - otlp/grpc
+                    - otlphttp
                     - debug
                   processors:
                     - batch
