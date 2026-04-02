@@ -4,6 +4,5 @@ metadata:
   name: "clickhouse"
 spec:
   configuration:
-    users:
     clusters:
       - name: "clickhouse"
