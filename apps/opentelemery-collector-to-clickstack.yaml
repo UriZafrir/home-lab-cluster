@@ -37,7 +37,6 @@ spec:
                 endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4317"
                 tls:
                   insecure: true
-                debug: {}
             service:
               pipelines:
                 metrics:
