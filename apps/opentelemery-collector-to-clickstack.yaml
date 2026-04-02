@@ -38,8 +38,6 @@ spec:
             extensions:
               health_check:
                 endpoint: :13133
-              bearertokenauth:
-                token: ${HYPERDX_API_KEY}
             processors:
               batch:
                 send_batch_size: 1000
@@ -49,16 +47,16 @@ spec:
                 endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4318"
                 tls:
                   insecure: true
-                auth:
-                  authenticator: bearertokenauth
+                headers:
+                  authorization: "${HYPERDX_API_KEY}"
               # otlp_grpc:
               #   endpoint: "clickstack-otel-collector.clickstack-operators-system.svc:4317"
               #   tls:
               #     insecure: true
-              #   auth:
-              #     authenticator: bearertokenauth
+              #   headers:
+              #     authorization: "${HYPERDX_API_KEY}"
             service:
-              extensions: [health_check, bearertokenauth]
+              extensions: [health_check]
               pipelines:
                 metrics:
                   exporters:
