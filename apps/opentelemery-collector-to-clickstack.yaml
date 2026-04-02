@@ -39,7 +39,7 @@ spec:
               health_check:
                 endpoint: :13133
               bearertokenauth:
-                bearer_token: ${OTELUSERPASSWORD}
+                token: ${OTELUSERPASSWORD}
             processors:
               batch:
                 send_batch_size: 1000
