@@ -1,0 +1,29 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: clickstack
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://clickhouse.github.io/ClickStack-helm-charts
+      chart: clickstack
+      targetRevision: 1.0.0
+      helm:
+        releaseName: clickstack
+        valuesObject:
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: ubuntu
+    #   path: extras/clickhouse-operator
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: clickstack-operators-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
