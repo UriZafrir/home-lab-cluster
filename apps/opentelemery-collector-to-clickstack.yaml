@@ -27,21 +27,19 @@ spec:
               enabled: true
             kubeletMetrics:
               enabled: true
-          # Add environment variable for the API key
+          # Add environment variable for the HyperDX API key
           extraEnvs:
-            - name: OTELUSERPASSWORD
+            - name: HYPERDX_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: clickstack-clickhouse-secrets
-                  key: otelUserPassword
+                  name: clickstack-app-secrets
+                  key: api-key
           config:
             extensions:
               health_check:
                 endpoint: :13133
-              basicauth:
-                client_auth:
-                  username: otelcollector
-                  password: ${OTELUSERPASSWORD}
+              bearer_token_auth:
+                token: ${HYPERDX_API_KEY}
             processors:
               batch:
                 send_batch_size: 1000
@@ -52,15 +50,15 @@ spec:
                 tls:
                   insecure: true
                 auth:
-                  authenticator: basicauth
+                  authenticator: bearer_token_auth
               # otlp_grpc:
               #   endpoint: "clickstack-otel-collector.clickstack-operators-system.svc:4317"
               #   tls:
               #     insecure: true
               #   auth:
-              #     authenticator: basicauth
+              #     authenticator: bearer_token_auth
             service:
-              extensions: [health_check, basicauth]
+              extensions: [health_check, bearer_token_auth]
               pipelines:
                 metrics:
                   exporters:
