@@ -1,0 +1,29 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: altinity-clickhouse-operator
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://docs.altinity.com/clickhouse-operator
+      chart: altinity-clickhouse-operator
+      targetRevision: 0.26.2
+      helm:
+        releaseName: altinity-clickhouse-operator
+        valuesObject:
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: ubuntu
+    #   path: extras/altinity-clickhouse-operator
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: altinity-clickhouse-operator
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
