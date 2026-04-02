@@ -4,5 +4,7 @@ metadata:
   name: "clickhouse"
 spec:
   configuration:
+    users:
+      clickhouse_operator/networks/ip: 0.0.0.0/0
     clusters:
       - name: "clickhouse"

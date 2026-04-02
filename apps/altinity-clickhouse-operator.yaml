@@ -15,9 +15,9 @@ spec:
       helm:
         releaseName: altinity-clickhouse-operator
         valuesObject:
-    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: ubuntu
-      path: extras/altinity-clickhouse-operator
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: ubuntu
+    #   path: extras/altinity-clickhouse-operator
   destination:
     server: "https://kubernetes.default.svc"
     namespace: altinity-clickhouse-operator
