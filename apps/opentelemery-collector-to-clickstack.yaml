@@ -1,0 +1,70 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: opentelemetry-collector
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
+      chart: opentelemetry-collector
+      targetRevision: 0.147.1
+      helm:
+        releaseName: opentelemetry-collector
+        valuesObject:
+          mode: daemonset
+          image:
+            repository: otel/opentelemetry-collector-contrib
+          presets:
+            logsCollection:
+              enabled: true
+              includeCollectorLogs: true
+            hostMetrics:
+              enabled: true
+            kubernetesAttributes:
+              enabled: true
+            kubeletMetrics:
+              enabled: true
+          config:
+            processors:
+              batch:
+                send_batch_size: 1000
+                timeout: 10s
+            exporters:
+              otlp/grpc:
+                endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4317"
+                tls:
+                  insecure: true
+                debug: {}
+            service:
+              pipelines:
+                metrics:
+                  exporters:
+                    - otlp/grpc
+                    - debug
+                  processors:
+                    - batch
+                  receivers:
+                    - hostmetrics
+                logs:
+                  exporters:
+                    - otlp/grpc
+                    - debug
+                  processors:
+                    - batch
+                  receivers:
+                    - filelog
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: HEAD
+    #   path: extras/opentelemetry-collector
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: clickhouse-operator-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
