@@ -38,7 +38,7 @@ spec:
             extensions:
               health_check:
                 endpoint: :13133
-              bearer_token_auth:
+              bearertokenauth:
                 token: ${HYPERDX_API_KEY}
             processors:
               batch:
@@ -50,15 +50,15 @@ spec:
                 tls:
                   insecure: true
                 auth:
-                  authenticator: bearer_token_auth
+                  authenticator: bearertokenauth
               # otlp_grpc:
               #   endpoint: "clickstack-otel-collector.clickstack-operators-system.svc:4317"
               #   tls:
               #     insecure: true
               #   auth:
-              #     authenticator: bearer_token_auth
+              #     authenticator: bearertokenauth
             service:
-              extensions: [health_check, bearer_token_auth]
+              extensions: [health_check, bearertokenauth]
               pipelines:
                 metrics:
                   exporters:
