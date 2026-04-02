@@ -45,25 +45,24 @@ spec:
                 send_batch_size: 1000
                 timeout: 10s
             exporters:
-              # otlphttp:
-              #   endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4318"
-              #   tls:
-              #     insecure: true
-              #   auth:
-              #     authenticator: bearertokenauth
-              # Also keep gRPC option available
-              otlp_grpc:
-                endpoint: "clickstack-otel-collector.clickstack-operators-system.svc:4317"
+              otlphttp:
+                endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4318"
                 tls:
                   insecure: true
                 auth:
                   authenticator: bearertokenauth
+              # otlp_grpc:
+              #   endpoint: "clickstack-otel-collector.clickstack-operators-system.svc:4317"
+              #   tls:
+              #     insecure: true
+              #   auth:
+              #     authenticator: bearertokenauth
             service:
               extensions: [health_check, bearertokenauth]
               pipelines:
                 metrics:
                   exporters:
-                    - otlp_grpc
+                    - otlphttp
                     - debug
                   processors:
                     - batch
@@ -71,7 +70,7 @@ spec:
                     - hostmetrics
                 logs:
                   exporters:
-                    - otlp_grpc
+                    - otlphttp
                     - debug
                   processors:
                     - batch
