@@ -38,7 +38,7 @@ spec:
             extensions:
               health_check:
                 endpoint: :13133
-              bearer_token_auth:
+              bearertokenauth:
                 bearer_token: ${OTELUSERPASSWORD}
             processors:
               batch:
@@ -59,7 +59,7 @@ spec:
                 auth:
                   authenticator: bearer_token_auth
             service:
-              extensions: [health_check, bearer_token_auth]
+              extensions: [health_check, bearertokenauth]
               pipelines:
                 metrics:
                   exporters:
