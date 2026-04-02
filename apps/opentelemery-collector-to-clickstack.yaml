@@ -36,8 +36,10 @@ spec:
                   key: otelUserPassword
           config:
             extensions:
+              health_check:
+                endpoint: :13133
               bearer_token_auth:
-                token: ${OTELUSERPASSWORD}
+                bearer_token: ${OTELUSERPASSWORD}
             processors:
               batch:
                 send_batch_size: 1000
@@ -51,13 +53,13 @@ spec:
               #     authenticator: bearer_token_auth
               # Also keep gRPC option available
               otlp/grpc:
-                endpoint: "http://clickstack-otel-collector.clickstack-operators-system.svc:4317"
+                endpoint: "clickstack-otel-collector.clickstack-operators-system.svc:4317"
                 tls:
                   insecure: true
                 auth:
                   authenticator: bearer_token_auth
             service:
-              extensions: [bearer_token_auth]
+              extensions: [health_check, bearer_token_auth]
               pipelines:
                 metrics:
                   exporters:
