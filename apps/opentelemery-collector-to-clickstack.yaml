@@ -57,7 +57,7 @@ spec:
                 tls:
                   insecure: true
                 auth:
-                  authenticator: bearer_token_auth
+                  authenticator: bearertokenauth
             service:
               extensions: [health_check, bearertokenauth]
               pipelines:
