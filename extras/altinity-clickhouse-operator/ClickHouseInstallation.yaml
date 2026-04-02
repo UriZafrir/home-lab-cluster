@@ -1,0 +1,9 @@
+apiVersion: "clickhouse.altinity.com/v1"
+kind: "ClickHouseInstallation"
+metadata:
+  name: "clickhouse"
+spec:
+  configuration:
+    users:
+    clusters:
+      - name: "clickhouse"
