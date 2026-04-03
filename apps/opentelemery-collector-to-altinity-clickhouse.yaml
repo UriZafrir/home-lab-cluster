@@ -37,9 +37,16 @@ spec:
             hostMetrics:
               enabled: true
             kubernetesAttributes:
-              enabled: true
+              enabled: true    
+              extractAllPodLabels: false
+              extractAllPodAnnotations: false
             kubeletMetrics:
               enabled: true
+            kubernetesEvents:
+              enabled: true
+            clusterMetrics:
+              enabled: true
+
           config:
             processors:
               batch:
@@ -66,6 +73,8 @@ spec:
                     - batch
                   receivers:
                     - hostmetrics
+                    - kubeletstats 
+                    - k8s_cluster
                 logs:
                   exporters:
                     - clickhouse
