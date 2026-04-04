@@ -20,7 +20,6 @@ spec:
           plugins:
             - victoriametrics-metrics-datasource
             - grafana-clickhouse-datasource
-            - vertamedia-clickhouse-datasource
           datasources:
             datasources.yaml:
               apiVersion: 1
@@ -35,9 +34,6 @@ spec:
                   protocol: native
                 secureJsonData:
                   password: ${password}
-              - name: ClickHouse-vertamedia
-                type: vertamedia-clickhouse-datasource
-                url: http://chi-clickhouse-clickhouse-0-0.monitoring.svc:8123
               # - name: VictoriaMetrics
               #   type: prometheus
               #   url: http://vmselect-vmcluster.victoria-metrics-operator.svc:8481/select/0/prometheus
