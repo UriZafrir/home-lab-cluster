@@ -19,6 +19,8 @@ spec:
             type: LoadBalancer
           plugins:
             - victoriametrics-metrics-datasource
+            - grafana-clickhouse-datasource
+            - vertamedia-clickhouse-datasource
           datasources:
             datasources.yaml:
               apiVersion: 1
