@@ -13,24 +13,26 @@ spec:
         releaseName: jenkins
         valuesObject:
           controller:
+            JCasC:
+              defaultConfig: true  # <-- THIS IS REQUIRED
             serviceType: LoadBalancer
           agent:
             podTemplates:
-            dind: |
-              - name: dind
-                label: jenkins-dind
-                serviceAccount: jenkins
-                containers:
-                  - name: dind
-                    image: docker:29.4.0-rc
-                    command: "/bin/sh -c"
-                    args: "cat"
-                    ttyEnabled: true
-                    privileged: true
-                    resourceRequestCpu: "400m"
-                    resourceRequestMemory: "512Mi"
-                    resourceLimitCpu: "1"
-                    resourceLimitMemory: "1024Mi"
+              dind: |
+                - name: dind
+                  label: jenkins-dind
+                  serviceAccount: jenkins
+                  containers:
+                    - name: dind
+                      image: docker:29.4.0-rc
+                      command: "/bin/sh -c"
+                      args: "cat"
+                      ttyEnabled: true
+                      privileged: true
+                      resourceRequestCpu: "400m"
+                      resourceRequestMemory: "512Mi"
+                      resourceLimitCpu: "1"
+                      resourceLimitMemory: "1024Mi"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: jenkins
