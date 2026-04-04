@@ -24,7 +24,7 @@ spec:
                   serviceAccount: jenkins
                   containers:
                     - name: dind
-                      image: docker:29.4.0-rc
+                      image: docker:27.5-dind
                       command: "/bin/sh -c"
                       args: "cat"
                       ttyEnabled: true
