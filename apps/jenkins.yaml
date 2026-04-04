@@ -25,8 +25,8 @@ spec:
                   containers:
                     - name: dind
                       image: docker:27.5-dind
-                      command: "/bin/sh -c"
-                      args: "cat"
+                      #command: "/bin/sh -c"
+                      #args: "cat"
                       ttyEnabled: true
                       privileged: true
                       resourceRequestCpu: "400m"
