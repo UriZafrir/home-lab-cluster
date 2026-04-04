@@ -16,6 +16,7 @@ spec:
       helm:
         releaseName: grafana
         valuesObject:
+          envFromSecret: altinity-clickhouse-operator
           service:
             type: LoadBalancer
           plugins:
@@ -24,17 +25,19 @@ spec:
             datasources.yaml:
               apiVersion: 1
               datasources:
-              # - name: ClickHouse
-              #   type: grafana-clickhouse-datasource
-              #   isDefault: true
-              #   jsonData:
-              #     server: "clickhouse.monitoring.svc.cluster.local"
-              #     port: 8123
-              #     protocol: http
-              #     defaultDatabase: "default"
-              #     username: "grafana"
-              #   secureJsonData:
-              #     password: "your‑grafana‑password"
+              - name: ClickHouse-official
+                type: grafana-clickhouse-datasource
+                jsonData:
+                  port: 9000
+                  host: chi-clickhouse-clickhouse-0-0.monitoring.svc
+                  username: ${username}
+                  tlsSkipVerify: false
+                  protocol: native
+                secureJsonData:
+                  password: ${password}
+              - name: ClickHouse-vertamedia
+                type: vertamedia-clickhouse-datasource
+                url: http://chi-clickhouse-clickhouse-0-0.monitoring.svc:8123
               # - name: VictoriaMetrics
               #   type: prometheus
               #   url: http://vmselect-vmcluster.victoria-metrics-operator.svc:8481/select/0/prometheus
@@ -73,7 +76,7 @@ spec:
     #   path: extras/grafana
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: grafana
+    namespace: monitoring
   syncPolicy:
     automated:
       prune: true

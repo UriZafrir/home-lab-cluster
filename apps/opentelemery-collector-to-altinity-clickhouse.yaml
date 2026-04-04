@@ -54,15 +54,15 @@ spec:
                 timeout: 10s
             exporters:
               clickhouse:
-                endpoint: "http://chi-clickhouse-clickhouse-0-0.altinity-clickhouse-operator.svc:8123"
-                database: "default"
+                endpoint: "http://chi-clickhouse-clickhouse-0-0.monitoring.svc:8123"
+                database: "otel"
                 username: "${CLICKHOUSE_USERNAME}"
                 password: "${CLICKHOUSE_PASSWORD}"
-                ttl: 48h # Optional: sets data retention (e.g., 30 days)
+                ttl: 12h # Optional: sets data retention (e.g., 30 days)
                 # Optional: table names
-                traces_table_name: "traces"
-                logs_table_name: "logs" 
-                metrics_table_name: "metrics"
+                traces_table_name: "otel_traces"
+                logs_table_name: "otel_logs" 
+                metrics_table_name: "otel_metrics"
             service:
               pipelines:
                 metrics:
@@ -88,7 +88,7 @@ spec:
     #   path: extras/opentelemetry-collector
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: altinity-clickhouse-operator
+    namespace: monitoring
   syncPolicy:
     automated:
       prune: true

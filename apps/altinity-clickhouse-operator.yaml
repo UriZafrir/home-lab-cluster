@@ -20,7 +20,7 @@ spec:
       path: extras/altinity-clickhouse-operator
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: altinity-clickhouse-operator
+    namespace: monitoring
   syncPolicy:
     automated:
       prune: true
