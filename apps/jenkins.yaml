@@ -12,6 +12,8 @@ spec:
       helm:
         releaseName: jenkins
         valuesObject:
+          controller:
+            serviceType: LoadBalancer
   destination:
     server: "https://kubernetes.default.svc"
     namespace: jenkins
