@@ -1,0 +1,76 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: buildkit-ci-
+spec:
+  entrypoint: buildkit-pipeline
+  arguments:
+    parameters:
+    - name: git-repo
+      value: "https://github.com/komljen/dockerfile-examples"
+    - name: image
+      value: "yourreg/app:latest"
+
+  templates:
+  - name: buildkit-pipeline
+    dag:
+      tasks:
+      - name: clone
+        template: git-clone
+      # - name: buildkit-build
+      #   template: buildkit
+      #   depends: "clone"
+        arguments:
+          parameters:
+          - name: context
+            value: "/workspace/src"
+          - name: image
+            value: "{{workflow.parameters.image}}"
+
+  - name: git-clone
+    container:
+      image: alpine/git
+      command: [sh, -c]
+      args: ["git clone {{workflow.parameters.git-repo}} /workspace/src"]
+      volumeMounts:
+      - name: workspace
+        mountPath: /workspace
+
+  # - name: buildkit
+  #   inputs:
+  #     parameters:
+  #     - name: context
+  #     - name: image
+  #   container:
+  #     image: moby/buildkit:rootless  # ✅ BuildKit (no privileged!)
+  #     securityContext:
+  #       runAsUser: 1000
+  #       runAsGroup: 1000
+  #     env:
+  #     - name: BUILDKITD_FLAGS
+  #       value: "--oci-worker-no-process-sandbox"
+  #     command: ["/usr/bin/buildctl-daemonless.sh"]
+  #     args:
+  #     - "build"
+  #     - "--frontend=dockerfile.v0"
+  #     - "--local=context={{inputs.parameters.context}}"
+  #     - "--local=dockerfile={{inputs.parameters.context}}"
+  #     - "--output=type=image,name={{inputs.parameters.image}},push=true"
+  #     volumeMounts:
+  #     - name: workspace
+  #       mountPath: /workspace
+  #     - name: docker-config
+  #       mountPath: /root/.docker
+
+  volumes:
+  # - name: docker-config
+  #   secret:
+  #     secretName: registry-secret
+  volumeClaimTemplates:
+  - metadata:
+      name: workspace
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 5Gi
