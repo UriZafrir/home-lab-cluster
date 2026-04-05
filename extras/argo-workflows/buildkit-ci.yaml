@@ -15,17 +15,8 @@ spec:
   - name: buildkit-pipeline
     dag:
       tasks:
-      - name: clone
-        template: git-clone
-      # - name: buildkit-build
-      #   template: buildkit
-      #   depends: "clone"
-        arguments:
-          parameters:
-          - name: context
-            value: "/workspace/src"
-          - name: image
-            value: "{{workflow.parameters.image}}"
+      - name: clone                # ✅ Fixed: No arguments needed
+        template: git-clone        # Git-clone uses workflow.parameters directly
 
   - name: git-clone
     container:
@@ -36,37 +27,7 @@ spec:
       - name: workspace
         mountPath: /workspace
 
-  # - name: buildkit
-  #   inputs:
-  #     parameters:
-  #     - name: context
-  #     - name: image
-  #   container:
-  #     image: moby/buildkit:rootless  # ✅ BuildKit (no privileged!)
-  #     securityContext:
-  #       runAsUser: 1000
-  #       runAsGroup: 1000
-  #     env:
-  #     - name: BUILDKITD_FLAGS
-  #       value: "--oci-worker-no-process-sandbox"
-  #     command: ["/usr/bin/buildctl-daemonless.sh"]
-  #     args:
-  #     - "build"
-  #     - "--frontend=dockerfile.v0"
-  #     - "--local=context={{inputs.parameters.context}}"
-  #     - "--local=dockerfile={{inputs.parameters.context}}"
-  #     - "--output=type=image,name={{inputs.parameters.image}},push=true"
-  #     volumeMounts:
-  #     - name: workspace
-  #       mountPath: /workspace
-  #     - name: docker-config
-  #       mountPath: /root/.docker
-
-  volumes:
-  # - name: docker-config
-  #   secret:
-  #     secretName: registry-secret
-  volumeClaimTemplates:
+  volumeClaimTemplates:           # ✅ Move volumes UP (before templates end)
   - metadata:
       name: workspace
     spec:
