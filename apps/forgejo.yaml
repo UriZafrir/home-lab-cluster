@@ -16,6 +16,11 @@ spec:
       helm:
         releaseName: forgejo
         valuesObject:
+          service:
+            http:
+              type: LoadBalancer
+            ssh:
+              type: LoadBalancer
   destination:
     server: "https://kubernetes.default.svc"
     namespace: forgejo
