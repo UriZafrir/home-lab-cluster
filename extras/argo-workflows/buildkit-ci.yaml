@@ -10,14 +10,12 @@
 #       value: "https://github.com/komljen/dockerfile-examples"
 #     - name: image
 #       value: "yourreg/app:latest"
-
 #   templates:
 #   - name: buildkit-pipeline
 #     dag:
 #       tasks:
 #       - name: clone                # ✅ Fixed: No arguments needed
 #         template: git-clone        # Git-clone uses workflow.parameters directly
-
 #   - name: git-clone
 #     container:
 #       image: alpine/git
@@ -26,7 +24,6 @@
 #       volumeMounts:
 #       - name: workspace
 #         mountPath: /workspace
-
 #   volumeClaimTemplates:           # ✅ Move volumes UP (before templates end)
 #   - metadata:
 #       name: workspace
