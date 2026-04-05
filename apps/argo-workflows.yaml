@@ -20,9 +20,9 @@ spec:
           authModes:
             - server
           serviceType: LoadBalancer
-    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: ubuntu
-      path: extras/argo-workflows
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: ubuntu
+    #   path: extras/argo-workflows
   destination:
     server: "https://kubernetes.default.svc"
     namespace: argo
