@@ -20,6 +20,9 @@ spec:
             authModes:
               - server
             serviceType: LoadBalancer
+          workflow:
+            serviceAccount:
+              create: true
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/argo-workflows
