@@ -8,6 +8,7 @@ metadata:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
+  serviceAccountName: argo-workflow
   entrypoint: buildkit-pipeline
   arguments:
     parameters:
