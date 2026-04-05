@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: buildkit-ci-template
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  serviceAccountName: argo-workflow
+  entrypoint: buildkit-pipeline
+  arguments:
+    parameters:
+      - name: git-repo
+        value: "https://github.com/komljen/dockerfile-examples"
+      - name: image
+        value: "yourreg/app:latest"
+  volumeClaimTemplates:
+    - metadata:
+        name: workspace
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
+  templates:
+    - name: buildkit-pipeline
+      dag:
+        tasks:
+          - name: clone
+            template: git-clone
+    - name: git-clone
+      container:
+        image: alpine/git
+        command: [sh, -c]
+        args: ["git clone {{workflow.parameters.git-repo}} /workspace/src"]
+        volumeMounts:
+          - name: workspace
+            mountPath: /workspace
