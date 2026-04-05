@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-workflows
+  name: forgejo
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"
@@ -10,22 +10,15 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://argoproj.github.io/argo-helm
-      chart: argo-workflows
+    - repoURL: oci://code.forgejo.org/forgejo-helm/forgejo
+      chart: forgejo
       targetRevision: 1.0.7
       helm:
-        releaseName: argo-workflows
+        releaseName: forgejo
         valuesObject:
-          server:
-            authModes:
-              - server
-            serviceType: LoadBalancer
-          workflow:
-            serviceAccount:
-              create: true
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: argo
+    namespace: forgejo
   syncPolicy:
     automated:
       prune: true
