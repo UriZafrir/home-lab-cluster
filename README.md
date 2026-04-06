@@ -57,6 +57,6 @@ helm upgrade --install \
 
 helm repo add argo https://argoproj.github.io/argo-helm
 kubectl create ns argocd
-helm upgrade --install argocd argo/argo-cd --version 9.1.7 -n argocd -f argocd-values.yaml --debug
+helm upgrade --install argocd argo/argo-cd --version 9.4.17 -n argocd -f argocd-values.yaml --debug
 envsubst < secrets/argocd-repo.yaml | kubectl apply -f -
 kubectl apply -f root-app/root-app.yaml 
