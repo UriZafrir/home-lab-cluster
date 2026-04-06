@@ -7,9 +7,6 @@ spec:
   storage:
     storageClass: longhorn
     size: 10Gi
-  walStorage:
-    storageClass: longhorn
-    size: 10Gi
 
   backup:
     volumeSnapshot:
