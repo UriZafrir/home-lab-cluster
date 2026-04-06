@@ -14,6 +14,14 @@ spec:
       helm:
         releaseName: openebs
         valuesObject:
+          loki:
+            singleBinary:
+              replicas: 1
+            minio:
+              replicas: 1
+            loki:
+              commonConfig: 
+                replication_factor: 1
           engines:
             replicated:
               mayastor:
