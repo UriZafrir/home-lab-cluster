@@ -14,31 +14,31 @@ metadata:
 spec:
   project: default
   sources:
-  - repoURL: https://charts.longhorn.io
-    chart: longhorn
-    targetRevision: 1.11.1
-    helm:
-      releaseName: longhorn
-      valuesObject:
-        defaultSettings:
-          defaultDataPath: /mnt/data
-        persistence:
-          defaultClass: false
-        preUpgradeChecker:
-          jobEnabled: false
-        service:
-          ui:
-            type: LoadBalancer
-        longhornUI:
-          replicas: 1
-        csi:
-          attacherReplicaCount: 1
-          # -- Replica count of the CSI Provisioner. When unspecified, Longhorn uses the default value ("3").
-          provisionerReplicaCount: 1
-          # -- Replica count of the CSI Resizer. When unspecified, Longhorn uses the default value ("3").
-          resizerReplicaCount: 1
-          # -- Replica count of the CSI Snapshotter. When unspecified, Longhorn uses the default value ("3").
-          snapshotterReplicaCount: 1
+    - repoURL: https://charts.longhorn.io
+      chart: longhorn
+      targetRevision: 1.11.1
+      helm:
+        releaseName: longhorn
+        valuesObject:
+          defaultSettings:
+            defaultDataPath: /mnt/data
+          persistence:
+            defaultClass: false
+          preUpgradeChecker:
+            jobEnabled: false
+          service:
+            ui:
+              type: LoadBalancer
+          longhornUI:
+            replicas: 1
+          csi:
+            attacherReplicaCount: 1
+            # -- Replica count of the CSI Provisioner. When unspecified, Longhorn uses the default value ("3").
+            provisionerReplicaCount: 1
+            # -- Replica count of the CSI Resizer. When unspecified, Longhorn uses the default value ("3").
+            resizerReplicaCount: 1
+            # -- Replica count of the CSI Snapshotter. When unspecified, Longhorn uses the default value ("3").
+            snapshotterReplicaCount: 1
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/longhorn
