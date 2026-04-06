@@ -19,7 +19,7 @@ spec:
       path: extras/cloudnative-pg
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: cloudnative-pg
+    namespace: cnpg-system
   syncPolicy:
     automated:
       prune: true
