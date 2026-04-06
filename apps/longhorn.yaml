@@ -13,9 +13,9 @@ metadata:
     argocd.argoproj.io/sync-wave: "-9"
 spec:
   project: default
-  source:
+  sources:
+  - repoURL: https://charts.longhorn.io
     chart: longhorn
-    repoURL: https://charts.longhorn.io
     targetRevision: 1.11.1
     helm:
       releaseName: longhorn
@@ -39,6 +39,9 @@ spec:
           resizerReplicaCount: 1
           # -- Replica count of the CSI Snapshotter. When unspecified, Longhorn uses the default value ("3").
           snapshotterReplicaCount: 1
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/longhorn
   destination:
     server: "https://kubernetes.default.svc"
     namespace: longhorn-system
