@@ -17,8 +17,9 @@ spec:
           loki:
             singleBinary:
               replicas: 1
-            minio:
-              replicas: 1
+          minio:
+            replicas: 1
+            mode: standalone
             loki:
               commonConfig: 
                 replication_factor: 1
