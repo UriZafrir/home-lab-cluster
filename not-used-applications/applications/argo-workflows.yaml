@@ -9,17 +9,20 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    chart: argo-workflows
-    repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 0.45.22
-    helm:
-      releaseName: argo-workflows
-      valuesObject:
-        server:
-          authModes:
-            - server
-          serviceType: LoadBalancer
+  sources:
+    - repoURL: https://argoproj.github.io/argo-helm
+      chart: argo-workflows
+      targetRevision: 1.0.7
+      helm:
+        releaseName: argo-workflows
+        valuesObject:
+          server:
+            authModes:
+              - server
+            serviceType: LoadBalancer
+          workflow:
+            serviceAccount:
+              create: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: argo
