@@ -17,15 +17,28 @@ spec:
           loki:
             singleBinary:
               replicas: 1
-            commonConfig: 
+            commonConfig:
               replication_factor: 1
-          minio:
-            replicas: 1
-            mode: standalone
+            minio:
+              replicas: 1
+              mode: standalone
+              drivesPerNode: 1
           engines:
             replicated:
               mayastor:
                 enabled: false
+          # loki:
+          #   singleBinary:
+          #     replicas: 1
+          #   commonConfig: 
+          #     replication_factor: 1
+          # minio:
+          #   replicas: 1
+          #   mode: standalone
+          # engines:
+          #   replicated:
+          #     mayastor:
+          #       enabled: false
           # mayastor:
           #   etcd:
           #     auth:
