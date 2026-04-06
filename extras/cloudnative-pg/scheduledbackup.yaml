@@ -6,6 +6,6 @@ spec:
   schedule: "0 0 * * * *"
   backupOwnerReference: cluster
   cluster:
-    name: cluster
+    name: postgres
   method: volumeSnapshot
   immediate: true
