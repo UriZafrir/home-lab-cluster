@@ -1,16 +1,16 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
-metadata:
-  name: postgres
-spec:
-  instances: 1
-  storage:
-    storageClass: longhorn
-    size: 10Gi
-  walStorage:
-    storageClass: longhorn
-    size: 10Gi
+# apiVersion: postgresql.cnpg.io/v1
+# kind: Cluster
+# metadata:
+#   name: postgres
+# spec:
+#   instances: 1
+#   storage:
+#     storageClass: longhorn
+#     size: 10Gi
+#   walStorage:
+#     storageClass: longhorn
+#     size: 10Gi
 
-  backup:
-    volumeSnapshot:
-      className: longhorn
+#   backup:
+#     volumeSnapshot:
+#       className: longhorn
