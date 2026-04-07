@@ -5,6 +5,10 @@ metadata:
 spec:
   instances: 1
   storage:
+    storageClass: longhorn
+    size: 10Gi
+  walStorage:
+    storageClass: longhorn
     size: 10Gi
 
   backup:
