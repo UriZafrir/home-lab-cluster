@@ -39,6 +39,8 @@ spec:
             resizerReplicaCount: 1
             # -- Replica count of the CSI Snapshotter. When unspecified, Longhorn uses the default value ("3").
             snapshotterReplicaCount: 1
+          persistence:
+            defaultClassReplicaCount: 1
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/longhorn
