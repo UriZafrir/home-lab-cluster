@@ -1,0 +1,74 @@
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influxdb3-data
+  namespace: influxdb3
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: influxdb3
+  namespace: influxdb3
+spec:
+  serviceName: influxdb3
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb3
+  template:
+    metadata:
+      labels:
+        app: influxdb3
+    spec:
+      containers:
+      - name: influxdb3
+        image: ghcr.io/influxdata/influxdb3-core:latest
+        ports:
+        - containerPort: 8086
+          name: http
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        env:
+        - name: INFLUXD_HOST
+          value: "0.0.0.0"
+        - name: INFLUXD_DATABASE
+          value: "dev"
+        - name: INFLUXD_TOKEN
+          value: "dev-token-change-this-in-prod"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb3
+  namespace: influxdb3
+spec:
+  selector:
+    app: influxdb3
+  ports:
+  - port: 8086
+    targetPort: 8086
+    name: http
+  type: ClusterIP
