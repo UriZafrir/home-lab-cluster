@@ -14,6 +14,10 @@ spec:
       helm:
         releaseName: opentelemetry-ebpf-instrumentation
         valuesObject:
+          config:
+            data:
+              otel_traces_export.endpoint: "http://vtsingle-vtsingle.victoria-metrics-operator.svc:10428/insert/opentelemetry/v1/traces"
+              otel_metrics_export.endpoint: "http://vmsingle-vmsingle.victoria-metrics-operator.svc:8428/opentelemetry/v1/metrics"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: monitoring

@@ -4,3 +4,5 @@ metadata:
   name: vmsingle
 spec:
   selectAllByDefault: true
+  extraArgs:
+    opentelemetry.usePrometheusNaming: "true"
