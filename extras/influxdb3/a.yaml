@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: influxdb3
-        image: ghcr.io/influxdata/influxdb3-core:latest
+        image: influxdb:3.9.0-core
         ports:
         - containerPort: 8086
           name: http
