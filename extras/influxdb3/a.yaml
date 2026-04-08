@@ -31,7 +31,7 @@ spec:
       - name: influxdb3
         image: influxdb:3.9.0-core
         ports:
-        - containerPort: 8086
+        - containerPort: 8181
           name: http
         volumeMounts:
         - name: data
@@ -46,7 +46,6 @@ spec:
         # node-id replacement (no --node-id flag needed)
         - name: INFLUXDB3_NODE_IDENTIFIER_PREFIX
           value: "influxdb3-node0"
-
         # log filter (no --log-filter flag needed)
         - name: INFLUXDB3_LOG_FILTER
           value: "info"
@@ -75,7 +74,7 @@ spec:
   selector:
     app: influxdb3
   ports:
-  - port: 8086
-    targetPort: 8086
+  - port: 8181
+    targetPort: 8181
     name: http
-  type: ClusterIP
+  type: LoadBalancer
