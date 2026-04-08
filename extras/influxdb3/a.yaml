@@ -43,6 +43,13 @@ spec:
           value: "dev"
         - name: INFLUXD_TOKEN
           value: "dev-token-change-this-in-prod"
+        # node-id replacement (no --node-id flag needed)
+        - name: INFLUXDB3_NODE_IDENTIFIER_PREFIX
+          value: "influxdb3-node0"
+
+        # log filter (no --log-filter flag needed)
+        - name: INFLUXDB3_LOG_FILTER
+          value: "info"
         resources:
           requests:
             cpu: 100m
