@@ -9,7 +9,7 @@ spec:
   project: default
   sources:
     - repoURL: https://github.com/tektoncd/operator
-      targetRevision: main
+      targetRevision: release-v0.79.x
       path: charts/tekton-operator
       helm:
         releaseName: tekton-operator
