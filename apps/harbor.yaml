@@ -29,7 +29,7 @@ spec:
             #   hosts:
             #     - harbor.192.168.122.200.nip.io
             # externalURL: http://harbor.192.168.122.200.nip.io
-            externalURL: http://192.168.64.105
+            externalURL: http://192.168.64.105:30002
 
 
   destination:
