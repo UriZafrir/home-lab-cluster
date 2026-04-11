@@ -22,7 +22,7 @@ spec:
     - name: cilium-gateway
       namespace: gateway
   hostnames:
-    - "tekton-dashboard.192.168.122.102.nip.io"
+    - "tekton-dashboard.192.168.122.200.nip.io"
   rules:
     - matches:
         - path:

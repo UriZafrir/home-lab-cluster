@@ -7,6 +7,9 @@ metadata:
   #   networking.istio.io/service-type: NodePort
 spec:
   gatewayClassName: cilium
+  addresses:
+    - type: IPAddress
+      value: "192.168.122.200"  # Your specific IP
   listeners:
     - name: http
       port: 80
