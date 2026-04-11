@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tekton
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/tektoncd/operator
+      targetRevision: release-v0.79.x
+      path: config/crs/kubernetes/config/all
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: tekton-operator
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    # - ServerSideApply=true
