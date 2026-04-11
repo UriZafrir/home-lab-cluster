@@ -18,6 +18,8 @@ spec:
             # Set how to expose the service. Set the type as "ingress", "clusterIP", "nodePort" or "loadBalancer"
             # and fill the information in the corresponding section
             type: loadBalancer
+            tls:
+              enabled: false
   destination:
     server: "https://kubernetes.default.svc"
     namespace: harbor
