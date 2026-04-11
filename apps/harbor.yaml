@@ -17,19 +17,22 @@ spec:
           expose:
             # Set how to expose the service. Set the type as "ingress", "clusterIP", "nodePort" or "loadBalancer"
             # and fill the information in the corresponding section
-            # type: loadBalancer
+            type: loadBalancer
+            loadBalancer:
+              IP: 192.168.122.201
             # type: route
-            type: nodePort
+            # type: nodePort
             tls:
               enabled: false
+          externalURL: http://192.168.122.201
             # route:
             #   parentRefs:
             #     - name: kgateway-gateway
             #       namespace: kgateway-system
             #   hosts:
             #     - harbor.192.168.122.200.nip.io
-            # externalURL: http://harbor.192.168.122.200.nip.io
-          externalURL: http://192.168.64.105:30002
+          # externalURL: http://harbor.192.168.122.200.nip.io
+          # externalURL: http://192.168.64.105:30002
 
 
   destination:
