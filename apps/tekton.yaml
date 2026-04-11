@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/tektoncd/operator
-      targetRevision: release-v0.79.x
-      path: config/crs/kubernetes/config/all
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/tekton
   destination:
     server: "https://kubernetes.default.svc"
     namespace: tekton-operator
