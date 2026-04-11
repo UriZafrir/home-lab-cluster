@@ -12,14 +12,14 @@ spec:
   sources:
     - repoURL: oci://cr.kgateway.dev/kgateway-dev/charts/kgateway
       chart: kgateway
-      targetRevision: v2.1.2 
+      targetRevision: v2.3.0
       helm:
         releaseName: kgateway
         valuesObject:
-          inferenceExtension:
-            enabled: true
-          agentgateway:
-            enabled: true
+          # inferenceExtension:
+          #   enabled: true
+          # agentgateway:
+          #   enabled: true
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/kgateway

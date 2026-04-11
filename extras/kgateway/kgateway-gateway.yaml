@@ -1,0 +1,16 @@
+kind: Gateway
+apiVersion: gateway.networking.k8s.io/v1
+metadata:
+  name: kgateway-gateway
+spec:
+  gatewayClassName: kgateway
+  addresses:
+    - type: IPAddress
+      value: "192.168.122.200"  # Your specific IP
+  listeners:
+  - protocol: HTTP
+    port: 80
+    name: http
+    allowedRoutes:
+      namespaces:
+        from: All
