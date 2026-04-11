@@ -1,0 +1,49 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: harbor-routes
+  namespace: harbor
+spec:
+  parentRefs:
+  - name: kgateway-gateway  # Cilium/Envoy Gateway
+    namespace: kgateway-system
+  hostnames:
+  - "harbor.192.168.122.200.nip.io"
+  rules:
+  # CRITICAL: portal LAST (catch-all)
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: harbor-portal
+      port: 80
+  # API endpoints → harbor-core
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api
+    backendRefs:
+    - name: harbor-core
+      port: 80
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /service
+    backendRefs:
+    - name: harbor-core
+      port: 80
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /v2
+    backendRefs:
+    - name: harbor-registry
+      port: 5000
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /chartrepo
+    backendRefs:
+    - name: harbor-core
+      port: 80
