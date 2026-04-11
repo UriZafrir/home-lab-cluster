@@ -18,9 +18,15 @@ spec:
             # Set how to expose the service. Set the type as "ingress", "clusterIP", "nodePort" or "loadBalancer"
             # and fill the information in the corresponding section
             # type: loadBalancer
-            type: clusterIP
+            type: route
             tls:
               enabled: false
+            route:
+              parentRefs:
+                - name: kgateway-gateway
+                  namespace: kgateway-system
+              hosts:
+                - harbor.192.168.122.200.nip.io
   destination:
     server: "https://kubernetes.default.svc"
     namespace: harbor
