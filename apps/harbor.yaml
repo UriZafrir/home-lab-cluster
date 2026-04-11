@@ -27,6 +27,9 @@ spec:
                   namespace: kgateway-system
               hosts:
                 - harbor.192.168.122.200.nip.io
+            externalURL: http://harbor.192.168.122.200.nip.io
+
+
   destination:
     server: "https://kubernetes.default.svc"
     namespace: harbor
