@@ -14,6 +14,7 @@ spec:
       helm:
         releaseName: tekton-operator
         valuesObject:
+          installCRDs: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: tekton-operator
@@ -22,5 +23,13 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    # - CreateNamespace=true
+    - CreateNamespace=true
     - ServerSideApply=true
+    - RespectIgnoreDifferences=true
+  ignoreDifferences:
+  - group: apiextensions.k8s.io
+    kind: CustomResourceDefinition
+    jqPathExpressions:
+    - '.metadata.name | test("operator\\.tekton\\.dev$")'
+    jsonPointers:
+    - /spec/preserveUnknownFields
