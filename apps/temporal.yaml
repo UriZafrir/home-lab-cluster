@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: temporal
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
+spec:
+  project: default
+  sources:
+    - repoURL: https://temporalio.github.io/helm-charts
+      chart: temporal
+      targetRevision: 1.0.0
+      helm:
+        releaseName: temporal
+        valuesObject:
+          server:
+            frontend:
+              service:
+                type: LoadBalancer
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: temporal
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
