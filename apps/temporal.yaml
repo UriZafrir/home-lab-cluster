@@ -20,6 +20,17 @@ spec:
             frontend:
               service:
                 type: LoadBalancer
+        datastores:
+          default:
+            sql:
+              pluginName: postgres17
+              driverName: postgres17
+              databaseName: temporal
+              connectAddr: "postgres.example.com:5432"
+              connectProtocol: "tcp"
+              user: temporal_user
+              existingSecret: temporal-db-secret
+              secretKey: password
   destination:
     server: "https://kubernetes.default.svc"
     namespace: temporal
