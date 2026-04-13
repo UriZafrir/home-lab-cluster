@@ -2,7 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: postgres
-  # namespace: temporal
+  namespace: temporal
 spec:
   instances: 1
   storage:

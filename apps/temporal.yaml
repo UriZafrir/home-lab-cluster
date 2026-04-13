@@ -17,20 +17,34 @@ spec:
         releaseName: temporal
         valuesObject:
           server:
+            replicaCount: 1
             frontend:
               service:
                 type: LoadBalancer
-        datastores:
-          default:
-            sql:
-              pluginName: postgres17
-              driverName: postgres17
-              databaseName: temporal
-              connectAddr: "postgres.example.com:5432"
-              connectProtocol: "tcp"
-              user: temporal_user
-              existingSecret: temporal-db-secret
-              secretKey: password
+          config:
+            persistence:
+              defaultStore: default
+              visibilityStore: visibility
+              numHistoryShards: 512
+              datastores:
+                default:
+                  sql:
+                    pluginName: postgres18
+                    databaseName: temporal
+                    connectAddr: "postgres-rw.temporal.svc.cluster.local:5432"
+                    connectProtocol: "tcp"
+                    existingSecret: postgres-app
+                    secretKey: password
+                    user: app
+                visibility:
+                  sql:
+                    pluginName: postgres18
+                    databaseName: temporal_visibility
+                    connectAddr: "postgres-rw.temporal.svc.cluster.local:5432"
+                    connectProtocol: "tcp"
+                    existingSecret: postgres-app
+                    secretKey: password
+                    user: app
   destination:
     server: "https://kubernetes.default.svc"
     namespace: temporal
