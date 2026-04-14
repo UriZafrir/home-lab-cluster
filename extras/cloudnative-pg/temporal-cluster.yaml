@@ -7,3 +7,11 @@ spec:
   instances: 1
   storage:
     size: 10Gi
+  managed:
+    roles:
+    - name: app
+      ensure: present
+      login: true
+      createdb: true
+      passwordSecret:
+        name: postgres-app
