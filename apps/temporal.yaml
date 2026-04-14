@@ -21,32 +21,32 @@ spec:
             frontend:
               service:
                 type: LoadBalancer
-          config:
-            persistence:
-              defaultStore: default
-              visibilityStore: visibility
-              numHistoryShards: 512
-              datastores:
-                default:
-                  sql:
-                    pluginName: postgres12
-                    driverName: postgres12
-                    databaseName: temporal
-                    connectAddr: "postgres-rw.temporal.svc.cluster.local:5432"
-                    connectProtocol: "tcp"
-                    existingSecret: postgres-app
-                    secretKey: password
-                    user: app
-                visibility:
-                  sql:
-                    pluginName: postgres12
-                    driverName: postgres12
-                    databaseName: temporal_visibility
-                    connectAddr: "postgres-rw.temporal.svc.cluster.local:5432"
-                    connectProtocol: "tcp"
-                    existingSecret: postgres-app
-                    secretKey: password
-                    user: app
+            config:
+              persistence:
+                defaultStore: default
+                visibilityStore: visibility
+                numHistoryShards: 512
+                datastores:
+                  default:
+                    sql:
+                      pluginName: postgres12
+                      driverName: postgres12
+                      databaseName: temporal
+                      connectAddr: "postgres-rw.temporal.svc.cluster.local:5432"
+                      connectProtocol: "tcp"
+                      existingSecret: postgres-app
+                      secretKey: password
+                      user: app
+                  visibility:
+                    sql:
+                      pluginName: postgres12
+                      driverName: postgres12
+                      databaseName: temporal_visibility
+                      connectAddr: "postgres-rw.temporal.svc.cluster.local:5432"
+                      connectProtocol: "tcp"
+                      existingSecret: postgres-app
+                      secretKey: password
+                      user: app
   destination:
     server: "https://kubernetes.default.svc"
     namespace: temporal
