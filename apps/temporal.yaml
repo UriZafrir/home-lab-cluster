@@ -29,8 +29,8 @@ spec:
                 datastores:
                   default:
                     sql:
-                      pluginName: postgres12
-                      driverName: postgres12
+                      pluginName: postgres12_pgx
+                      driverName: postgres12_pgx
                       databaseName: temporal
                       connectAddr: "postgres-rw.temporal.svc.cluster.local:5432"
                       connectProtocol: "tcp"
@@ -39,8 +39,8 @@ spec:
                       user: app
                   visibility:
                     sql:
-                      pluginName: postgres12
-                      driverName: postgres12
+                      pluginName: postgres12_pgx
+                      driverName: postgres12_pgx
                       databaseName: temporal_visibility
                       connectAddr: "postgres-rw.temporal.svc.cluster.local:5432"
                       connectProtocol: "tcp"
