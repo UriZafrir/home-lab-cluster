@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pgadmin
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://helm.runix.net/
+      chart: pgadmin
+      targetRevision: 1.62.0
+      helm:
+        releaseName: pgadmin
+        valuesObject:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: pgadmin
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
