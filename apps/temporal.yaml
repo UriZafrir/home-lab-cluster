@@ -16,6 +16,9 @@ spec:
       helm:
         releaseName: temporal
         valuesObject:
+          web:
+            service:
+              type: LoadBalancer
           server:
             replicaCount: 1
             frontend:
