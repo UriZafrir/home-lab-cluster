@@ -19,8 +19,7 @@ spec:
           # tag: latest
         main:
           extraEnvVars:
-            N8N_SECURE_COOKIE:
-              value: "false"
+            N8N_SECURE_COOKIE: "false"
             # NODE_FUNCTION_ALLOW_EXTERNAL:
             #   value: "@rxap/n8n-nodes-litellm"
         service:
