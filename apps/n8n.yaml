@@ -18,7 +18,7 @@ spec:
           # repository: urizaf/n8n
           # tag: latest
         main:
-          main.extraEnvVars:
+          extraEnvVars:
             N8N_SECURE_COOKIE:
               value: "false"
             # NODE_FUNCTION_ALLOW_EXTERNAL:
