@@ -9,20 +9,20 @@ spec:
   project: default
   source:
     chart: n8n
-    repoURL: oci://8gears.container-registry.com/library/n8n
-    targetRevision: 1.0.10
+    repoURL: https://community-charts.github.io/helm-charts
+    targetRevision: 1.16.36
     helm:
       releaseName: n8n
       valuesObject:
         image:
           # repository: urizaf/n8n
           # tag: latest
-        main:
-          extraEnv:
-            N8N_SECURE_COOKIE:
-              value: "false"
-            NODE_FUNCTION_ALLOW_EXTERNAL:
-              value: "@rxap/n8n-nodes-litellm"
+        # main:
+        #   extraEnv:
+        #     N8N_SECURE_COOKIE:
+        #       value: "false"
+        #     NODE_FUNCTION_ALLOW_EXTERNAL:
+        #       value: "@rxap/n8n-nodes-litellm"
           service:
             type: LoadBalancer
   destination:

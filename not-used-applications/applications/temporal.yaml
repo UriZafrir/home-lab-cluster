@@ -5,26 +5,51 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
 spec:
   project: default
   sources:
     - repoURL: https://temporalio.github.io/helm-charts
       chart: temporal
-      targetRevision: 0.68.1
+      targetRevision: 1.0.0
       helm:
         releaseName: temporal
         valuesObject:
+          web:
+            service:
+              type: LoadBalancer
           server:
-            replicaCount: 1 
-          cassandra:
+            replicaCount: 1
+            frontend:
+              service:
+                type: LoadBalancer
             config:
-              cluster_size: 1 
-          elasticsearch:
-            replicas: 1 
-          prometheus:
-            enabled: false 
-          grafana:
-            enabled: false 
+              persistence:
+                defaultStore: default
+                visibilityStore: visibility
+                numHistoryShards: 512
+                datastores:
+                  default:
+                    sql:
+                      pluginName: postgres12_pgx
+                      driverName: postgres12_pgx
+                      databaseName: temporal
+                      connectAddr: "postgres-rw.temporal.svc.cluster.local:5432"
+                      connectProtocol: "tcp"
+                      existingSecret: postgres-app
+                      secretKey: password
+                      user: app
+                  visibility:
+                    sql:
+                      pluginName: postgres12_pgx
+                      driverName: postgres12_pgx
+                      databaseName: temporal_visibility
+                      connectAddr: "postgres-rw.temporal.svc.cluster.local:5432"
+                      connectProtocol: "tcp"
+                      existingSecret: postgres-app
+                      secretKey: password
+                      user: app
   destination:
     server: "https://kubernetes.default.svc"
     namespace: temporal
@@ -34,3 +59,4 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+    - ServerSideApply=true
