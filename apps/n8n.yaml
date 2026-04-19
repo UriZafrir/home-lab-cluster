@@ -14,7 +14,7 @@ spec:
     helm:
       releaseName: n8n
       valuesObject:
-        image:
+        # image:
           # repository: urizaf/n8n
           # tag: latest
         # main:
@@ -23,8 +23,8 @@ spec:
         #       value: "false"
         #     NODE_FUNCTION_ALLOW_EXTERNAL:
         #       value: "@rxap/n8n-nodes-litellm"
-          service:
-            type: LoadBalancer
+        service:
+          type: LoadBalancer
   destination:
     server: "https://kubernetes.default.svc"
     namespace: n8n
