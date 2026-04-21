@@ -26,6 +26,8 @@ spec:
               - name: set1
                 count: 1  # Single node, so 1 OSD
                 portable: false  # Longhorn volumes are node-specific
+                tuneDeviceClass: true
+                tuneFastDeviceClass: false
                 volumeClaimTemplates:
                   - metadata:
                       name: data
