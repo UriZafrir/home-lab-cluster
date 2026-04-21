@@ -12,7 +12,7 @@ spec:
   sources:
     - repoURL: https://charts.rook.io/release
       chart: rook-ceph
-      targetRevision: 1.20.0-beta.0
+      targetRevision: 1.19.4
       helm:
         releaseName: rook-ceph
         valuesObject:
