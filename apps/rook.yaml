@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rook
+  name: rook-ceph
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,14 +11,14 @@ spec:
   project: default
   sources:
     - repoURL: https://charts.rook.io/release
-      chart: rook
+      chart: rook-ceph
       targetRevision: 1.20.0-beta.0
       helm:
-        releaseName: rook
+        releaseName: rook-ceph
         valuesObject:
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: rook
+    namespace: rook-ceph
   syncPolicy:
     automated:
       prune: true
