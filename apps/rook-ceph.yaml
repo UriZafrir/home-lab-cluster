@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rook-ceph-cluster
+  name: rook-ceph
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,10 +11,10 @@ spec:
   project: default
   sources:
     - repoURL: https://charts.rook.io/release
-      chart: rook-ceph-cluster
+      chart: rook-ceph
       targetRevision: 1.19.4
       helm:
-        releaseName: rook-ceph-cluster
+        releaseName: rook-ceph
         valuesObject:
   destination:
     server: "https://kubernetes.default.svc"
