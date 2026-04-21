@@ -21,7 +21,6 @@ spec:
               count: 1
             mgr:
               count: 1
-          cephClusterSpec:
             storage:  # ADD THIS SECTION
               storageClassDeviceSets:
                 - name: set1
