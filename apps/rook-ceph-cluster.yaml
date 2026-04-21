@@ -21,6 +21,27 @@ spec:
               count: 1
             mgr:
               count: 1
+          storage:  # ADD THIS SECTION
+            storageClassDeviceSets:
+              - name: set1
+                count: 1  # Single node, so 1 OSD
+                portable: false  # Longhorn volumes are node-specific
+                volumeClaimTemplates:
+                  - metadata:
+                      name: data
+                    spec:
+                      resources:
+                        requests:
+                          storage: 50Gi  # Adjust size as needed
+                      storageClassName: longhorn
+                      volumeMode: Block
+                      accessModes:
+                        - ReadWriteOnce
+
+
+          # cephBlockPools[0].spec.replicated.size
+          # cephFileSystems[0].spec.metadataPool.replicated.size
+          # cephObjectStores[0].spec.metadataPool.replicated.size
   destination:
     server: "https://kubernetes.default.svc"
     namespace: rook-ceph
