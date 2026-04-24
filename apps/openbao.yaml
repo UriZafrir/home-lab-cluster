@@ -22,6 +22,8 @@ spec:
           server:
             ha:
               replicas: 1
+          csi:
+            enabled: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: openbao-system
