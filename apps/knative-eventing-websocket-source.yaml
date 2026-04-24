@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: knative-eventing-websocket-source
+  name: knative-eventing-blockchain-demo
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/UriZafrir/knative-eventing-websocket-source.git
+    - repoURL: https://github.com/UriZafrir/knative-eventing-blockchain-demo.git
       targetRevision: master
       path: yaml
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: knative-eventing-websocket-source
+    namespace: knative-eventing-blockchain-demo
   syncPolicy:
     automated:
       prune: true
