@@ -1,24 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: knative-workloads
+  name: knative-eventing-websocket-source
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: ubuntu
-      path: extras/knative-workloads
+    - repoURL: https://github.com/UriZafrir/knative-eventing-websocket-source.git
+      targetRevision: master
+      path: yaml
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: knative-workloads
+    namespace: knative-eventing-websocket-source
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-      allowEmpty: true
     syncOptions:
     - CreateNamespace=true
-    - ServerSideApply=true
