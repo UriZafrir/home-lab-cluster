@@ -89,6 +89,8 @@ spec:
             - mountPath: /var/lib/postgresql/data
               name: db-customer-storage
             - name: secrets
+              readOnly: true
+
               mountPath: /mnt/secrets
       volumes:
         - emptyDir: {}
@@ -96,6 +98,7 @@ spec:
         - name: secrets
           csi:
             driver: secrets-store.csi.k8s.io
+            readOnly: true
             volumeAttributes:
               secretProviderClass: llm-api
 ---
@@ -415,11 +418,13 @@ spec:
             periodSeconds: 10
           volumeMounts:
           - name: secrets
+            readOnly: true
             mountPath: /mnt/secrets
       volumes:
       - name: secrets
         csi:
           driver: secrets-store.csi.k8s.io
+          readOnly: true
           volumeAttributes:
             secretProviderClass: llm-api
 ---
@@ -488,11 +493,13 @@ spec:
             periodSeconds: 10
           volumeMounts:
           - name: secrets
+            readOnly: true
             mountPath: /mnt/secrets
       volumes:
       - name: secrets
         csi:
           driver: secrets-store.csi.k8s.io
+          readOnly: true
           volumeAttributes:
             secretProviderClass: llm-api
 ---
