@@ -24,6 +24,8 @@ spec:
               replicas: 1
           csi:
             enabled: true
+          injector:
+            enabled: false
   destination:
     server: "https://kubernetes.default.svc"
     namespace: openbao-system
