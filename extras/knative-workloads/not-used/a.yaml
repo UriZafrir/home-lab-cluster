@@ -1,0 +1,544 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: keventmesh
+---
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  annotations:
+    eventing.knative.dev/broker.class: Kafka
+  name: default
+  namespace: keventmesh
+spec:
+  config:
+    apiVersion: v1
+    kind: ConfigMap
+    name: kafka-broker-config
+    namespace: knative-eventing
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-customer-secret
+  namespace: keventmesh
+stringData:
+  db: customer
+  host: db-customer.keventmesh.svc.cluster.local
+  password: postgres
+  port: "5432"
+  user: postgres
+type: Opaque
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres
+  name: db-customer
+  namespace: keventmesh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-customer
+  template:
+    metadata:
+      labels:
+        app: db-customer
+    spec:
+      containers:
+
+        - env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: user
+                  name: db-customer-secret
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: db-customer-secret
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  key: db
+                  name: db-customer-secret
+            - name: LOGGING_LOG_LEVEL
+              value: "0"
+          image: 192.168.122.150:5000/db-customer:latest@sha256:c5800aac894a2f8deb0a8cae83c0b1c23584425e8f0f20b8bcfab4e0f78ac4c1
+          imagePullPolicy: Always
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready -U  -d  -h 127.0.0.1
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          name: postgres
+          ports:
+            - containerPort: 5432
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready -U  -d  -h 127.0.0.1
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: db-customer-storage
+      volumes:
+        - emptyDir: {}
+          name: db-customer-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-customer
+  namespace: keventmesh
+spec:
+  ports:
+    - port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    app: db-customer
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: svc-intake
+  namespace: keventmesh
+spec:
+  template:
+    metadata:
+      labels:
+        app: svc-intake
+    spec:
+      containers:
+        - image: 192.168.122.150:5000/svc-intake:latest@sha256:2af66a583c41c35f283604a04bb921eb508622c8f2c2a5d742526c932db19b73
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+          name: user-container
+          ports:
+            - containerPort: 8080
+              name: http1
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+---
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: svc-intake-binding
+  namespace: keventmesh
+spec:
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+  subject:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: svc-intake
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: svc-structure-processor
+  namespace: keventmesh
+spec:
+  template:
+    metadata:
+      labels:
+        app: svc-structure-processor
+    spec:
+      containers:
+        - env:
+            - name: LLM_API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: apiBaseUrl
+                  name: svc-structure-processor
+            - name: LLM_MODEL_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: modelName
+                  name: svc-structure-processor
+            - name: LLM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: apiKey
+                  name: svc-structure-processor-llm-secret
+          image: 192.168.122.150:5000/svc-structure-processor:latest@sha256:6e426624d2eb6bc5e13397f1ad2ad79ca855c4e1142a7d51adb58c4a14307ab0
+          name: user-container
+          ports:
+            - containerPort: 8080
+              name: http1
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: svc-structure-processor
+  namespace: keventmesh
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: com.example.triage.intake.new
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: svc-structure-processor
+---
+apiVersion: v1
+data:
+  apiBaseUrl: https://your-api-base-url.com/v1
+  modelName: your-model-name
+kind: ConfigMap
+metadata:
+  name: svc-structure-processor
+  namespace: keventmesh
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: svc-structure-processor-llm-secret
+  namespace: keventmesh
+stringData:
+  apiKey: your-api-key
+type: Opaque
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: svc-guardian-processor
+  namespace: keventmesh
+spec:
+  template:
+    metadata:
+      labels:
+        app: svc-guardian-processor
+    spec:
+      containers:
+        - env:
+            - name: LLM_API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: apiBaseUrl
+                  name: svc-guardian-processor
+            - name: LLM_MODEL_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: modelName
+                  name: svc-guardian-processor
+            - name: LLM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: apiKey
+                  name: svc-guardian-processor-llm-secret
+          image: 192.168.122.150:5000/svc-guardian-processor:latest@sha256:a2caf6469774847e445bfef29a9346d27d4078d6b446556f4024b58895e30e3d
+          name: user-container
+          ports:
+            - containerPort: 8080
+              name: http1
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: svc-guardian-processor
+  namespace: keventmesh
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: com.example.triage.structured
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: svc-guardian-processor
+---
+apiVersion: v1
+data:
+  apiBaseUrl: https://your-api-base-url.com/v1
+  modelName: your-model-name
+kind: ConfigMap
+metadata:
+  name: svc-guardian-processor
+  namespace: keventmesh
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: svc-guardian-processor-llm-secret
+  namespace: keventmesh
+stringData:
+  apiKey: your-api-key
+type: Opaque
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: svc-customer-lookup
+  namespace: keventmesh
+spec:
+  template:
+    metadata:
+      labels:
+        app: svc-customer-lookup
+    spec:
+      containers:
+        - env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: db-customer-secret
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: port
+                  name: db-customer-secret
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: db
+                  name: db-customer-secret
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: user
+                  name: db-customer-secret
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: db-customer-secret
+          image: 192.168.122.150:5000/svc-customer-lookup:latest@sha256:80fb7f322fdd3ab322ddac9b2435982a75bf4702e4ea0b3dd4048f4553f8fd8a
+          name: user-container
+          ports:
+            - containerPort: 8080
+              name: http1
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: svc-customer-lookup
+  namespace: keventmesh
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: com.example.triage.guardian.passed
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: svc-customer-lookup
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: svc-router
+  namespace: keventmesh
+spec:
+  template:
+    metadata:
+      labels:
+        app: svc-router
+    spec:
+      containers:
+        - env:
+            - name: LLM_API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: apiBaseUrl
+                  name: svc-router
+            - name: LLM_MODEL_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: modelName
+                  name: svc-router
+            - name: LLM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: apiKey
+                  name: svc-router-llm-secret
+          image: 192.168.122.150:5000/svc-router:latest@sha256:f7b0cd654cb6772ba952208ccf416ddddcc3e30f82066ab2c919eee5b593a855
+          name: user-container
+          ports:
+            - containerPort: 8080
+              name: http1
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: svc-router
+  namespace: keventmesh
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: com.example.triage.customer.found
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: svc-router
+---
+apiVersion: v1
+data:
+  apiBaseUrl: https://your-api-base-url.com/v1
+  modelName: your-model-name
+kind: ConfigMap
+metadata:
+  name: svc-router
+  namespace: keventmesh
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: svc-router-llm-secret
+  namespace: keventmesh
+stringData:
+  apiKey: your-api-key
+type: Opaque
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svc-finance-responder
+  namespace: keventmesh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: svc-finance-responder
+  template:
+    metadata:
+      labels:
+        app: svc-finance-responder
+    spec:
+      containers:
+        - env:
+            - name: PORT
+              value: "8080"
+          image: 192.168.122.150:5000/svc-finance-responder:latest@sha256:0aa785487e829442820291ea53de757173c28838a30635616f43a4f021323bbe
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          name: server
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-finance-responder
+  namespace: keventmesh
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: svc-finance-responder
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: svc-finance-responder
+  namespace: keventmesh
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: com.example.triage.routed.finance
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: svc-finance-responder
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-observer
+  namespace: keventmesh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ui-observer
+  template:
+    metadata:
+      labels:
+        app: ui-observer
+    spec:
+      containers:
+        - env:
+            - name: PORT
+              value: "8080"
+          image: 192.168.122.150:5000/ui-observer:latest@sha256:d927d74c0cf8f77be06bc99ef8ab4b2015c70d94d868854f78af89ddad5b5f16
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          name: server
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui-observer
+  namespace: keventmesh
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: ui-observer
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: ui-observer-trigger
+  namespace: keventmesh
+spec:
+  broker: default
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: ui-observer
