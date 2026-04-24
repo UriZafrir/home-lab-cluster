@@ -35,7 +35,6 @@ metadata:
     app: postgres
   name: db-customer
 spec:
-  serviceAccountName: llm-app
   replicas: 1
   selector:
     matchLabels:
@@ -45,6 +44,7 @@ spec:
       labels:
         app: db-customer
     spec:
+      serviceAccountName: llm-app
       containers:
         - env:
             - name: POSTGRES_USER
@@ -382,7 +382,6 @@ kind: Deployment
 metadata:
   name: svc-finance-responder
 spec:
-  serviceAccountName: llm-app
   replicas: 1
   selector:
     matchLabels:
@@ -392,6 +391,7 @@ spec:
       labels:
         app: svc-finance-responder
     spec:
+      serviceAccountName: llm-app
       containers:
         - env:
             - name: PORT
@@ -455,7 +455,6 @@ kind: Deployment
 metadata:
   name: ui-observer
 spec:
-  serviceAccountName: llm-app
   replicas: 1
   selector:
     matchLabels:
@@ -465,6 +464,7 @@ spec:
       labels:
         app: ui-observer
     spec:
+      serviceAccountName: llm-app
       containers:
         - env:
             - name: PORT
