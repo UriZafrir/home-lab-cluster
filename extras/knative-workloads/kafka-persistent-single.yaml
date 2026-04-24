@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: knative-serving
+  name: kafka
 ---
 apiVersion: kafka.strimzi.io/v1
 kind: KafkaNodePool
