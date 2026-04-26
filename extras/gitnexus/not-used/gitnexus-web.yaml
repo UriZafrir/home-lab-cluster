@@ -39,7 +39,7 @@ spec:
             - containerPort: 4173
           env:
             - name: VITE_GITNEXUS_SERVER_URL
-              value: http://gitnexus-server:4747
+              value: http://gitnexus-server.gitnexus.svc.cluster.local:4747
           livenessProbe:
             httpGet:
               path: /
