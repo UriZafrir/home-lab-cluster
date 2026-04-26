@@ -2,7 +2,6 @@ apiVersion: sources.knative.dev/v1
 kind: SinkBinding
 metadata:
   name: node-sinkbinding
-  namespace: default
 spec:
   subject:
     apiVersion: apps/v1
