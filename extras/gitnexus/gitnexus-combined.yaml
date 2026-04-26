@@ -10,10 +10,12 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 4173
+    - name: web
+      port: 4173
       targetPort: 4173
       protocol: TCP
-    - port: 4747
+    - name: api
+      port: 4747
       targetPort: 4747
       protocol: TCP
   selector:
