@@ -1,0 +1,66 @@
+---
+# Service for gitnexus-web
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitnexus-web
+  labels:
+    app: gitnexus-web
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 4173
+      targetPort: 4173
+      protocol: TCP
+  selector:
+    app: gitnexus-web
+---
+# Deployment for gitnexus-web
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitnexus-web
+  labels:
+    app: gitnexus-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitnexus-web
+  template:
+    metadata:
+      labels:
+        app: gitnexus-web
+    spec:
+      containers:
+        - name: gitnexus-web
+          image: ghcr.io/abhigyanpatwari/gitnexus-web:latest
+          ports:
+            - containerPort: 4173
+          env:
+            - name: VITE_GITNEXUS_SERVER_URL
+              value: http://gitnexus-server:4747
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 4173
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 4173
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "50m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+      restartPolicy: Always

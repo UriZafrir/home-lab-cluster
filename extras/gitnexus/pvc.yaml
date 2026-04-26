@@ -1,0 +1,14 @@
+# PersistentVolumeClaim for gitnexus-data
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitnexus-data
+  labels:
+    app: gitnexus-server
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
