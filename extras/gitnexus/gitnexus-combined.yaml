@@ -1,4 +1,7 @@
 #http://192.168.122.151:4173/?server=192.168.122.151:4747
+#git config --global http.sslVerify false
+#need port forwarding for server on 4747
+
 # GitNexus Combined Deployment - Server + Web in same pod
 # Both containers share network namespace, enabling localhost communication
 ---
