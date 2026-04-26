@@ -48,6 +48,8 @@ spec:
           env:
             - name: WORKSPACE_DIR
               value: /workspace
+            - name: HOST
+              value: "0.0.0.0"
           livenessProbe:
             httpGet:
               path: /api/heartbeat
