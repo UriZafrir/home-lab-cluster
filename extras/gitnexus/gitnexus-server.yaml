@@ -48,24 +48,24 @@ spec:
           env:
             - name: WORKSPACE_DIR
               value: /workspace
-            - name: HOST
-              value: "0.0.0.0"
-          livenessProbe:
-            httpGet:
-              path: /api/heartbeat
-              port: 4747
-            initialDelaySeconds: 15
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 3
-          readinessProbe:
-            httpGet:
-              path: /api/heartbeat
-              port: 4747
-            initialDelaySeconds: 15
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 3
+            # - name: HOST
+            #   value: "0.0.0.0"
+          # livenessProbe:
+          #   httpGet:
+          #     path: /api/heartbeat
+          #     port: 4747
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 30
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+          # readinessProbe:
+          #   httpGet:
+          #     path: /api/heartbeat
+          #     port: 4747
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 30
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
           resources:
             requests:
               memory: "256Mi"
