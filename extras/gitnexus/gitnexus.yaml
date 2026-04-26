@@ -91,7 +91,7 @@ spec:
             claimName: gitnexus-data
         - name: workspace
           hostPath:
-            path: ./workspace
+            path: /mnt/data/gitnexus/workspace
             type: DirectoryOrCreate
       restartPolicy: Always
 ---
