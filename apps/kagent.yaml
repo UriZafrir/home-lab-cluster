@@ -41,6 +41,9 @@ spec:
             enabled: false
           cilium-debug-agent:
             enabled: false
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/kagent
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kagent

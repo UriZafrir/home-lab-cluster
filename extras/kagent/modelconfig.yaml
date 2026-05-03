@@ -1,0 +1,12 @@
+apiVersion: kagent.dev/v1alpha2
+kind: ModelConfig
+metadata:
+  name: mistral-model
+spec:
+  provider: OpenAI # Leverages OpenAI-compatible API
+  model: codestral-2508 # Or mistral-nemo, open-mistral-nemo
+  openAI:
+    host: https://api.mistral.ai # Mistral API endpoint
+    path: "/v1/chat/completions"
+  apiKeySecret: mistral-api
+  apiKeySecretKey: apiKey
