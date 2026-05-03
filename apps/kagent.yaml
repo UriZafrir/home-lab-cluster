@@ -17,6 +17,10 @@ spec:
           ui:
             service:
               type: LoadBalancer
+          grafana-mcp:
+            enabled: false
+          querydoc:
+            enabled: false
           k8s-agent:
             enabled: false
           kgateway-agent:
