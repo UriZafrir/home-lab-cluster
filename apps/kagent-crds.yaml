@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kmcp-crds
+  name: kagent-crds
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   sources:
-  - repoURL: oci://ghcr.io/kagent-dev/kmcp/helm/kmcp-crds
-    targetRevision: 0.1.5
-    chart: kmcp-crds
-    helm:
-      releaseName: kmcp-crds
-      valuesObject:
+    - repoURL: oci://ghcr.io/kagent-dev/kagent/helm/kagent-crds
+      targetRevision: 0.9.1
+      chart: kagent-crds
+      helm:
+        releaseName: kagent-crds
+        valuesObject:
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kagent
@@ -22,4 +22,4 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true

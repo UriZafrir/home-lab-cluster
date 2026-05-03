@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kagent
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: oci://ghcr.io/kagent-dev/kagent/helm/kagent
+      targetRevision: 0.9.1
+      chart: kagent
+      helm:
+        releaseName: kagent
+        valuesObject:
+          ui:
+            service:
+              type: LoadBalancer
+          agents:
+            k8s-agent:
+              enabled: false
+            kgateway-agent:
+              enabled: false
+            istio-agent:
+              enabled: false
+            promql-agent:
+              enabled: false
+            observability-agent:
+              enabled: false
+            argo-rollouts-agent:
+              enabled: false
+            helm-agent:
+              enabled: false
+            cilium-policy-agent:
+              enabled: false
+            cilium-manager-agent:
+              enabled: false
+            cilium-debug-agent:
+              enabled: false
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kagent
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
