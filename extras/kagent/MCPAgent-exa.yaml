@@ -3,13 +3,12 @@ kind: MCPServer
 metadata:
   name: exa-search
 spec:
-  transportType: http
+  transportType: stdio
   deployment:
     image: ghcr.io/exa-labs/exa-mcp-server:latest
-    env:
-      - name: EXA_API_KEY
-        valueFrom:
-          secretKeyRef:
-            name: exa-credentials
-            key: api-key
-    port: 3000
+    cmd: /bin/sh
+    args:
+      - -c
+      - export EXA_API_KEY=$(cat /etc/secrets/EXA_API_KEY) && exec node dist/stdio.cjs
+    secretRefs:
+      - name: exa-credentials
