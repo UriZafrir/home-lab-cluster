@@ -1,0 +1,15 @@
+apiVersion: kagent.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: exa-search
+spec:
+  transportType: http
+  deployment:
+    image: ghcr.io/exa-labs/exa-mcp-server:latest
+    env:
+      - name: EXA_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: exa-credentials
+            key: api-key
+    port: 3000
