@@ -5,7 +5,7 @@ metadata:
 spec:
   transportType: stdio
   deployment:
-    image: ghcr.io/exa-labs/exa-mcp-server:latest
+    image: mcp/exa:latest
     cmd: /bin/sh
     args:
       - -c
