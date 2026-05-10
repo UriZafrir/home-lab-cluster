@@ -11,7 +11,7 @@ spec:
     cmd: /bin/sh
     args:
       - -c
-      - export EXA_API_KEY=$(cat /etc/secrets/EXA_API_KEY) && exec node dist/stdio.cjs
+      - exec node dist/stdio.cjs
     secretRefs:
       - name: exa-credentials
     port: 3000
