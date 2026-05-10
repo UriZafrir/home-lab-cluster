@@ -4,7 +4,8 @@ metadata:
   name: exa-search
   namespace: kagent
 spec:
-  transportType: http
+  # transportType: http
+  transportType: stdio
   deployment:
     image: mcp/exa:latest
     cmd: /bin/sh
