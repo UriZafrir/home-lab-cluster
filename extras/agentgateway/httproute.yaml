@@ -17,6 +17,3 @@ spec:
         - path:
             type: PathPrefix
             value: /mcp
-        - path:
-            type: PathPrefix
-            value: /register

@@ -9,4 +9,4 @@ spec:
         static:
           host: exa-search.kagent.svc.cluster.local
           port: 3000
-          protocol: SSE
+          protocol: StreamableHTTP
