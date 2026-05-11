@@ -36,9 +36,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-    ignoreDifferences:
-      - group: kagent.dev
-        kind: ModelConfig
-        jsonPointers:
-          - /spec/openAI/host
-          - /spec/openAI/path
