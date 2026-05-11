@@ -8,17 +8,20 @@ spec:
     namespace: agentgateway-system
     server: https://kubernetes.default.svc
   project: default
-  source:
-    chart: agentgateway
-    helm:
-      skipCrds: false
-      parameters:
-        - name: controller.image.pullPolicy
-          value: "Always"
-        - name: controller.extraEnv.KGW_ENABLE_GATEWAY_API_EXPERIMENTAL_FEATURES
-          value: "true"
-    repoURL: cr.agentgateway.dev/charts
-    targetRevision: v1.1.0
+  sources:
+    - repoURL: cr.agentgateway.dev/charts
+      targetRevision: v1.1.0
+      chart: agentgateway
+      helm:
+        skipCrds: false
+        parameters:
+          - name: controller.image.pullPolicy
+            value: "Always"
+          - name: controller.extraEnv.KGW_ENABLE_GATEWAY_API_EXPERIMENTAL_FEATURES
+            value: "true"
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/agentgateway
   syncPolicy:
     automated:
       # Prune resources during auto-syncing (default is false)
