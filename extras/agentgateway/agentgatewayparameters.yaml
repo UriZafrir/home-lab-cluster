@@ -3,7 +3,6 @@ kind: AgentgatewayParameters
 metadata:
   name: parameters
 spec:
-  agentgateway:
-    env:
-      - name: ADMIN_ADDR
-        value: "0.0.0.0:15000"
+  env:
+    - name: ADMIN_ADDR
+      value: "0.0.0.0:15000"
