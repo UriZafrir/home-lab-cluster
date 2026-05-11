@@ -6,6 +6,8 @@ spec:
   parentRefs:
     - name: agentgateway-proxy
       namespace: agentgateway-system
+  hostnames:
+    - "exa-mcp.192.168.122.201.nip.io"
   rules:
     - backendRefs:
         - name: exa
