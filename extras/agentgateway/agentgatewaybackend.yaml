@@ -6,7 +6,7 @@ spec:
   mcp:
     targets:
       - name: exa
-        selector:
-          services:
-            matchLabels:
-              app.kubernetes.io/name: exa-search
+        static:
+          host: exa-search.kagent.svc.cluster.local
+          port: 3000
+          protocol: SSE
