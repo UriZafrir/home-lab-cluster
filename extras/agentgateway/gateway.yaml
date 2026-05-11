@@ -5,6 +5,11 @@ metadata:
   namespace: agentgateway-system
 spec:
   gatewayClassName: agentgateway
+  infrastructure:
+    parametersRef:
+      group: agentgateway.dev
+      kind: AgentgatewayParameters
+      name: parameters
   addresses:
     - type: IPAddress
       value: "192.168.122.201" # Your specific IP
