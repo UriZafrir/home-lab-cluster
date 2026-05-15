@@ -1,0 +1,41 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mender
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://charts.mender.io
+      chart: mender
+      targetRevision: 7.6.2
+      helm:
+        releaseName: mender
+        valuesObject:
+          global:
+            s3:
+              existingSecret: seaweedfs-mender-creds
+            url: "192.168.122.105"
+          api_gateway:
+            dashboard: true
+            service:
+              type: LoadBalancer
+            storage_proxy:
+              enabled: true
+              url: "seaweedfs-s3.mender.svc:8333"
+              customRule: "PathRegexp(\`^/mender-bucket\`)"
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/mender
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: mender
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
