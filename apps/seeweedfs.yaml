@@ -28,7 +28,7 @@ spec:
             enableAuth: true
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: seaweedfs
+    namespace: mender
   syncPolicy:
     automated:
       prune: true
