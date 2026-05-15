@@ -1,0 +1,37 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: seaweedfs
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://seaweedfs.github.io/seaweedfs/helm
+      chart: seaweedfs
+      targetRevision: 4.25.0
+      helm:
+        releaseName: seaweedfs
+        valuesObject:
+          filer:
+            s3:
+              enabled: true
+              enableAuth: true
+              createBuckets:
+                - name: "mender-bucket"
+            storageClass: default
+
+          s3:
+            enabled: true
+            enableAuth: true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: seaweedfs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
