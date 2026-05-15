@@ -20,7 +20,7 @@ spec:
             # as part of the Helm installation.
             enabled: true
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: HEAD
+      targetRevision: ubuntu
       path: extras/cert-manager
   destination:
     server: "https://kubernetes.default.svc"
