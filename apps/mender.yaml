@@ -26,7 +26,7 @@ spec:
             storage_proxy:
               enabled: true
               url: "seaweedfs-s3.mender.svc:8333"
-              customRule: "PathRegexp(\`^/mender-bucket\`)"
+              customRule: "PathRegexp(^/mender-bucket)"
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/mender
