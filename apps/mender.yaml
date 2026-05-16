@@ -19,7 +19,8 @@ spec:
         valuesObject:
           nats:
             cluster:
-              enabled: false
+              enabled: true
+              replicas: 1
           gui:
             service:
               type: LoadBalancer
