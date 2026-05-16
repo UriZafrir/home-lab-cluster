@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: traefik 
+  name: traefik
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,24 +9,24 @@ spec:
   project: default
   sources:
     - repoURL: https://traefik.github.io/charts
-      chart: traefik 
-      targetRevision: 34.4.1
+      chart: traefik
+      targetRevision: 40.2.0
       helm:
-        releaseName: traefik 
+        releaseName: traefik
         valuesObject:
-          ingressRoute:
-            dashboard: 
-              enabled: true
-              entryPoints: ["web"]
+          # ingressRoute:
+          #   dashboard:
+          #     enabled: true
+          #     entryPoints: ["web"]
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: HEAD
-    #   path: extras/traefik 
+    #   path: extras/traefik
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: traefik 
+    namespace: traefik
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
