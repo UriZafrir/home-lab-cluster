@@ -17,6 +17,20 @@ spec:
       helm:
         releaseName: mender
         valuesObject:
+          ingress:
+            enabled: true
+            annotations:
+              cert-manager.io/issuer: "selfsigned-issuer"
+            ingressClassName: traefik
+            path: /
+            hosts:
+              - mender.192.168.122.108.nip.io
+            tls:
+              # this secret must exists or it can be created from a working cert-manager instance
+              - secretName: mender-ingress-tls
+                hosts:
+                  - mender.192.168.122.108.nip.io
+
           # nats:
           #   cluster:
           #     enabled: true
