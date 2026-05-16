@@ -1,4 +1,3 @@
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -9,15 +8,17 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://charts.mender.io
-      chart: mender
-      targetRevision: 7.6.2
+    # - repoURL: https://charts.mender.io
+    #   chart: mender
+    #   targetRevision: 7.6.2
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/mender-helm
       helm:
         releaseName: mender
         valuesObject:
           gui:
             service:
-              name: mender-gui.mender.svc
               type: LoadBalancer
           global:
             s3:
@@ -26,45 +27,12 @@ spec:
           api_gateway:
             # dashboard: true
             service:
-              name: mender-api-gateway.mender.svc
               type: LoadBalancer
             storage_proxy:
               enabled: true
               url: "http://seaweedfs-s3.mender.svc:8333"
               customRule: "PathRegexp(^/mender-bucket)"
-          deployments:
-            service:
-              name: mender-deployments.mender.svc
-          device_auth:
-            service:
-              name: mender-device-auth.mender.svc
-          inventory:
-            service:
-              name: mender-inventory.mender.svc
-          tenantadm:
-            service:
-              name: mender-tenantadm.mender.svc
-          useradm:
-            service:
-              name: mender-useradm.mender.svc
-          workflows:
-            service:
-              name: mender-workflows-server.mender.svc
-          auditlogs:
-            service:
-              name: mender-auditlogs.mender.svc
-          iot_manager:
-            service:
-              name: mender-iot-manager.mender.svc
-          deviceconnect:
-            service:
-              name: mender-deviceconnect.mender.svc
-          deviceconfig:
-            service:
-              name: mender-deviceconfig.mender.svc
-          devicemonitor:
-            service:
-              name: mender-devicemonitor.mender.svc
+            serviceNamespace: "mender"
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/mender
@@ -76,4 +44,4 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
