@@ -8,12 +8,12 @@ metadata:
 spec:
   project: default
   sources:
-    # - repoURL: https://charts.mender.io
-    #   chart: mender
-    #   targetRevision: 7.6.2
-    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: ubuntu
-      path: extras/mender-helm
+    - repoURL: https://charts.mender.io
+      chart: mender
+      targetRevision: 7.6.2
+      # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      #   targetRevision: ubuntu
+      #   path: extras/mender-helm
       helm:
         releaseName: mender
         valuesObject:
