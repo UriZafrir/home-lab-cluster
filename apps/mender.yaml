@@ -17,10 +17,10 @@ spec:
       helm:
         releaseName: mender
         valuesObject:
-          nats:
-            cluster:
-              enabled: true
-              replicas: 1
+          # nats:
+          #   cluster:
+          #     enabled: true
+          #     replicas: 1
           gui:
             service:
               type: LoadBalancer
