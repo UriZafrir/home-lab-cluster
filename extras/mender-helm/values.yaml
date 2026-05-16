@@ -287,6 +287,7 @@ api_gateway:
   #   ...
   #   -----END PRIVATE KEY-----
   # existingSecret: my-secret-name
+  # serviceNamespace: ""  # Optional: set to namespace to use fully-qualified service URLs (e.g., service.namespace.svc)
 
   # api_gateway.updateStrategy: Strategy to use to update existing pods
   # Example:

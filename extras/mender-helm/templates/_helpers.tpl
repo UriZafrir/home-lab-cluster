@@ -371,3 +371,19 @@ Use custom probes overrides
 {{- toYaml $_ }}
 {{- end }}
 {{- end }}
+
+{{/*
+Service URL with optional namespace suffix
+Usage: include "mender.serviceUrl" (dict "dot" . "service" .Values.auditlogs.service.name "port" .Values.auditlogs.service.port)
+*/}}
+{{- define "mender.serviceUrl" -}}
+{{- $dot := .dot -}}
+{{- $service := .service -}}
+{{- $port := .port | toString -}}
+{{- $namespace := $dot.Values.api_gateway.serviceNamespace | default "" -}}
+{{- if $namespace }}
+{{- printf "http://%s.%s.svc:%s" $service $namespace $port }}
+{{- else }}
+{{- printf "http://%s:%s" $service $port }}
+{{- end }}
+{{- end }}

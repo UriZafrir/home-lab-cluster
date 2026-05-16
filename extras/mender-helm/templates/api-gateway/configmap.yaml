@@ -404,57 +404,57 @@ data:
         auditlogs:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.auditlogs.service.name }}:{{ .Values.auditlogs.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.auditlogs.service.name "port" .Values.auditlogs.service.port) | quote }}
 
         iot-manager:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.iot_manager.service.name }}:{{ .Values.iot_manager.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.iot_manager.service.name "port" .Values.iot_manager.service.port) | quote }}
 
         deviceauth:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.device_auth.service.name }}:{{ .Values.device_auth.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.device_auth.service.name "port" .Values.device_auth.service.port) | quote }}
 
         deviceconnect:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.deviceconnect.service.name }}:{{ .Values.deviceconnect.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.deviceconnect.service.name "port" .Values.deviceconnect.service.port) | quote }}
 
         deviceconfig:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.deviceconfig.service.name }}:{{ .Values.deviceconfig.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.deviceconfig.service.name "port" .Values.deviceconfig.service.port) | quote }}
 
         devicemonitor:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.devicemonitor.service.name }}:{{ .Values.devicemonitor.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.devicemonitor.service.name "port" .Values.devicemonitor.service.port) | quote }}
 
         deployments:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.deployments.service.name }}:{{ .Values.deployments.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.deployments.service.name "port" .Values.deployments.service.port) | quote }}
 
         gui:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.gui.service.name }}:{{ .Values.gui.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.gui.service.name "port" .Values.gui.service.port) | quote }}
 
         inventory:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.inventory.service.name }}:{{ .Values.inventory.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.inventory.service.name "port" .Values.inventory.service.port) | quote }}
 
         tenantadm:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.tenantadm.service.name }}:{{ .Values.tenantadm.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.tenantadm.service.name "port" .Values.tenantadm.service.port) | quote }}
 
         useradm:
           loadBalancer:
             servers:
-            - url: "http://{{ .Values.useradm.service.name }}:{{ .Values.useradm.service.port }}"
+            - url: {{ include "mender.serviceUrl" (dict "dot" . "service" .Values.useradm.service.name "port" .Values.useradm.service.port) | quote }}
 {{- if and .Values.api_gateway.storage_proxy.enabled .Values.api_gateway.minio.enabled }}
     {{- fail "You cannot set both api_gateway.storage_proxy and api_gateway.minio. Choose one" }}
 {{- else if and .Values.api_gateway.minio.enabled (not .Values.api_gateway.storage_proxy.enabled) }}
@@ -529,12 +529,12 @@ data:
 
         devauth:
           forwardAuth:
-            address: "http://{{ .Values.device_auth.service.name }}:{{ .Values.device_auth.service.port }}/api/internal/v1/devauth/tokens/verify"
+            address: {{ printf "%s/api/internal/v1/devauth/tokens/verify" (include "mender.serviceUrl" (dict "dot" . "service" .Values.device_auth.service.name "port" .Values.device_auth.service.port)) | quote }}
             authResponseHeaders: "X-MEN-RequestID"
 
         userauth:
           forwardAuth:
-            address: "http://{{ .Values.useradm.service.name }}:{{ .Values.useradm.service.port }}/api/internal/v1/useradm/auth/verify"
+            address: {{ printf "%s/api/internal/v1/useradm/auth/verify" (include "mender.serviceUrl" (dict "dot" . "service" .Values.useradm.service.name "port" .Values.useradm.service.port)) | quote }}
             authResponseHeaders: "X-MEN-RequestID,X-MEN-RBAC-Inventory-Groups,X-MEN-RBAC-Deployments-Groups,X-MEN-RBAC-Releases-Tags"
 
         inventoryV1-replacepathregex:
