@@ -15,14 +15,17 @@ spec:
       helm:
         releaseName: mender
         valuesObject:
+          gui:
+            service:
+              type: LoadBalancer
           global:
             s3:
               existingSecret: seaweedfs-mender-creds
-            url: "192.168.122.105"
+            url: "192.168.122.107"
           api_gateway:
-            dashboard: true
-            service:
-              type: LoadBalancer
+            # dashboard: true
+            # service:
+            #   type: LoadBalancer
             storage_proxy:
               enabled: true
               url: "http://seaweedfs-s3.mender.svc:8333"
