@@ -17,19 +17,54 @@ spec:
         valuesObject:
           gui:
             service:
+              name: mender-gui.mender.svc
               type: LoadBalancer
           global:
             s3:
               existingSecret: seaweedfs-mender-creds
-            url: "192.168.122.107"
+            url: "192.168.122.106"
           api_gateway:
             # dashboard: true
             service:
+              name: mender-api-gateway.mender.svc
               type: LoadBalancer
             storage_proxy:
               enabled: true
               url: "http://seaweedfs-s3.mender.svc:8333"
               customRule: "PathRegexp(^/mender-bucket)"
+          deployments:
+            service:
+              name: mender-deployments.mender.svc
+          device_auth:
+            service:
+              name: mender-device-auth.mender.svc
+          inventory:
+            service:
+              name: mender-inventory.mender.svc
+          tenantadm:
+            service:
+              name: mender-tenantadm.mender.svc
+          useradm:
+            service:
+              name: mender-useradm.mender.svc
+          workflows:
+            service:
+              name: mender-workflows-server.mender.svc
+          auditlogs:
+            service:
+              name: mender-auditlogs.mender.svc
+          iot_manager:
+            service:
+              name: mender-iot-manager.mender.svc
+          deviceconnect:
+            service:
+              name: mender-deviceconnect.mender.svc
+          deviceconfig:
+            service:
+              name: mender-deviceconfig.mender.svc
+          devicemonitor:
+            service:
+              name: mender-devicemonitor.mender.svc
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/mender
