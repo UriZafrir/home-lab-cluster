@@ -35,7 +35,7 @@ spec:
               enabled: true
               url: "http://seaweedfs-s3.mender.svc:8333"
               customRule: "PathRegexp(^/mender-bucket)"
-            serviceNamespace: "mender"
+            # serviceNamespace: "mender"
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/mender
