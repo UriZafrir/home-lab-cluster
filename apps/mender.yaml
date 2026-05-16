@@ -24,8 +24,8 @@ spec:
             url: "192.168.122.107"
           api_gateway:
             # dashboard: true
-            # service:
-            #   type: LoadBalancer
+            service:
+              type: LoadBalancer
             storage_proxy:
               enabled: true
               url: "http://seaweedfs-s3.mender.svc:8333"
