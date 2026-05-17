@@ -1,3 +1,4 @@
+#need also - seeweedfs, traefik, cert-manager
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
