@@ -1,5 +1,0 @@
-{{- if and .Values.workflows.enabled .Values.workflows.hpa.enabled }}
-{{- $servicename := "workflows-worker" }}
-{{- $context := (dict "default" .Values.default "override" .Values.workflows "name" (printf "%s-%s" (include "mender.fullname" . ) $servicename ) ) -}}
-{{- include "mender.autoscaler" $context }}
-{{- end }}
