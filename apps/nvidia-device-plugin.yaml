@@ -15,10 +15,6 @@ spec:
       releaseName: nvidia-device-plugin
       valuesObject:
         deviceDiscoveryStrategy: "tegra"
-        # runtimeClassName: "nvidia"
-        # deviceListStrategy: "volume-mounts"
-        # securityContext:
-        #   privileged: true
         tolerations:
           - key: nvidia.com/gpu
             effect: NoSchedule
