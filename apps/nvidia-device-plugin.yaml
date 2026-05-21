@@ -14,6 +14,7 @@ spec:
     helm:
       releaseName: nvidia-device-plugin
       valuesObject:
+        runtimeClassName: "nvidia"
         tolerations:
           - key: nvidia.com/gpu
             effect: NoSchedule
@@ -22,12 +23,12 @@ spec:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
-              - matchExpressions:
-                  # We allow a GPU deployment to be forced by setting the following label to "true"
-                  - key: "nvidia.com/gpu.present"
-                    operator: In
-                    values:
-                      - "true"
+                - matchExpressions:
+                    # We allow a GPU deployment to be forced by setting the following label to "true"
+                    - key: "nvidia.com/gpu.present"
+                      operator: In
+                      values:
+                        - "true"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: nvidia-device-plugin
