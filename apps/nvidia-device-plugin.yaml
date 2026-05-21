@@ -14,7 +14,7 @@ spec:
     helm:
       releaseName: nvidia-device-plugin
       valuesObject:
-        # runtimeClassName: "nvidia"
+        runtimeClassName: "nvidia"
         tolerations:
           - key: nvidia.com/gpu
             effect: NoSchedule
