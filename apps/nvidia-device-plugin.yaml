@@ -21,7 +21,13 @@ spec:
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms: []
+              nodeSelectorTerms:
+              - matchExpressions:
+                  # We allow a GPU deployment to be forced by setting the following label to "true"
+                  - key: "nvidia.com/gpu.present"
+                    operator: In
+                    values:
+                      - "true"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: nvidia-device-plugin
