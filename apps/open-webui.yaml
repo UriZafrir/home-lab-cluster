@@ -14,26 +14,37 @@ spec:
     helm:
       releaseName: open-webui
       valuesObject:
-        # tika: enabled
-        # service:
-        #   type: LoadBalancer
-        # tika:
-        #   service:
-        #     type: LoadBalancer
-        # pipelines:
-        #   service:
-        #     type: LoadBalancer
-        # ollama:
-        #   service:
-        #     type: LoadBalancer
-        # knative:
-        #   enabled: true
-        # ollama:
-        #   models:
-        #     pull:
-        #       - llama3.2
-        #     run:
-        #       - llama3.2
+        route:
+          enabled: true
+          hostnames:
+            - openwebui.192.168.122.200.nip.io
+          parentRefs:
+            - name: kgateway-gateway
+              namespace: kgateway-system
+          rules:
+            - matches:
+                - path:
+                    type: PathPrefix
+                    value: /
+        terminals:
+          enabled: true
+        tika:
+          enabled: true
+        tika:
+          service:
+            type: LoadBalancer
+        pipelines:
+          service:
+            type: LoadBalancer
+        ollama:
+          gpu:
+            enabled: true
+            number: 1
+          models:
+            pull:
+              - llama3.2
+            run:
+              - llama3.2
 
   destination:
     server: "https://kubernetes.default.svc"
