@@ -2,10 +2,7 @@ curl -sfL https://get.k3s.io | \
   INSTALL_K3S_EXEC="server \
       --disable=traefik \
       --disable=servicelb \
-      --flannel-backend=none \
-      --disable-network-policy \
-      --disable-kube-proxy" \
-      --default-local-storage-path=/media/uri/data/k3s-ubuntu-storage \
+      --default-local-storage-path=/mnt/uri/data/k3s-ubuntu-storage" \
   sh -
 
 or
@@ -59,4 +56,4 @@ helm repo add argo https://argoproj.github.io/argo-helm
 kubectl create ns argocd
 helm upgrade --install argocd argo/argo-cd --version 9.5.15 -n argocd -f argocd-values.yaml --debug
 envsubst < secrets/argocd-repo.yaml | kubectl apply -f -
-kubectl apply -f root-app/root-app.yaml 
+kubectl apply -f root-app/root-app.yaml
