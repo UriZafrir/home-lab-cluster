@@ -14,6 +14,8 @@ spec:
     helm:
       releaseName: open-webui
       valuesObject:
+        ollamaUrls:
+          - http://ollama.ollama.svc.cluster.local:11434
         route:
           enabled: true
           hostnames:
@@ -37,15 +39,16 @@ spec:
           service:
             type: LoadBalancer
         ollama:
-          gpu:
-            enabled: true
-            type: 'nvidia'
-            number: 1
-          models:
-            pull:
-              - llama3.2
-            run:
-              - llama3.2
+          enabled: false
+          # gpu:
+          #   enabled: true
+          #   type: 'nvidia'
+          #   number: 1
+          # models:
+          #   pull:
+          #     - llama3.2
+          #   run:
+          #     - llama3.2
 
   destination:
     server: "https://kubernetes.default.svc"
