@@ -7,28 +7,34 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    chart: nvidia-device-plugin
-    repoURL: https://nvidia.github.io/k8s-device-plugin
-    targetRevision: 0.19.1
-    helm:
-      releaseName: nvidia-device-plugin
-      valuesObject:
-        deviceDiscoveryStrategy: "tegra"
-        tolerations:
-          - key: nvidia.com/gpu
-            effect: NoSchedule
-            operator: Exists
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    # We allow a GPU deployment to be forced by setting the following label to "true"
-                    - key: "nvidia.com/gpu.present"
-                      operator: In
-                      values:
-                        - "true"
+  sources:
+    - repoURL: https://nvidia.github.io/k8s-device-plugin
+      chart: nvidia-device-plugin
+      targetRevision: 0.19.1
+      helm:
+        releaseName: nvidia-device-plugin
+        valuesObject:
+          config:
+            name: "time-slicing-config"
+            default: "sharing-config.yaml"
+          deviceDiscoveryStrategy: "tegra"
+          tolerations:
+            - key: nvidia.com/gpu
+              effect: NoSchedule
+              operator: Exists
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      # We allow a GPU deployment to be forced by setting the following label to "true"
+                      - key: "nvidia.com/gpu.present"
+                        operator: In
+                        values:
+                          - "true"
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/nvidia-device-plugin
   destination:
     server: "https://kubernetes.default.svc"
     namespace: nvidia-device-plugin
