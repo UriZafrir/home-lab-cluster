@@ -15,7 +15,7 @@ spec:
         httpRoute:
           enabled: true
           hostnames:
-            - qwen2.5-coder-3b.192.168.122.200.nip.io
+            - ollama.192.168.122.200.nip.io
           parentRefs:
             - name: kgateway-gateway
               namespace: kgateway-system
@@ -30,8 +30,11 @@ spec:
           models:
             pull:
               - qwen2.5-coder:3b
+              - moondream:v2
             run:
               - qwen2.5-coder:3b
+              - moondream:v2
+
   destination:
     server: "https://kubernetes.default.svc"
     namespace: ollama
