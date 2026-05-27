@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: oci://ghcr.io/openclaw-rocks/charts
+    - repoURL: oci://ghcr.io/paperclipinc/charts
       chart: openclaw-operator
       targetRevision: 0.34.4
       helm:
