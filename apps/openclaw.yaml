@@ -9,7 +9,7 @@ spec:
   project: default
   sources:
     - repoURL: https://serhanekicii.github.io/openclaw-helm
-      chart: openclaw-
+      chart: openclaw
       targetRevision: 1.5.40
       helm:
         releaseName: openclaw
