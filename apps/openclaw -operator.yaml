@@ -14,9 +14,9 @@ spec:
       helm:
         releaseName: openclaw-operator
         valuesObject:
-    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-    #   targetRevision: ubuntu
-    #   path: extras/openclaw-operator
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/openclaw-operator
   destination:
     server: "https://kubernetes.default.svc"
     namespace: openclaw-operator
