@@ -14,7 +14,7 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: myagent
+        - name: my-agent
           namespace: openclaw-operator 
           port: 18789
 ---
