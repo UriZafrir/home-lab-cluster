@@ -17,3 +17,17 @@ spec:
         - name: myagent
           namespace: openclaw-operator 
           port: 18789
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: openclaw-operator
+  namespace: openclaw-operator  # Namespace of the backend service
+spec:
+  from:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    namespace: kgateway-system  # Namespace of the HTTPRoute
+  to:
+  - group: ""
+    kind: Service  # Allow referencing Kubernetes Services
