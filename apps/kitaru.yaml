@@ -16,6 +16,8 @@ spec:
         valuesObject:
           kitaru:
             server:
+              image:
+                tag: 0.13.1
               database:
                 persistence:
                   storageClassName: local-path-immediate
