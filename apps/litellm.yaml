@@ -15,7 +15,7 @@ spec:
       releaseName: litellm
       valuesObject:
         db:
-          # Use an existing postgres server/cluster
+          deployStandalone: true
           useExisting: true
           # How to connect to the existing postgres server/cluster
           endpoint: litellm-rw.litellm.svc:5432
