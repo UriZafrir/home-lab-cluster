@@ -20,6 +20,9 @@ spec:
             enabled: true
             serviceType: LoadBalancer
           server:
+            annotations:
+              app.kubernetes.io/instance: "vault"
+              component: "server"
             ha:
               replicas: 1
           csi:
