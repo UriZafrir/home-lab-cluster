@@ -14,6 +14,9 @@ spec:
     helm:
       releaseName: litellm
       valuesObject:
+        db:
+          # Use an existing postgres server/cluster
+          useExisting: true
         service:
           type: LoadBalancer
         migrationJob:
@@ -26,4 +29,4 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
