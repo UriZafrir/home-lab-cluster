@@ -5,3 +5,5 @@ metadata:
   namespace: litellm
 spec:
   instances: 1
+  storage:
+    size: 10Gi
