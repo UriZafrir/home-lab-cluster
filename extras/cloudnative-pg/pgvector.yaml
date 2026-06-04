@@ -18,3 +18,10 @@ spec:
         # FIX: Define 'reference' directly as a direct parameter of 'image'
         image:
           reference: "ghcr.io/cloudnative-pg/pgvector:0.8.2-18-trixie"
+
+  bootstrap:
+    initdb:
+      database: vector_db
+      owner: vector_user
+      postInitSQL:
+        - "CREATE EXTENSION IF NOT EXISTS vector;"
