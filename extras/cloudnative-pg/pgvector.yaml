@@ -17,4 +17,4 @@ spec:
       - name: pgvector
         # FIX: Define 'reference' directly as a direct parameter of 'image'
         image:
-          reference: "ghcr.io/cloudnative-pg/pgvector:18"
+          reference: "ghcr.io/cloudnative-pg/pgvector:0.8.2-18-trixie"
