@@ -14,4 +14,6 @@ spec:
 
   postgresql:
     extensions:
-      - name: pgvector # Resolves all details, including the image reference, from the catalog
+      - name: pgvector
+        # FIX: Explicitly supply the OCI extension container image
+        image: ghcr.io/cloudnative-pg/postgres-extensions/pgvector:18
