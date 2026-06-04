@@ -15,5 +15,6 @@ spec:
   postgresql:
     extensions:
       - name: pgvector
-        # FIX: Explicitly supply the OCI extension container image
-        image: "ghcr.io/cloudnative-pg/postgres-extensions/pgvector:18"
+        # FIX: Define 'reference' directly as a direct parameter of 'image'
+        image:
+          reference: "ghcr.io/cloudnative-pg/postgres-extensions/pgvector:18"
