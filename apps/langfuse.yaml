@@ -22,6 +22,14 @@ spec:
               secretKeyRef:
                 name: "langfuse-salt"
                 key: "salt"
+            # NextAuth configuration
+            nextauth:
+              # -- When deploying to production, set the `nextauth.url` value to the canonical URL of your site.
+              # url: http://localhost:3000
+              # -- Used to encrypt the NextAuth.js JWT, and to hash email verification tokens. Can be configured by value or existing secret reference.
+              secretKeyRef:
+                name: "langfuse-salt"
+                key: "salt"
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/langfuse
