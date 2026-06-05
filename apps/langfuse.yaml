@@ -16,7 +16,8 @@ spec:
         valuesObject:
           langfuse:
             additionalEnv:
-              CLICKHOUSE_CLUSTER_ENABLED: "false"
+              - name: CLICKHOUSE_CLUSTER_ENABLED
+                value: "false"
             web:
               service:
                 type: LoadBalancer
