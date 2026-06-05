@@ -4,7 +4,7 @@ metadata:
   name: "langfuse"
   namespace: "langfuse"
 spec:
-  taskID: "1"
+  taskID: "2"
   configuration:
     users:
       clickhouse_operator/networks/ip: 0.0.0.0/0
