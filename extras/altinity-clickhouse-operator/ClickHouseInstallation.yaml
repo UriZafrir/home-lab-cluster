@@ -7,5 +7,6 @@ spec:
   configuration:
     users:
       clickhouse_operator/networks/ip: 0.0.0.0/0
+      langfuse_user/secrets: "langfuse-clickhouse-creds"
     clusters:
       - name: "clickhouse"
