@@ -31,12 +31,12 @@ spec:
                 secretKeyRef:
                   name: "langfuse-salt"
                   key: "salt"
-          redis:
-            deploy: true
-            host: "langfuse-redis-primary"
-            auth:
-              existingSecret: "langfuse-redis"
-              existingSecretPasswordKey: "valkey-password"
+          # redis:
+          #   deploy: true
+          #   host: "langfuse-redis-primary"
+          #   auth:
+          #     existingSecret: "langfuse-redis"
+          #     existingSecretPasswordKey: "valkey-password"
           postgresql:
             deploy: false
             host: postgres-langfuse-rw.langfuse.svc.cluster.local
