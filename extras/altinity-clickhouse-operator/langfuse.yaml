@@ -8,7 +8,7 @@ spec:
   configuration:
     zookeeper:
       nodes:
-        - host: keeper-clickhouse-langfuse
+        - host: keeper-langfuse
           port: 2181
     users:
       clickhouse_operator/networks/ip: 0.0.0.0/0
@@ -24,7 +24,7 @@ spec:
 apiVersion: "clickhouse-keeper.altinity.com/v1"
 kind: "ClickHouseKeeperInstallation"
 metadata:
-  name: clickhouse-langfuse
+  name: langfuse
 spec:
   configuration:
     clusters:
