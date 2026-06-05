@@ -4,7 +4,7 @@ metadata:
   name: "langfuse"
   namespace: "langfuse"
 spec:
-  taskID: "5"
+  taskID: "1"
   configuration:
     zookeeper:
       nodes:
