@@ -30,7 +30,7 @@ spec:
                   key: "salt"
           postgresql:
             deploy: false
-            host: postgres-langfuse-rw.langfuse
+            host: postgres-langfuse-rw.langfuse.svc.cluster.local
             auth:
               username: app
               database: app
@@ -40,7 +40,7 @@ spec:
                 userPasswordKey: password
           clickhouse:
             deploy: false
-            host: "chi-langfuse-langfuse-0-0.langfuse"
+            host: "clickhouse-langfuse.langfuse.svc.cluster.local"
             auth:
               username: "langfuse_user" 
               # -- If you want to use an existing secret for the ClickHouse password, set the name of the secret here. (`clickhouse.auth.password` will be ignored and picked up from this secret).
