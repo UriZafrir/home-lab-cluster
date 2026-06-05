@@ -38,6 +38,8 @@ spec:
               # -- The keys in the existing secret that contain the passwords. If using the default `postgres` user, both `userPasswordKey` and `adminPasswordKey` must be provided.
               secretKeys:
                 userPasswordKey: password
+          clickhouse:
+            deploy: false
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/langfuse

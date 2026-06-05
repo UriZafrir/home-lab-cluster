@@ -1,0 +1,12 @@
+apiVersion: "clickhouse.altinity.com/v1"
+kind: "ClickHouseInstallation"
+metadata:
+  name: "langfuse"
+  namespace: "langfuse"
+spec:
+  configuration:
+    users:
+      clickhouse_operator/networks/ip: 0.0.0.0/0
+      langfuse_user/secrets: "langfuse-clickhouse-creds"
+    clusters:
+      - name: "langfuse"
