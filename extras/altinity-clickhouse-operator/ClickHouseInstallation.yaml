@@ -9,7 +9,3 @@ spec:
       clickhouse_operator/networks/ip: 0.0.0.0/0
     clusters:
       - name: "clickhouse"
-        # Explicitly setting a 1x1 grid ensures a strict single-node setup
-        layout:
-          shardsCount: 1
-          replicasCount: 1
