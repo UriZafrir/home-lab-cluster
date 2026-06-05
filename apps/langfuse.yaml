@@ -18,6 +18,13 @@ spec:
             web:
               service:
                 type: LoadBalancer
+            salt:
+              secretKeyRef:
+                name: "langfuse-salt"
+                key: "salt"
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/langfuse
   destination:
     server: "https://kubernetes.default.svc"
     namespace: langfuse
