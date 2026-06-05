@@ -4,12 +4,8 @@ metadata:
   name: "langfuse"
   namespace: "langfuse"
 spec:
-  taskID: "1"
+  taskID: "5"
   configuration:
-    zookeeper:
-      nodes:
-        - host: keeper-langfuse
-          port: 2181
     users:
       clickhouse_operator/networks/ip: 0.0.0.0/0
       langfuse_user/networks/ip: 0.0.0.0/0
@@ -20,12 +16,12 @@ spec:
             key: password
     clusters:
       - name: "langfuse"
----
-apiVersion: "clickhouse-keeper.altinity.com/v1"
-kind: "ClickHouseKeeperInstallation"
-metadata:
-  name: langfuse
-spec:
-  configuration:
-    clusters:
-      - name: "langfuse"
+# ---
+# apiVersion: "clickhouse-keeper.altinity.com/v1"
+# kind: "ClickHouseKeeperInstallation"
+# metadata:
+#   name: langfuse
+# spec:
+#   configuration:
+#     clusters:
+#       - name: "langfuse"
