@@ -4,8 +4,12 @@ metadata:
   name: "langfuse"
   namespace: "langfuse"
 spec:
-  taskID: "2"
+  taskID: "4"
   configuration:
+    zookeeper:
+      nodes:
+        - host: clickhouse-langfuse
+          port: 2181
     users:
       clickhouse_operator/networks/ip: 0.0.0.0/0
       langfuse_user/networks/ip: 0.0.0.0/0
