@@ -15,6 +15,12 @@ spec:
       helm:
         releaseName: altinity-clickhouse-operator
         valuesObject:
+          configs:
+            files:
+              "config\.yaml":
+                watch:
+                  namespaces:
+                    include: [".*"]
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/altinity-clickhouse-operator
