@@ -17,7 +17,7 @@ spec:
         valuesObject:
           configs:
             files:
-              "config\.yaml":
+              "config.yaml":
                 watch:
                   namespaces:
                     include: [".*"]
