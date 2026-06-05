@@ -4,9 +4,14 @@ metadata:
   name: "langfuse"
   namespace: "langfuse"
 spec:
+  taskID: "1"
   configuration:
     users:
       clickhouse_operator/networks/ip: 0.0.0.0/0
-      langfuse_user/secrets: "langfuse-clickhouse-creds"
+      langfuse_user/password:
+        valueFrom:
+          secretKeyRef:
+            name: langfuse-clickhouse-creds
+            key: password
     clusters:
       - name: "langfuse"
