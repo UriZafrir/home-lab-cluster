@@ -41,6 +41,7 @@ spec:
           clickhouse:
             deploy: false
             host: "chi-langfuse-langfuse-0-0.langfuse"
+            auth:
               # -- If you want to use an existing secret for the ClickHouse password, set the name of the secret here. (`clickhouse.auth.password` will be ignored and picked up from this secret).
               existingSecret: "langfuse-clickhouse-creds"
               # -- The key in the existing secret that contains the password.
