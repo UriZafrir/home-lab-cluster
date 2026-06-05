@@ -28,6 +28,16 @@ spec:
                 secretKeyRef:
                   name: "langfuse-salt"
                   key: "salt"
+          postgresql:
+            deploy: false
+            host: postgres-langfuse-rw.langfuse
+            auth:
+              username: app
+              database: app
+              existingSecret: "postgres-langfuse-app"
+              # -- The keys in the existing secret that contain the passwords. If using the default `postgres` user, both `userPasswordKey` and `adminPasswordKey` must be provided.
+              secretKeys:
+                userPasswordKey: password
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
       path: extras/langfuse
