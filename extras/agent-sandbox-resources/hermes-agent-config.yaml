@@ -8,3 +8,5 @@ data:
       default: "nvidia/nemotron-3-super-120b-a12b:free"
     dashboard:
       theme: "nous-blue"
+    display:
+      show_reasoning: true  # 💭 This forces the agent to prepend reasoning traces to your console/dashboard
