@@ -19,6 +19,8 @@ spec:
           service:
             enabled: true
             type: LoadBalancer
+          apiServer:
+            enabled: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: hermes-agent
