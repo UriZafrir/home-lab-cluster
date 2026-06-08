@@ -14,7 +14,7 @@ spec:
       containers:
       - name: hermes
         image: nousresearch/hermes-agent:latest
-        args: ["gateway", "--insecure"]
+        args: ["gateway"]
         env:
         - name: HERMES_DASHBOARD
           value: "1"
