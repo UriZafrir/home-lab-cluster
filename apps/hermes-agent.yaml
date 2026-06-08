@@ -19,6 +19,14 @@ spec:
           service:
             enabled: true
             type: LoadBalancer
+          # s6-overlay in the image needs to start as root (uid 0) to manage /run
+          # before dropping privileges internally. No capabilities or host access
+          # are granted — the container-level securityContext (capabilities.drop: ALL,
+          # allowPrivilegeEscalation: false, readOnlyRootFilesystem: true) still applies.
+          podSecurityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
           apiServer:
             enabled: true
           externalSecret:
