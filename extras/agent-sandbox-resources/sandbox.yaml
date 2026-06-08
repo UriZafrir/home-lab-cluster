@@ -2,6 +2,8 @@ apiVersion: agents.x-k8s.io/v1beta1
 kind: Sandbox
 metadata:
   name: hermes-agent
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   podTemplate:
     spec:
