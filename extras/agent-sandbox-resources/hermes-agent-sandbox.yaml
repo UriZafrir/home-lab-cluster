@@ -38,7 +38,7 @@ spec:
           subPath: config.yaml
         - name: hermes-agent-soul
           mountPath: /opt/data/SOUL.md
-          subPath: SOUL.md
+          subPath: soul.md
         - name: host-data
           mountPath: /host/data
           readOnly: true
