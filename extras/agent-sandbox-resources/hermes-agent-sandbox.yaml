@@ -35,6 +35,12 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /opt/data
+        - name: config.yaml
+          mountPath: /opt/data/config.yaml
+      volumes:
+      - name: hermes-agent-config
+        configMap:
+          name: hermes-agent-config          
       #   - name: skill-k8s-dev
       #     mountPath: /opt/data/skills/custom/k8s-developer.md
       #     subPath: k8s-developer.md
