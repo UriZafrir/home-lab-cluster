@@ -21,6 +21,19 @@ spec:
             type: LoadBalancer
           apiServer:
             enabled: true
+          externalSecret:
+            enabled: true
+            refreshInterval: 1h
+            secretStoreRef:
+              kind: ClusterSecretStore
+              name: openbao-store
+            target:
+              name: openrouter-secret-k8s
+            data:
+              - secretKey: OPENROUTER_API_KEY
+                remoteRef:
+                  key: OPENROUTER_API_KEY
+                  property: api_key
   destination:
     server: "https://kubernetes.default.svc"
     namespace: hermes-agent
