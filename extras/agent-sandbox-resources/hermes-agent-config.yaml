@@ -5,6 +5,6 @@ metadata:
 data:
   config.yaml: |
     model:
-      default: "openrouter/owl-alpha"
+      default: "nvidia/nemotron-3-super-120b-a12b:free"
     dashboard:
       theme: "nous-blue"
