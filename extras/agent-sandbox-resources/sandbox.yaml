@@ -20,6 +20,10 @@ spec:
           value: "1"
         - name: HERMES_DASHBOARD_INSECURE
           value: "1" 
+        - name: HERMES_THEME
+          value: "nous-blue"          # Sets the primary skin / color palette
+        - name: HERMES_MODEL
+          value: "openrouter/owl-alpha"
         - name: OPENROUTER_API_KEY
           valueFrom:
             secretKeyRef:
