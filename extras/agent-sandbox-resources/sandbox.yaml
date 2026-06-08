@@ -18,6 +18,8 @@ spec:
         env:
         - name: HERMES_DASHBOARD
           value: "1"
+        - name: HERMES_DASHBOARD_INSECURE
+          value: "1" 
         - name: OPENROUTER_API_KEY
           valueFrom:
             secretKeyRef:
