@@ -1,0 +1,43 @@
+apiVersion: agents.x-k8s.io/v1beta1
+kind: Sandbox
+metadata:
+  name: hermes-agent
+spec:
+  podTemplate:
+    spec:
+      containers:
+      - name: hermes
+        image: nousresearch/hermes-agent:latest
+        args: ["gateway"]
+        env:
+        - name: HERMES_DASHBOARD
+          value: "1"
+        - name: OPENROUTER_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: openrouter-api-key
+              key: OPENROUTER_API_KEY
+        ports:
+        - containerPort: 8642
+          name: api
+        - containerPort: 9119
+          name: dashboard
+        volumeMounts:
+        - name: data
+          mountPath: /opt/data
+      #   - name: skill-k8s-dev
+      #     mountPath: /opt/data/skills/custom/k8s-developer.md
+      #     subPath: k8s-developer.md
+      # volumes:
+      # - name: skill-k8s-dev
+      #   configMap:
+      #     name: hermes-skills
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+

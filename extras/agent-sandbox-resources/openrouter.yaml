@@ -1,0 +1,16 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: openrouter-api-key
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: openbao-store
+    kind: ClusterSecretStore
+  target:
+    name: openrouter-api-key
+  data:
+  - secretKey: OPENROUTER_API_KEY
+    remoteRef:
+      key: OPENROUTER_API_KEY
+      property: api_key

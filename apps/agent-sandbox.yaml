@@ -10,7 +10,10 @@ spec:
   sources:
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
-      path: extras/agent-sandbox
+      path: extras/agent-sandbox-install
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+      targetRevision: ubuntu
+      path: extras/agent-sandbox-resources
   destination:
     server: "https://kubernetes.default.svc"
     namespace: agent-sandbox-system
