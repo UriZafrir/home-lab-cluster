@@ -4,8 +4,8 @@ metadata:
   name: hermes-agent
 spec:
   type: LoadBalancer
-  # selector:
-  #   agents.x-k8s.io/sandbox-name-hash: c3a2943f
+  selector:
+    agents.x-k8s.io/sandbox-name: hermes-agent
   ports:
     - name: api
       protocol: TCP

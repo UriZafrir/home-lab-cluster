@@ -7,6 +7,9 @@ metadata:
 spec:
   # service: false
   podTemplate:
+    metadata:
+      labels:
+        agents.x-k8s.io/sandbox-name: hermes-agent
     spec:
       containers:
       - name: hermes
