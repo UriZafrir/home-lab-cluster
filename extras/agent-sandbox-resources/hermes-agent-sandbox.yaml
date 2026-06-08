@@ -20,8 +20,8 @@ spec:
           value: "1"
         - name: HERMES_DASHBOARD_INSECURE
           value: "1" 
-        - name: HERMES_MODEL
-          value: "openrouter/owl-alpha"
+        # - name: HERMES_MODEL
+        #   value: "openrouter/owl-alpha"
         - name: OPENROUTER_API_KEY
           valueFrom:
             secretKeyRef:

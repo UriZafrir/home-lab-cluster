@@ -7,4 +7,4 @@ data:
     model:
       default: "openrouter/owl-alpha"
     display:
-      skin: "nous-blue"
+      skin: "daylight"
