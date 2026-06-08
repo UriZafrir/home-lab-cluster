@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hermes-agent
+spec:
+  type: LoadBalancer
+  # selector:
+  #   agents.x-k8s.io/sandbox-name-hash: c3a2943f
+  ports:
+    - name: api
+      protocol: TCP
+      port: 8642
+      targetPort: 8642
+    - name: dashboard
+      protocol: TCP
+      port: 9119
+      targetPort: 9119
