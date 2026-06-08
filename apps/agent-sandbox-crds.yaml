@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: agent-sandbox
+  name: agent-sandbox-resources
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,7 +10,7 @@ spec:
   sources:
     - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
       targetRevision: ubuntu
-      path: extras/agent-sandbox-install
+      path: extras/agent-sandbox-resources
   destination:
     server: "https://kubernetes.default.svc"
     namespace: agent-sandbox-system
@@ -21,4 +21,3 @@ spec:
     syncOptions:
     - CreateNamespace=true
     - ServerSideApply=true
-
