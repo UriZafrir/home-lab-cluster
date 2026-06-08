@@ -5,7 +5,7 @@ metadata:
 data:
   config.yaml: |
     model:
-      default: "nvidia/nemotron-3-super-120b-a12b:free"
+      default: "deepseek/deepseek-v4-flash"
     dashboard:
       theme: "nous-blue"
     display:
