@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/ultraworkers/hermes-agent-helm-chart
-      targetRevision: main
-      path: "."
+    - repoURL: https://github.com/UriZafrir/home-lab-cluster
+      targetRevision: ubuntu
+      path: "extras/hermes-agent-helm-chart"
       helm:
         releaseName: hermes-agent
         valuesObject:
