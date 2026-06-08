@@ -25,6 +25,16 @@ spec:
             secretKeyRef:
               name: openrouter-api-key
               key: OPENROUTER_API_KEY
+        - name: TELEGRAM_BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: hermes-telegram-secrets
+              key: bot-token
+        - name: TELEGRAM_ALLOWED_USERS
+          valueFrom:
+            secretKeyRef:
+              name: hermes-telegram-secrets
+              key: allowed-users
         ports:
         - containerPort: 8642
           name: api
