@@ -19,14 +19,6 @@ spec:
           service:
             enabled: true
             type: LoadBalancer
-          # s6-overlay in the image needs to start as root (uid 0) to manage /run
-          # before dropping privileges internally. No capabilities or host access
-          # are granted — the container-level securityContext (capabilities.drop: ALL,
-          # allowPrivilegeEscalation: false, readOnlyRootFilesystem: true) still applies.
-          podSecurityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
           apiServer:
             enabled: true
           externalSecret:
@@ -42,6 +34,19 @@ spec:
                 remoteRef:
                   key: OPENROUTER_API_KEY
                   property: api_key
+            # https://github.com/ultraworkers/hermes-agent-helm-chart/issues/1
+            podSecurityContext:
+              runAsUser: 0
+              runAsNonRoot: false
+            securityContext:
+              allowPrivilegeEscalation: true
+              readOnlyRootFilesystem: false
+              runAsNonRoot: false
+              capabilities:
+                drop: []
+            env:
+              HERMES_UID: "1000"
+              HERMES_GID: "1000"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: hermes-agent
