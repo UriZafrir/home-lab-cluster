@@ -35,7 +35,7 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /opt/data
-        - name: config.yaml
+        - name: hermes-agent-config
           mountPath: /opt/data/config.yaml
       volumes:
       - name: hermes-agent-config
