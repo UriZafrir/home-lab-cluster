@@ -20,8 +20,6 @@ spec:
           value: "1"
         - name: HERMES_DASHBOARD_INSECURE
           value: "1" 
-        # - name: HERMES_MODEL
-        #   value: "openrouter/owl-alpha"
         - name: OPENROUTER_API_KEY
           valueFrom:
             secretKeyRef:
@@ -38,10 +36,17 @@ spec:
         - name: hermes-agent-config
           mountPath: /opt/data/config.yaml
           subPath: config.yaml
+        - name: host-data
+          mountPath: /host/data
+          readOnly: true
       volumes:
       - name: hermes-agent-config
         configMap:
-          name: hermes-agent-config          
+          name: hermes-agent-config
+      - name: host-data
+        hostPath:
+          path: /mnt/data/general
+          type: Directory
       #   - name: skill-k8s-dev
       #     mountPath: /opt/data/skills/custom/k8s-developer.md
       #     subPath: k8s-developer.md
