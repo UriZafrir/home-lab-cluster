@@ -1,0 +1,16 @@
+apiVersion: http.keda.sh/v1beta1
+kind: InterceptorRoute
+metadata:
+  name: sample-app
+spec:
+  target:
+    service: sample-app
+    port: 80
+  rules:
+    - hosts:
+        - sample-app.example.com
+  scalingMetric:
+    requestRate:
+      targetValue: 5
+      window: 1m
+      granularity: 1s
