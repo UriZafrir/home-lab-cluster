@@ -18,7 +18,7 @@ spec:
             operator:
               # -- Logging level for KEDA http-add-on operator.
               # allowed values: `debug`, `info`, `error`, or an integer value greater than 0, specified as string
-              level: info
+              level: debug
               stackTracesEnabled: false
             scaler:
               # -- Logging level for KEDA http-add-on Scaler.
