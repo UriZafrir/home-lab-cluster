@@ -14,6 +14,22 @@ spec:
       helm:
         releaseName: keda-add-ons-http
         valuesObject:
+          logging:
+            operator:
+              # -- Logging level for KEDA http-add-on operator.
+              # allowed values: `debug`, `info`, `error`, or an integer value greater than 0, specified as string
+              level: info
+              stackTracesEnabled: false
+            scaler:
+              # -- Logging level for KEDA http-add-on Scaler.
+              # allowed values: `debug`, `info`, `error`, or an integer value greater than 0, specified as string
+              level: debug
+              stackTracesEnabled: false
+            interceptor:
+              # -- Logging level for KEDA http-add-on Interceptor.
+              # allowed values: `debug`, `info`, `error`, or an integer value greater than 0, specified as string
+              level: debug
+              stackTracesEnabled: false
           scaler:
             replicas: 1
           interceptor:
