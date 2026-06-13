@@ -19,7 +19,7 @@ spec:
           interceptor:
             replicas:
               min: 1
-            destination:
+  destination:
     server: "https://kubernetes.default.svc"
     namespace: keda
   syncPolicy:
