@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
+  sources:
     - repoURL: https://kedacore.github.io/charts
       chart: keda-add-ons-http 
       targetRevision: 0.14.1
