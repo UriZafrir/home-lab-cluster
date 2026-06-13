@@ -14,9 +14,6 @@ spec:
       helm:
         releaseName: keda-add-ons-http
         valuesObject:
-    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: ubuntu
-      path: extras/keda-add-ons-http
   destination:
     server: "https://kubernetes.default.svc"
     namespace: keda
