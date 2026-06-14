@@ -15,7 +15,7 @@ spec:
         releaseName: agent-sandbox
         valuesObject:
           image:
-            tag: v0.4.6
+            tag: v0.5.0rc1
           controller:
             extensions: true
   destination:
