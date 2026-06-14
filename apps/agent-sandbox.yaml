@@ -8,9 +8,16 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
-      targetRevision: ubuntu
-      path: extras/agent-sandbox-install
+    - repoURL: https://github.com/kubernetes-sigs/agent-sandbox.git
+      targetRevision: main
+      path: helm
+      helm:
+        releaseName: agent-sandbox
+        valuesObject:
+          image:
+            tag: v0.4.6
+          controller:
+            extensions: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: agent-sandbox-system
