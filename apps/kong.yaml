@@ -21,7 +21,7 @@ spec:
             type: LoadBalancer
           env:
             admin_gui_url: "http://192.168.122.103:8002"
-            admin_gui_api_url: "http://192.168.122.102:32104"
+            admin_gui_api_url: "https://192.168.122.102:8444"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kong-system
