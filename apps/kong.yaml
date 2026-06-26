@@ -14,8 +14,10 @@ spec:
       helm:
         releaseName: kong
         valuesObject:
-          admin:
+          manager:
             type: LoadBalancer
+          admin:
+            type: ClusterIP
             enabled: true
   destination:
     server: "https://kubernetes.default.svc"
