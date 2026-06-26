@@ -17,13 +17,13 @@ spec:
           manager:
             type: LoadBalancer
           admin:
-            type: NodePort
             enabled: true
+            type: NodePort
             http:
               nodePort: 32001
           env:
-            ADMIN_GUI_URL: "https://192.168.64.105:32100"
-            PROXY_LISTEN: "0.0.0.0:8000, 0.0.0.0:8443 ssl"
+            admin_gui_url: "http://192.168.122.103:8002"
+            admin_gui_api_url: "http://192.168.64.105:32001"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: kong-system
