@@ -8,7 +8,7 @@ spec:
   from:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
-      namespace: argocd # Namespace of the HTTPRoute
+      namespace: kgateway-system # Namespace of the HTTPRoute
   to:
     - group: ""
       kind: Service # Allow referencing Kubernetes Services
@@ -20,7 +20,7 @@ metadata:
 spec:
   parentRefs:
     - name: kgateway-gateway
-      namespace: argocd
+      namespace: kgateway-system
   hostnames:
     - "argocd.192.168.122.200.nip.io"
   rules:
