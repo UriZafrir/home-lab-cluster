@@ -29,6 +29,6 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: argocd
+        - name: argocd-server
           namespace: argocd
           port: 80
