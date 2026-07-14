@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bifrost
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/UriZafrir/opsiforce.git
+      path: helm/bifrost
+      helm:
+        releaseName: bifrost
+        valuesFiles:
+          - helm/bifrost/values.local.yaml
+        valuesObject:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: opsiforce
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
