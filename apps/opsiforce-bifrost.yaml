@@ -9,6 +9,7 @@ spec:
   project: default
   sources:
     - repoURL: https://github.com/UriZafrir/opsiforce.git
+      targetRevision: main
       path: helm/bifrost
       helm:
         releaseName: bifrost
