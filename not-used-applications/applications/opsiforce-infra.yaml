@@ -13,7 +13,6 @@ spec:
       path: helm/opsiforce
       helm:
         valuesObject:
-          storage: {}
   destination:
     server: "https://kubernetes.default.svc"
     namespace: opsiforce
