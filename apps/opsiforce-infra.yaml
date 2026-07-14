@@ -12,14 +12,8 @@ spec:
       targetRevision: main
       path: helm/opsiforce
       helm:
-        releaseName: external-secrets
         valuesObject:
-          storage:
-            className: local-path
-          valkey:
-            affinity: {}
-          agent:
-            affinity: {}
+          storage: {}
   destination:
     server: "https://kubernetes.default.svc"
     namespace: opsiforce
