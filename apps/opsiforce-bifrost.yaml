@@ -14,10 +14,6 @@ spec:
         releaseName: bifrost
         valuesFiles:
           - values.local.yaml
-        valuesObject:
-          bitfrost:
-            image:
-              tag: v1.5.3
   destination:
     server: "https://kubernetes.default.svc"
     namespace: opsiforce
