@@ -16,6 +16,10 @@ spec:
         valuesObject:
           storage:
             className: local-path
+          valkey:
+            affinity: {}
+          agent:
+            affinity: {}
   destination:
     server: "https://kubernetes.default.svc"
     namespace: opsiforce
