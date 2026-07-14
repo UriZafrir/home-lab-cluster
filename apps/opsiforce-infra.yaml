@@ -11,6 +11,11 @@ spec:
     - repoURL: https://github.com/UriZafrir/opsiforce.git
       targetRevision: main
       path: helm/opsiforce
+      helm:
+        releaseName: external-secrets
+        valuesObject:
+          storage:
+            className: local-path
   destination:
     server: "https://kubernetes.default.svc"
     namespace: opsiforce
