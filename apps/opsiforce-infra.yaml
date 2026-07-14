@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gateway-api-crds
+  name: opsiforce-infra
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
