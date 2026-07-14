@@ -13,8 +13,7 @@ spec:
       helm:
         releaseName: bifrost
         valuesFiles:
-          - helm/bifrost/values.local.yaml
-        valuesObject:
+          - values.local.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: opsiforce
