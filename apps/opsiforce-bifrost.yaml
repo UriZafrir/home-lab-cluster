@@ -15,8 +15,9 @@ spec:
         valuesFiles:
           - values.local.yaml
         valuesObject:
-          image:
-            tag: v1.5.3
+          bitfrost:
+            image:
+              tag: v1.5.3
   destination:
     server: "https://kubernetes.default.svc"
     namespace: opsiforce
