@@ -14,6 +14,10 @@ spec:
       helm:
         releaseName: openmetadata-dependencies
         valuesObject:
+          airflow:
+            logs:
+              persistence:
+                enabled: false
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: ubuntu
     #   path: extras/openmetadata-dependencies
