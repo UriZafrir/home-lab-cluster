@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: openmetadata
+  name: openmetadata-dependencies
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,16 +9,14 @@ spec:
   project: default
   sources:
     - repoURL: https://helm.open-metadata.org
-      chart: openmetadata
+      chart: openmetadata-dependencies
       targetRevision: 2.0.4
       helm:
-        releaseName: openmetadata
+        releaseName: openmetadata-dependencies
         valuesObject:
-          service:
-            type: LoadBalancer
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: ubuntu
-    #   path: extras/openmetadata
+    #   path: extras/openmetadata-dependencies
   destination:
     server: "https://kubernetes.default.svc"
     namespace: openmetadata
