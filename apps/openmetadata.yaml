@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openmetadata
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://helm.open-metadata.org
+      chart: openmetadata
+      targetRevision: 2.0.4
+      helm:
+        releaseName: openmetadata
+        valuesObject:
+          service:
+            type: LoadBalancer
+    # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
+    #   targetRevision: ubuntu
+    #   path: extras/openmetadata
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: openmetadata
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
