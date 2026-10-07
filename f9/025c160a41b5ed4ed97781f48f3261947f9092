@@ -1,0 +1,14 @@
+apps/openmetadata-dependencies.yaml
+  h_d2833f622cce50 4,12,15,19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f9025c160a41b5ed4ed97781f48f3261947f9092",
+  "prompts": {},
+  "humans": {
+    "h_d2833f622cce50": {
+      "author": "Your Name <you@example.com>"
+    }
+  }
+}
