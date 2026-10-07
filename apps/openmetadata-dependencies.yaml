@@ -18,6 +18,15 @@ spec:
             logs:
               persistence:
                 enabled: false
+            # Argo CD runs Helm post-install/post-upgrade hooks as PostSync hooks,
+            # and PostSync only runs after every Sync resource is Healthy. The
+            # api-server/scheduler/triggerer are never Healthy because their
+            # wait-for-airflow-migrations init container waits for these very jobs.
+            # Demoting them to plain resources breaks the deadlock.
+            migrateDatabaseJob:
+              useHelmHooks: false
+            createUserJob:
+              useHelmHooks: false
     # - repoURL: https://github.com/UriZafrir/home-lab-cluster.git
     #   targetRevision: ubuntu
     #   path: extras/openmetadata-dependencies
