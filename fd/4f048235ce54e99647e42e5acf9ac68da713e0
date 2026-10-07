@@ -1,0 +1,14 @@
+apps/openmetadata.yaml
+  h_d2833f622cce50 1-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fd4f048235ce54e99647e42e5acf9ac68da713e0",
+  "prompts": {},
+  "humans": {
+    "h_d2833f622cce50": {
+      "author": "Your Name <you@example.com>"
+    }
+  }
+}
