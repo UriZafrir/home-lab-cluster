@@ -1,7 +1,3 @@
-#first install openmetadata-dependencies and secrets
-#kubectl create secret generic mysql-secrets --from-literal=openmetadata-mysql-password=openmetadata_password
-#kubectl create secret generic airflow-secrets --from-literal=openmetadata-airflow-password=admin
-#kubectl create secret generic airflow-mysql-secrets --from-literal=airflow-mysql-password=airflow_pass
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
