@@ -1,0 +1,19 @@
+apps/openmetadata-dependencies.yaml
+  s_0fd8ab6ab32940::t_3a423ec1c0f828 21-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3e058dbadb9b9f56af5672f8bd81883b7e41b2ca",
+  "prompts": {},
+  "sessions": {
+    "s_0fd8ab6ab32940": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a1160a-dfc3-7614-a46e-b4c8c6ca3e69",
+        "model": "deepseek-v4.1-flash"
+      },
+      "human_author": "Your Name <you@example.com>"
+    }
+  }
+}
